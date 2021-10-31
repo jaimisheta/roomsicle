@@ -38,10 +38,6 @@ deploy_develop:
     paths:
       - target
   script:
-    - echo "dbURL=$DATABASE_TEST_URL" > config.properties
-    - echo "dbUserName=$DATABASE_TEST_USERNAME" >> config.properties
-    - echo "dbPassword=$DATABASE_TEST_PASSWORD" >> config.properties
-    - echo "dbDriver=$DATABASE_DRIVER" >> config.properties
     - echo "Deploying the develop pipeline"
     - chmod og-rwx ${DEPLOY_SSH_KEY}
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
@@ -57,10 +53,6 @@ deploy_release:
     paths:
       - target
   script:
-    - echo "dbURL=$DATABASE_PROD_URL" > config.properties
-    - echo "dbUserName=$DATABASE_PROD_USERNAME" >> config.properties
-    - echo "dbPassword=$DATABASE_PROD_PASSWORD" >> config.properties
-    - echo "dbDriver=$DATABASE_DRIVER" >> config.properties
     - echo "Deploying the release pipeline"
     - chmod og-rwx ${DEPLOY_PROD_SSH_KEY}
     - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
