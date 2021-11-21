@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DatabaseConnection{
+public class DatabaseConnection {
     private static DatabaseConnection databaseConnection = null;
     public static Connection connection = null;
 
@@ -16,9 +16,9 @@ public class DatabaseConnection{
     private String USER;
     private String PASSWORD;
 
-    public DatabaseConnection(){
+    public DatabaseConnection() {
         Properties properties = new Properties();
-        try{
+        try {
             FileInputStream fileInputStream = new FileInputStream("config.properties");
             properties.load(fileInputStream);
             fileInputStream.close();
@@ -26,36 +26,36 @@ public class DatabaseConnection{
             URL = properties.getProperty("url");
             USER = properties.getProperty("user");
             PASSWORD = properties.getProperty("password");
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Connection getConnectionObject(){
-        try{
+    public Connection getConnectionObject() {
+        try {
             Class.forName(JDBC_DRIVER);
-            connection = DriverManager.getConnection(URL,USER, PASSWORD);
-        } catch(Exception e){
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return connection;
     }
 
     public static DatabaseConnection databaseConnectionObject() {
-        if(databaseConnection == null){
+        if (databaseConnection == null) {
             databaseConnection = new DatabaseConnection();
         }
         return databaseConnection;
     }
 
-    public static void closeDatabaseConnection(){
-        try{
-            if(connection!=null){
+    public static void closeDatabaseConnection() {
+        try {
+            if (connection != null) {
                 connection.close();
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

@@ -6,6 +6,18 @@ import models.OwnerSurveyModel;
 
 import java.util.Scanner;
 
+import static controller.OwnerSurveyConstants.ONE;
+import static controller.OwnerSurveyConstants.TWO;
+import static controller.OwnerSurveyConstants.THREE;
+import static controller.OwnerSurveyConstants.FOUR;
+import static controller.OwnerSurveyConstants.SIX;
+import static controller.OwnerSurveyConstants.TWELVE;
+import static controller.OwnerSurveyConstants.ZERO_KM;
+import static controller.OwnerSurveyConstants.ONE_KM;
+import static controller.OwnerSurveyConstants.TWO_KM;
+import static controller.OwnerSurveyConstants.FIVE_KM;
+import static controller.OwnerSurveyConstants.FIFTY_KM;
+
 public class OwnerSurveyController {
     OwnerSurveyModel ownerSurveyModel = new OwnerSurveyModel();
     OwnerSurveyDAO ownerSurveyDAO = new OwnerSurveyDAO();
@@ -14,7 +26,7 @@ public class OwnerSurveyController {
     int[] distanceRange = new int[2];
 
     public void takeSurvey(String emailId) {
-        try{
+        try {
             ownerSurveyCLI.printTakeSurveyMessage();
             ownerSurveyModel.setOwnerID(emailId);
             ownerSurveyModel.setAddress(getPropertyAddressFromOwner());
@@ -34,28 +46,28 @@ public class OwnerSurveyController {
             ownerSurveyModel.setDowntownDistanceMin(distanceRange[0]);
             ownerSurveyModel.setDowntownDistanceMax(distanceRange[1]);
             ownerSurveyDAO.insertOwnerSurveyDetails(ownerSurveyModel);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private int[] getDistanceRange(int input) {
         int[] distanceMinMax = new int[2];
-        try{
-            if (input == 1) {
-                distanceMinMax[0] = 0;
-                distanceMinMax[1] = 1;
-            } else if (input == 2) {
-                distanceMinMax[0] = 1;
-                distanceMinMax[1] = 2;
-            } else if (input == 3) {
-                distanceMinMax[0] = 2;
-                distanceMinMax[1] = 5;
-            } else if (input == 4) {
-                distanceMinMax[0] = 5;
-                distanceMinMax[1] = 50;
+        try {
+            if (input == ONE) {
+                distanceMinMax[0] = ZERO_KM;
+                distanceMinMax[1] = ONE_KM;
+            } else if (input == TWO) {
+                distanceMinMax[0] = ZERO_KM;
+                distanceMinMax[1] = TWO_KM;
+            } else if (input == THREE) {
+                distanceMinMax[0] = TWO_KM;
+                distanceMinMax[1] = FIVE_KM;
+            } else if (input == FOUR) {
+                distanceMinMax[0] = FIVE_KM;
+                distanceMinMax[1] = FIFTY_KM;
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return distanceMinMax;
@@ -63,10 +75,10 @@ public class OwnerSurveyController {
 
     public String getPropertyAddressFromOwner() {
         String propertyAddress = null;
-        try{
+        try {
             ownerSurveyCLI.printPropertyAddressInputMessage();
             propertyAddress = input.nextLine();
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return propertyAddress;
@@ -74,14 +86,14 @@ public class OwnerSurveyController {
 
     public int getNumberOfBedroomsFromOwner() {
         int numberOfBedrooms = 0;
-        try{
+        try {
             ownerSurveyCLI.printNumberOfBedroomsInputMessage();
             numberOfBedrooms = input.nextInt();
-            while (!(numberOfBedrooms >= 1 && numberOfBedrooms <= 6)) {
+            while (!(numberOfBedrooms >= ONE && numberOfBedrooms <= SIX)) {
                 ownerSurveyCLI.printInvalidInputMessage();
                 numberOfBedrooms = input.nextInt();
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return numberOfBedrooms;
@@ -89,14 +101,14 @@ public class OwnerSurveyController {
 
     public int getNumberOfVacanciesFromOwner() {
         int numberOfVacancies = 0;
-        try{
+        try {
             ownerSurveyCLI.printNumberOfVacanciesInputMessage();
             numberOfVacancies = input.nextInt();
-            while (!(numberOfVacancies >= 1 && numberOfVacancies <= 12)) {
+            while (!(numberOfVacancies >= ONE && numberOfVacancies <= TWELVE)) {
                 ownerSurveyCLI.printInvalidInputMessage();
                 numberOfVacancies = input.nextInt();
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return numberOfVacancies;
@@ -105,17 +117,17 @@ public class OwnerSurveyController {
     public boolean getUtilitiesConfirmationFromOwner() {
         boolean utilitiesIncluded = false;
         int utilitiesIncludedInput;
-        try{
+        try {
             ownerSurveyCLI.printUtilitiesInputMessage();
             utilitiesIncludedInput = input.nextInt();
-            while (utilitiesIncludedInput != 1 && utilitiesIncludedInput != 2) {
+            while (utilitiesIncludedInput != ONE && utilitiesIncludedInput != TWO) {
                 ownerSurveyCLI.printInvalidInputMessage();
                 utilitiesIncludedInput = input.nextInt();
             }
-            if (utilitiesIncludedInput == 1) {
+            if (utilitiesIncludedInput == ONE) {
                 utilitiesIncluded = true;
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return utilitiesIncluded;
@@ -123,14 +135,14 @@ public class OwnerSurveyController {
 
     public int getDalhousieUniversityDistanceInputFromOwner() {
         int dalhousieUniversityDistanceInput = 0;
-        try{
+        try {
             ownerSurveyCLI.printDalhousieUniversityDistanceInputMessage();
             dalhousieUniversityDistanceInput = input.nextInt();
-            while (!(dalhousieUniversityDistanceInput >= 1 && dalhousieUniversityDistanceInput <= 4)) {
+            while (!(dalhousieUniversityDistanceInput >= ONE && dalhousieUniversityDistanceInput <= FOUR)) {
                 ownerSurveyCLI.printInvalidInputMessage();
                 dalhousieUniversityDistanceInput = input.nextInt();
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dalhousieUniversityDistanceInput;
@@ -138,14 +150,14 @@ public class OwnerSurveyController {
 
     public int getGroceryStoreDistanceInputFromOwner() {
         int groceryStoreDistanceInput = 0;
-        try{
+        try {
             ownerSurveyCLI.printGroceryStoreDistanceInputMessage();
             groceryStoreDistanceInput = input.nextInt();
-            while (!(groceryStoreDistanceInput >= 1 && groceryStoreDistanceInput <= 4)) {
+            while (!(groceryStoreDistanceInput >= ONE && groceryStoreDistanceInput <= FOUR)) {
                 ownerSurveyCLI.printInvalidInputMessage();
                 groceryStoreDistanceInput = input.nextInt();
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return groceryStoreDistanceInput;
@@ -153,14 +165,14 @@ public class OwnerSurveyController {
 
     public int getTheaterDistanceInputFromOwner() {
         int theaterDistanceInput = 0;
-        try{
+        try {
             ownerSurveyCLI.printTheaterDistanceInputMessage();
             theaterDistanceInput = input.nextInt();
-            while (!(theaterDistanceInput >= 1 && theaterDistanceInput <= 4)) {
+            while (!(theaterDistanceInput >= ONE && theaterDistanceInput <= FOUR)) {
                 ownerSurveyCLI.printInvalidInputMessage();
                 theaterDistanceInput = input.nextInt();
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return theaterDistanceInput;
@@ -168,14 +180,14 @@ public class OwnerSurveyController {
 
     public int getDowntownDistanceInputFromOwner() {
         int downtownDistanceInput = 0;
-        try{
+        try {
             ownerSurveyCLI.printDowntownDistanceInputMessage();
             downtownDistanceInput = input.nextInt();
-            while (!(downtownDistanceInput >= 1 && downtownDistanceInput <= 4)) {
+            while (!(downtownDistanceInput >= ONE && downtownDistanceInput <= FOUR)) {
                 ownerSurveyCLI.printInvalidInputMessage();
                 downtownDistanceInput = input.nextInt();
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return downtownDistanceInput;
