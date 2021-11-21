@@ -4,6 +4,7 @@ import commandline.UserSurveyCLI;
 import database.UserSurveyDAO;
 import models.UserSurveyModel;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static controller.UserSurveyConstants.ZERO;
@@ -68,6 +69,10 @@ public class UserSurveyController {
             } else {
                 userGender = OTHER;
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getUserGenderFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,6 +96,10 @@ public class UserSurveyController {
             } else {
                 userFoodHabits = VEGAN;
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getUserFoodHabitsFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,6 +119,10 @@ public class UserSurveyController {
             if (smokingHabitsInput == ONE) {
                 smokingHabits = ONE;
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getUserSmokingHabitsFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,6 +142,10 @@ public class UserSurveyController {
             if (alcoholHabitsInput == ONE) {
                 alcoholHabits = ONE;
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getUserAlcoholHabitsFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,6 +161,10 @@ public class UserSurveyController {
                 userSurveyCLI.printInvalidInputMessage();
                 userBudget = input.nextInt();
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getUserBudgetFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -159,6 +180,10 @@ public class UserSurveyController {
                 userSurveyCLI.printInvalidInputMessage();
                 dalProximity = input.nextInt();
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getUsersProximityToDalhousieUniversityFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -183,6 +208,10 @@ public class UserSurveyController {
             } else {
                 roommateGender = DOES_NOT_MATTER;
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getRoommateGenderPreferenceFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -206,6 +235,10 @@ public class UserSurveyController {
             } else {
                 roommateFoodHabits = VEGAN;
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getRoommateFoodHabitsPreferenceFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -229,6 +262,10 @@ public class UserSurveyController {
             } else {
                 roommateSmokingHabits = DOES_NOT_MATTER;
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getRoommateSmokingHabitsPreferenceFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -252,6 +289,10 @@ public class UserSurveyController {
             } else {
                 roommateAlcoholHabits = DOES_NOT_MATTER;
             }
+        } catch (InputMismatchException e) {
+            userSurveyCLI.printInvalidInputMessage();
+            input.nextLine();
+            getRoommateAlcoholHabitsPreferenceFromUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
