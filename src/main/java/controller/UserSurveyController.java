@@ -6,6 +6,20 @@ import models.UserSurveyModel;
 
 import java.util.Scanner;
 
+import static controller.UserSurveyConstants.ZERO;
+import static controller.UserSurveyConstants.ONE;
+import static controller.UserSurveyConstants.TWO;
+import static controller.UserSurveyConstants.THREE;
+import static controller.UserSurveyConstants.MALE;
+import static controller.UserSurveyConstants.FEMALE;
+import static controller.UserSurveyConstants.OTHER;
+import static controller.UserSurveyConstants.VEG;
+import static controller.UserSurveyConstants.NON_VEG;
+import static controller.UserSurveyConstants.VEGAN;
+import static controller.UserSurveyConstants.YES;
+import static controller.UserSurveyConstants.NO;
+import static controller.UserSurveyConstants.DOES_NOT_MATTER;
+
 public class UserSurveyController {
 
     UserSurveyCLI userSurveyCLI = new UserSurveyCLI();
@@ -43,16 +57,16 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUserGenderInputMessage();
             userGenderInput = input.nextInt();
-            while (userGenderInput != 1 && userGenderInput != 2 && userGenderInput != 3) {
+            while (userGenderInput != ONE && userGenderInput != TWO && userGenderInput != THREE) {
                 userSurveyCLI.printInvalidInputMessage();
                 userGenderInput = input.nextInt();
             }
-            if (userGenderInput == 1) {
-                userGender = "Male";
-            } else if (userGenderInput == 2) {
-                userGender = "Female";
+            if (userGenderInput == ONE) {
+                userGender = MALE;
+            } else if (userGenderInput == TWO) {
+                userGender = FEMALE;
             } else {
-                userGender = "Other";
+                userGender = OTHER;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,16 +80,16 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUserFoodHabitsInputMessage();
             userFoodHabitsInput = input.nextInt();
-            while (userFoodHabitsInput != 1 && userFoodHabitsInput != 2 && userFoodHabitsInput != 3) {
+            while (userFoodHabitsInput != ONE && userFoodHabitsInput != TWO && userFoodHabitsInput != THREE) {
                 userSurveyCLI.printInvalidInputMessage();
                 userFoodHabitsInput = input.nextInt();
             }
-            if (userFoodHabitsInput == 1) {
-                userFoodHabits = "Veg";
-            } else if (userFoodHabitsInput == 2) {
-                userFoodHabits = "Non-Veg";
+            if (userFoodHabitsInput == ONE) {
+                userFoodHabits = VEG;
+            } else if (userFoodHabitsInput == TWO) {
+                userFoodHabits = NON_VEG;
             } else {
-                userFoodHabits = "Vegan";
+                userFoodHabits = VEGAN;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,12 +103,12 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUserSmokingHabitsInputMessage();
             smokingHabitsInput = input.nextInt();
-            while (smokingHabitsInput != 1 && smokingHabitsInput != 2) {
+            while (smokingHabitsInput != ONE && smokingHabitsInput != TWO) {
                 userSurveyCLI.printInvalidInputMessage();
                 smokingHabitsInput = input.nextInt();
             }
-            if (smokingHabitsInput == 1) {
-                smokingHabits = 1;
+            if (smokingHabitsInput == ONE) {
+                smokingHabits = ONE;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,12 +122,12 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUserAlcoholHabitsInputMessage();
             alcoholHabitsInput = input.nextInt();
-            while (alcoholHabitsInput != 1 && alcoholHabitsInput != 2) {
+            while (alcoholHabitsInput != ONE && alcoholHabitsInput != TWO) {
                 userSurveyCLI.printInvalidInputMessage();
                 alcoholHabitsInput = input.nextInt();
             }
-            if (alcoholHabitsInput == 1) {
-                alcoholHabits = 1;
+            if (alcoholHabitsInput == ONE) {
+                alcoholHabits = ONE;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,7 +140,7 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUserBudgetInputMessage();
             userBudget = input.nextInt();
-            while (userBudget <= 0) {
+            while (userBudget <= ZERO) {
                 userSurveyCLI.printInvalidInputMessage();
                 userBudget = input.nextInt();
             }
@@ -141,7 +155,7 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUsersProximityFromDalhousieUniversityInputMessage();
             dalProximity = input.nextInt();
-            while (dalProximity <= 0) {
+            while (dalProximity <= ZERO) {
                 userSurveyCLI.printInvalidInputMessage();
                 dalProximity = input.nextInt();
             }
@@ -158,16 +172,16 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printRoommateGenderPreferenceInputMessage();
             roommateGenderInput = input.nextInt();
-            while (roommateGenderInput != 1 && roommateGenderInput != 2 && roommateGenderInput != 3) {
+            while (roommateGenderInput != ONE && roommateGenderInput != TWO && roommateGenderInput != THREE) {
                 userSurveyCLI.printInvalidInputMessage();
                 roommateGenderInput = input.nextInt();
             }
-            if (roommateGenderInput == 1) {
-                roommateGender = "Male";
-            } else if (roommateGenderInput == 2) {
-                roommateGender = "Female";
+            if (roommateGenderInput == ONE) {
+                roommateGender = MALE;
+            } else if (roommateGenderInput == TWO) {
+                roommateGender = FEMALE;
             } else {
-                roommateGender = "Does not matter";
+                roommateGender = DOES_NOT_MATTER;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,16 +195,16 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printRoommateFoodHabitsPreferenceInputMessage();
             roommateFoodHabitsInput = input.nextInt();
-            while (roommateFoodHabitsInput != 1 && roommateFoodHabitsInput != 2 && roommateFoodHabitsInput != 3) {
+            while (roommateFoodHabitsInput != ONE && roommateFoodHabitsInput != TWO && roommateFoodHabitsInput != THREE) {
                 userSurveyCLI.printInvalidInputMessage();
                 roommateFoodHabitsInput = input.nextInt();
             }
-            if (roommateFoodHabitsInput == 1) {
-                roommateFoodHabits = "Veg";
-            } else if (roommateFoodHabitsInput == 2) {
-                roommateFoodHabits = "Non-Veg";
+            if (roommateFoodHabitsInput == ONE) {
+                roommateFoodHabits = VEG;
+            } else if (roommateFoodHabitsInput == TWO) {
+                roommateFoodHabits = NON_VEG;
             } else {
-                roommateFoodHabits = "Vegan";
+                roommateFoodHabits = VEGAN;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -204,16 +218,16 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printRoommateSmokingHabitsPreferenceInputMessage();
             roommateSmokingHabitsInput = input.nextInt();
-            while (roommateSmokingHabitsInput != 1 && roommateSmokingHabitsInput != 2 && roommateSmokingHabitsInput != 3) {
+            while (roommateSmokingHabitsInput != ONE && roommateSmokingHabitsInput != TWO && roommateSmokingHabitsInput != THREE) {
                 userSurveyCLI.printInvalidInputMessage();
                 roommateSmokingHabitsInput = input.nextInt();
             }
-            if (roommateSmokingHabitsInput == 1) {
-                roommateSmokingHabits = "Yes";
-            } else if (roommateSmokingHabitsInput == 2) {
-                roommateSmokingHabits = "No";
+            if (roommateSmokingHabitsInput == ONE) {
+                roommateSmokingHabits = YES;
+            } else if (roommateSmokingHabitsInput == TWO) {
+                roommateSmokingHabits = NO;
             } else {
-                roommateSmokingHabits = "Does not matter";
+                roommateSmokingHabits = DOES_NOT_MATTER;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -227,16 +241,16 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printRoommateAlcoholHabitsPreferenceInputMessage();
             roommateAlcoholHabitsInput = input.nextInt();
-            while (roommateAlcoholHabitsInput != 1 && roommateAlcoholHabitsInput != 2 && roommateAlcoholHabitsInput != 3) {
+            while (roommateAlcoholHabitsInput != ONE && roommateAlcoholHabitsInput != TWO && roommateAlcoholHabitsInput != THREE) {
                 userSurveyCLI.printInvalidInputMessage();
                 roommateAlcoholHabitsInput = input.nextInt();
             }
-            if (roommateAlcoholHabitsInput == 1) {
-                roommateAlcoholHabits = "Yes";
-            } else if (roommateAlcoholHabitsInput == 2) {
-                roommateAlcoholHabits = "No";
+            if (roommateAlcoholHabitsInput == ONE) {
+                roommateAlcoholHabits = YES;
+            } else if (roommateAlcoholHabitsInput == TWO) {
+                roommateAlcoholHabits = NO;
             } else {
-                roommateAlcoholHabits = "Does not matter";
+                roommateAlcoholHabits = DOES_NOT_MATTER;
             }
         } catch (Exception e) {
             e.printStackTrace();
