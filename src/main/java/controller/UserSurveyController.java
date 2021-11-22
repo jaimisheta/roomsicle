@@ -33,17 +33,17 @@ public class UserSurveyController {
             userSurveyCLI.printTakeSurveyMessage();
             userSurveyCLI.printUserPersonalDetailsInputMessage();
             userSurveyModel.setUserId(emailId);
-            userSurveyModel.setUserGender(getUserGenderFromUser());
-            userSurveyModel.setUserFoodHabits(getUserFoodHabitsFromUser());
-            userSurveyModel.setUserSmokingHabits(getUserSmokingHabitsFromUser());
-            userSurveyModel.setUserAlcoholHabits(getUserAlcoholHabitsFromUser());
-            userSurveyModel.setUserBudget(getUserBudgetFromUser());
-            userSurveyModel.setUserDalDistance(getUsersProximityToDalhousieUniversityFromUser());
+            setUserGender();
+            setUserFoodHabits();
+            setUserSmokingHabits();
+            setUserAlcoholHabits();
+            setUserBudget();
+            setUsersProximityToDalhousieUniversity();
             userSurveyCLI.printRoommatePreferenceDetailsInputMessage();
-            userSurveyModel.setRoommateGender(getRoommateGenderPreferenceFromUser());
-            userSurveyModel.setRoommateFoodHabits(getRoommateFoodHabitsPreferenceFromUser());
-            userSurveyModel.setRoommateSmokingHabits(getRoommateSmokingHabitsPreferenceFromUser());
-            userSurveyModel.setRoommateAlcoholHabits(getRoommateAlcoholHabitsPreferenceFromUser());
+            setRoommateGenderPreference();
+            setRoommateFoodHabitsPreference();
+            setRoommateSmokingHabitsPreference();
+            setRoommateAlcoholHabitsPreference();
             userSurveyDAO.insertUserPersonalDetails(userSurveyModel);
             userSurveyDAO.insertRoommatePreferenceDetails(userSurveyModel);
             userSurveyCLI.printUserSurveyCompletionMessage();
@@ -52,8 +52,8 @@ public class UserSurveyController {
         }
     }
 
-    public String getUserGenderFromUser() {
-        String userGender = null;
+    public void setUserGender() {
+        String userGender;
         int userGenderInput;
         try {
             userSurveyCLI.printUserGenderInputMessage();
@@ -69,18 +69,18 @@ public class UserSurveyController {
             } else {
                 userGender = OTHER;
             }
+            userSurveyModel.setUserGender(userGender);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getUserGenderFromUser();
+            setUserGender();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return userGender;
     }
 
-    public String getUserFoodHabitsFromUser() {
-        String userFoodHabits = null;
+    public void setUserFoodHabits() {
+        String userFoodHabits;
         int userFoodHabitsInput;
         try {
             userSurveyCLI.printUserFoodHabitsInputMessage();
@@ -96,17 +96,17 @@ public class UserSurveyController {
             } else {
                 userFoodHabits = VEGAN;
             }
+            userSurveyModel.setUserFoodHabits(userFoodHabits);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getUserFoodHabitsFromUser();
+            setUserFoodHabits();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return userFoodHabits;
     }
 
-    public int getUserSmokingHabitsFromUser() {
+    public void setUserSmokingHabits() {
         int smokingHabits = 0;
         int smokingHabitsInput;
         try {
@@ -119,17 +119,17 @@ public class UserSurveyController {
             if (smokingHabitsInput == ONE) {
                 smokingHabits = ONE;
             }
+            userSurveyModel.setUserSmokingHabits(smokingHabits);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getUserSmokingHabitsFromUser();
+            setUserSmokingHabits();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return smokingHabits;
     }
 
-    public int getUserAlcoholHabitsFromUser() {
+    public void setUserAlcoholHabits() {
         int alcoholHabits = 0;
         int alcoholHabitsInput;
         try {
@@ -142,18 +142,18 @@ public class UserSurveyController {
             if (alcoholHabitsInput == ONE) {
                 alcoholHabits = ONE;
             }
+            userSurveyModel.setUserAlcoholHabits(alcoholHabits);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getUserAlcoholHabitsFromUser();
+            setUserAlcoholHabits();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return alcoholHabits;
     }
 
-    public int getUserBudgetFromUser() {
-        int userBudget = 0;
+    public void setUserBudget() {
+        int userBudget;
         try {
             userSurveyCLI.printUserBudgetInputMessage();
             userBudget = input.nextInt();
@@ -161,18 +161,18 @@ public class UserSurveyController {
                 userSurveyCLI.printInvalidInputMessage();
                 userBudget = input.nextInt();
             }
+            userSurveyModel.setUserBudget(userBudget);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getUserBudgetFromUser();
+            setUserBudget();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return userBudget;
     }
 
-    public int getUsersProximityToDalhousieUniversityFromUser() {
-        int dalProximity = 0;
+    public void setUsersProximityToDalhousieUniversity() {
+        int dalProximity;
         try {
             userSurveyCLI.printUsersProximityFromDalhousieUniversityInputMessage();
             dalProximity = input.nextInt();
@@ -180,19 +180,18 @@ public class UserSurveyController {
                 userSurveyCLI.printInvalidInputMessage();
                 dalProximity = input.nextInt();
             }
+            userSurveyModel.setUserDalDistance(dalProximity);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getUsersProximityToDalhousieUniversityFromUser();
+            setUsersProximityToDalhousieUniversity();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return dalProximity;
     }
 
-
-    public String getRoommateGenderPreferenceFromUser() {
-        String roommateGender = null;
+    public void setRoommateGenderPreference() {
+        String roommateGender;
         int roommateGenderInput;
         try {
             userSurveyCLI.printRoommateGenderPreferenceInputMessage();
@@ -208,18 +207,18 @@ public class UserSurveyController {
             } else {
                 roommateGender = DOES_NOT_MATTER;
             }
+            userSurveyModel.setRoommateGender(roommateGender);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getRoommateGenderPreferenceFromUser();
+            setRoommateGenderPreference();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return roommateGender;
     }
 
-    public String getRoommateFoodHabitsPreferenceFromUser() {
-        String roommateFoodHabits = null;
+    public void setRoommateFoodHabitsPreference() {
+        String roommateFoodHabits;
         int roommateFoodHabitsInput;
         try {
             userSurveyCLI.printRoommateFoodHabitsPreferenceInputMessage();
@@ -235,18 +234,18 @@ public class UserSurveyController {
             } else {
                 roommateFoodHabits = VEGAN;
             }
+            userSurveyModel.setRoommateFoodHabits(roommateFoodHabits);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getRoommateFoodHabitsPreferenceFromUser();
+            setRoommateFoodHabitsPreference();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return roommateFoodHabits;
     }
 
-    public String getRoommateSmokingHabitsPreferenceFromUser() {
-        String roommateSmokingHabits = null;
+    public void setRoommateSmokingHabitsPreference() {
+        String roommateSmokingHabits;
         int roommateSmokingHabitsInput;
         try {
             userSurveyCLI.printRoommateSmokingHabitsPreferenceInputMessage();
@@ -262,18 +261,18 @@ public class UserSurveyController {
             } else {
                 roommateSmokingHabits = DOES_NOT_MATTER;
             }
+            userSurveyModel.setRoommateSmokingHabits(roommateSmokingHabits);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getRoommateSmokingHabitsPreferenceFromUser();
+            setRoommateSmokingHabitsPreference();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return roommateSmokingHabits;
     }
 
-    public String getRoommateAlcoholHabitsPreferenceFromUser() {
-        String roommateAlcoholHabits = null;
+    public void setRoommateAlcoholHabitsPreference() {
+        String roommateAlcoholHabits;
         int roommateAlcoholHabitsInput;
         try {
             userSurveyCLI.printRoommateAlcoholHabitsPreferenceInputMessage();
@@ -289,13 +288,13 @@ public class UserSurveyController {
             } else {
                 roommateAlcoholHabits = DOES_NOT_MATTER;
             }
+            userSurveyModel.setRoommateAlcoholHabits(roommateAlcoholHabits);
         } catch (InputMismatchException e) {
             userSurveyCLI.printInvalidInputMessage();
             input.nextLine();
-            getRoommateAlcoholHabitsPreferenceFromUser();
+            setRoommateAlcoholHabitsPreference();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return roommateAlcoholHabits;
     }
 }

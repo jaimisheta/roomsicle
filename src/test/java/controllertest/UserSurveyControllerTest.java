@@ -1,7 +1,6 @@
 package controllertest;
 
 import controller.UserSurveyController;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -10,83 +9,72 @@ public class UserSurveyControllerTest {
     UserSurveyController userSurveyController = Mockito.mock(UserSurveyController.class);
 
     @Test
-    public void testGetUserGenderFromUser() {
-        String result;
-        Mockito.when(userSurveyController.getUserGenderFromUser()).thenReturn("Male");
-        result = userSurveyController.getUserGenderFromUser();
-        Assert.assertEquals(result, "Male");
+    public void testSetUserGender() {
+        Mockito.doNothing().when(userSurveyController).setUserGender();
+        userSurveyController.setUserGender();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setUserGender();
     }
 
     @Test
-    public void testGetUserFoodHabitsFromUser() {
-        String result;
-        Mockito.when(userSurveyController.getUserFoodHabitsFromUser()).thenReturn("Veg");
-        result = userSurveyController.getUserFoodHabitsFromUser();
-        Assert.assertEquals(result, "Veg");
+    public void testSetUserFoodHabits() {
+        Mockito.doNothing().when(userSurveyController).setUserFoodHabits();
+        userSurveyController.setUserFoodHabits();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setUserFoodHabits();
     }
 
     @Test
-    public void testGetUserSmokingHabitsFromUser() {
-        int result;
-        Mockito.when(userSurveyController.getUserSmokingHabitsFromUser()).thenReturn(1);
-        result = userSurveyController.getUserSmokingHabitsFromUser();
-        Assert.assertEquals(result, 1);
+    public void testSetUserSmokingHabits() {
+        Mockito.doNothing().when(userSurveyController).setUserSmokingHabits();
+        userSurveyController.setUserSmokingHabits();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setUserSmokingHabits();
     }
 
     @Test
-    public void testGetUserAlcoholHabitsFromUser() {
-        int result;
-        Mockito.when(userSurveyController.getUserAlcoholHabitsFromUser()).thenReturn(1);
-        result = userSurveyController.getUserAlcoholHabitsFromUser();
-        Assert.assertEquals(result, 1);
+    public void testSetUserAlcoholHabits() {
+        Mockito.doNothing().when(userSurveyController).setUserAlcoholHabits();
+        userSurveyController.setUserAlcoholHabits();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setUserAlcoholHabits();
     }
 
     @Test
-    public void testGetUserBudgetFromUser() {
-        int result;
-        Mockito.when(userSurveyController.getUserBudgetFromUser()).thenReturn(500);
-        result = userSurveyController.getUserBudgetFromUser();
-        Assert.assertEquals(result, 500);
+    public void testSetUserBudget() {
+        Mockito.doNothing().when(userSurveyController).setUserBudget();
+        userSurveyController.setUserBudget();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setUserBudget();
     }
 
     @Test
-    public void testGetUsersProximityToDalhousieUniversityFromUser() {
-        int result;
-        Mockito.when(userSurveyController.getUsersProximityToDalhousieUniversityFromUser()).thenReturn(2000);
-        result = userSurveyController.getUsersProximityToDalhousieUniversityFromUser();
-        Assert.assertEquals(result, 2000);
+    public void testSetUsersProximityToDalhousieUniversity() {
+        Mockito.doNothing().when(userSurveyController).setUsersProximityToDalhousieUniversity();
+        userSurveyController.setUsersProximityToDalhousieUniversity();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setUsersProximityToDalhousieUniversity();
     }
 
     @Test
-    public void testGetRoommateGenderPreferenceFromUser() {
-        String result;
-        Mockito.when(userSurveyController.getRoommateGenderPreferenceFromUser()).thenReturn("Female");
-        result = userSurveyController.getRoommateGenderPreferenceFromUser();
-        Assert.assertEquals(result, "Female");
+    public void testSetRoommateGenderPreference() {
+        Mockito.doNothing().when(userSurveyController).setRoommateGenderPreference();
+        userSurveyController.setRoommateGenderPreference();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setRoommateGenderPreference();
     }
 
     @Test
-    public void testGetRoommateFoodHabitsPreferenceFromUser() {
-        String result;
-        Mockito.when(userSurveyController.getRoommateFoodHabitsPreferenceFromUser()).thenReturn("Non-Veg");
-        result = userSurveyController.getRoommateFoodHabitsPreferenceFromUser();
-        Assert.assertEquals(result, "Non-Veg");
+    public void testSetRoommateFoodHabitsPreference() {
+        Mockito.doNothing().when(userSurveyController).setRoommateSmokingHabitsPreference();
+        userSurveyController.setRoommateSmokingHabitsPreference();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setRoommateSmokingHabitsPreference();
     }
 
     @Test
-    public void testGetRoommateSmokingHabitsPreferenceFromUser() {
-        String result;
-        Mockito.when(userSurveyController.getRoommateSmokingHabitsPreferenceFromUser()).thenReturn("No");
-        result = userSurveyController.getRoommateSmokingHabitsPreferenceFromUser();
-        Assert.assertEquals(result, "No");
+    public void testSetRoommateSmokingHabitsPreference() {
+        Mockito.doNothing().when(userSurveyController).setRoommateSmokingHabitsPreference();
+        userSurveyController.setRoommateSmokingHabitsPreference();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setRoommateSmokingHabitsPreference();
     }
 
     @Test
-    public void testGetRoommateAlcoholHabitsPreferenceFromUser() {
-        String result;
-        Mockito.when(userSurveyController.getRoommateAlcoholHabitsPreferenceFromUser()).thenReturn("Yes");
-        result = userSurveyController.getRoommateAlcoholHabitsPreferenceFromUser();
-        Assert.assertEquals(result, "Yes");
+    public void testSetRoommateAlcoholHabitsPreference() {
+        Mockito.doNothing().when(userSurveyController).setRoommateAlcoholHabitsPreference();
+        userSurveyController.setRoommateAlcoholHabitsPreference();
+        Mockito.verify(userSurveyController, Mockito.times(1)).setRoommateAlcoholHabitsPreference();
     }
-
 }
