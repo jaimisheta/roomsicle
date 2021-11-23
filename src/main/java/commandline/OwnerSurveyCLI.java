@@ -45,4 +45,8 @@ public class OwnerSurveyCLI {
         System.out.println("1. <1KM 2. 1-2KM 3. 2-5KM 4. >5KM");
     }
 
+    public void printOwnerSurveyCompletionMessage() {
+        System.out.println("Thanks for taking the survey. Your profile has been completed successfully");
+    }
+
 }
