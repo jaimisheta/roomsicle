@@ -10,74 +10,58 @@ public class OwnerSurveyControllerTest {
     OwnerSurveyController ownerSurveyController = Mockito.mock(OwnerSurveyController.class);
 
     @Test
-    public void testGetPropertyAddressFromOwner() {
-        String result;
-        Mockito.when(ownerSurveyController.getPropertyAddressFromOwner()).thenReturn("address1");
-        result = ownerSurveyController.getPropertyAddressFromOwner();
-        Assert.assertEquals(result, "address1");
+    public void testSetPropertyAddress() {
+        Mockito.doNothing().when(ownerSurveyController).setPropertyAddress();
+        ownerSurveyController.setPropertyAddress();
+        Mockito.verify(ownerSurveyController, Mockito.times(1)).setPropertyAddress();
     }
 
     @Test
-    public void testGetNumberOfBedroomsFromOwner() {
-        int result;
-        Mockito.when(ownerSurveyController.getNumberOfBedroomsFromOwner()).thenReturn(7);
-        result = ownerSurveyController.getNumberOfBedroomsFromOwner();
-        Assert.assertEquals(result, 7);
+    public void testSetNumberOfBedrooms() {
+        Mockito.doNothing().when(ownerSurveyController).setNumberOfBedrooms();
+        ownerSurveyController.setNumberOfBedrooms();
+        Mockito.verify(ownerSurveyController, Mockito.times(1)).setNumberOfBedrooms();
     }
 
     @Test
-    public void testGetNumberOfVacanciesFromOwner() {
-        int result;
-        Mockito.when(ownerSurveyController.getNumberOfVacanciesFromOwner()).thenReturn(4);
-        result = ownerSurveyController.getNumberOfVacanciesFromOwner();
-        Assert.assertEquals(result, 4);
+    public void testSetNumberOfVacancies() {
+        Mockito.doNothing().when(ownerSurveyController).setNumberOfVacancies();
+        ownerSurveyController.setNumberOfVacancies();
+        Mockito.verify(ownerSurveyController, Mockito.times(1)).setNumberOfVacancies();
     }
 
     @Test
-    public void testGetUtilitiesConfirmationFromOwnerWhenAvailable() {
-        boolean result;
-        Mockito.when(ownerSurveyController.getUtilitiesConfirmationFromOwner()).thenReturn(true);
-        result = ownerSurveyController.getUtilitiesConfirmationFromOwner();
-        Assert.assertEquals(result, true);
+    public void testSetUtilitiesConfirmation() {
+        Mockito.doNothing().when(ownerSurveyController).setUtilitiesConfirmation();
+        ownerSurveyController.setUtilitiesConfirmation();
+        Mockito.verify(ownerSurveyController, Mockito.times(1)).setUtilitiesConfirmation();
     }
 
     @Test
-    public void testGetUtilitiesConfirmationFromOwnerWhenNotAvailable() {
-        boolean result;
-        Mockito.when(ownerSurveyController.getUtilitiesConfirmationFromOwner()).thenReturn(false);
-        result = ownerSurveyController.getUtilitiesConfirmationFromOwner();
-        Assert.assertEquals(result, false);
+    public void testSetDalhousieUniversityDistance() {
+        Mockito.doNothing().when(ownerSurveyController).setDalhousieUniversityDistance();
+        ownerSurveyController.setDalhousieUniversityDistance();
+        Mockito.verify(ownerSurveyController, Mockito.times(1)).setDalhousieUniversityDistance();
     }
 
     @Test
-    public void testGetDalhousieUniversityDistanceInputFromOwner() {
-        int result;
-        Mockito.when(ownerSurveyController.getDalhousieUniversityDistanceInputFromOwner()).thenReturn(1);
-        result = ownerSurveyController.getDalhousieUniversityDistanceInputFromOwner();
-        Assert.assertEquals(result, 1);
+    public void testSetGroceryStoreDistance() {
+        Mockito.doNothing().when(ownerSurveyController).setGroceryStoreDistance();
+        ownerSurveyController.setGroceryStoreDistance();
+        Mockito.verify(ownerSurveyController, Mockito.times(1)).setGroceryStoreDistance();
     }
 
     @Test
-    public void testGetGroceryStoreDistanceInputFromOwner() {
-        int result;
-        Mockito.when(ownerSurveyController.getGroceryStoreDistanceInputFromOwner()).thenReturn(3);
-        result = ownerSurveyController.getGroceryStoreDistanceInputFromOwner();
-        Assert.assertEquals(result, 3);
+    public void testSetTheaterDistance() {
+        Mockito.doNothing().when(ownerSurveyController).setTheaterDistance();
+        ownerSurveyController.setTheaterDistance();
+        Mockito.verify(ownerSurveyController, Mockito.times(1)).setTheaterDistance();
     }
 
     @Test
-    public void testGetTheaterDistanceInputFromOwner() {
-        int result;
-        Mockito.when(ownerSurveyController.getTheaterDistanceInputFromOwner()).thenReturn(23);
-        result = ownerSurveyController.getTheaterDistanceInputFromOwner();
-        Assert.assertEquals(result, 23);
-    }
-
-    @Test
-    public void testGetDowntownDistanceInputFromOwner() {
-        int result;
-        Mockito.when(ownerSurveyController.getDowntownDistanceInputFromOwner()).thenReturn(7);
-        result = ownerSurveyController.getDowntownDistanceInputFromOwner();
-        Assert.assertEquals(result, 7);
+    public void testSetDowntownDistance() {
+        Mockito.doNothing().when(ownerSurveyController).setDowntownDistance();
+        ownerSurveyController.setDowntownDistance();
+        Mockito.verify(ownerSurveyController, Mockito.times(1)).setDowntownDistance();
     }
 }
