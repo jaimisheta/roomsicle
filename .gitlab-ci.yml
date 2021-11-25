@@ -26,7 +26,7 @@ test:
 
   script:
     - echo "Pipeline test started"
-    - mvn clean test
+    - mvn verify
   tags:
     - ugrad
 
