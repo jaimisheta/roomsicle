@@ -11,6 +11,7 @@ import static controller.UserSurveyConstants.ZERO;
 import static controller.UserSurveyConstants.ONE;
 import static controller.UserSurveyConstants.TWO;
 import static controller.UserSurveyConstants.THREE;
+import static controller.UserSurveyConstants.FOUR;
 import static controller.UserSurveyConstants.MALE;
 import static controller.UserSurveyConstants.FEMALE;
 import static controller.UserSurveyConstants.OTHER;
@@ -58,8 +59,9 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUserGenderInputMessage();
             userGenderInput = input.nextInt();
-            while (userGenderInput != ONE && userGenderInput != TWO && userGenderInput != THREE) {
+            while (userGenderInput <= ZERO || userGenderInput >= FOUR) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printUserGenderInputMessage();
                 userGenderInput = input.nextInt();
             }
             if (userGenderInput == ONE) {
@@ -85,8 +87,9 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUserFoodHabitsInputMessage();
             userFoodHabitsInput = input.nextInt();
-            while (userFoodHabitsInput != ONE && userFoodHabitsInput != TWO && userFoodHabitsInput != THREE) {
+            while (userFoodHabitsInput <= ZERO || userFoodHabitsInput >= FOUR) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printUserFoodHabitsInputMessage();
                 userFoodHabitsInput = input.nextInt();
             }
             if (userFoodHabitsInput == ONE) {
@@ -112,8 +115,9 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUserSmokingHabitsInputMessage();
             smokingHabitsInput = input.nextInt();
-            while (smokingHabitsInput != ONE && smokingHabitsInput != TWO) {
+            while (smokingHabitsInput <= ZERO || smokingHabitsInput >= THREE) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printUserSmokingHabitsInputMessage();
                 smokingHabitsInput = input.nextInt();
             }
             if (smokingHabitsInput == ONE) {
@@ -135,8 +139,9 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printUserAlcoholHabitsInputMessage();
             alcoholHabitsInput = input.nextInt();
-            while (alcoholHabitsInput != ONE && alcoholHabitsInput != TWO) {
+            while (alcoholHabitsInput <= ZERO || alcoholHabitsInput >= THREE) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printUserAlcoholHabitsInputMessage();
                 alcoholHabitsInput = input.nextInt();
             }
             if (alcoholHabitsInput == ONE) {
@@ -159,6 +164,7 @@ public class UserSurveyController {
             userBudget = input.nextInt();
             while (userBudget <= ZERO) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printUserBudgetInputMessage();
                 userBudget = input.nextInt();
             }
             userSurveyModel.setUserBudget(userBudget);
@@ -178,6 +184,7 @@ public class UserSurveyController {
             dalProximity = input.nextInt();
             while (dalProximity <= ZERO) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printUsersProximityFromDalhousieUniversityInputMessage();
                 dalProximity = input.nextInt();
             }
             userSurveyModel.setUserDalDistance(dalProximity);
@@ -196,8 +203,9 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printRoommateGenderPreferenceInputMessage();
             roommateGenderInput = input.nextInt();
-            while (roommateGenderInput != ONE && roommateGenderInput != TWO && roommateGenderInput != THREE) {
+            while (roommateGenderInput <= ZERO || roommateGenderInput >= FOUR) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printRoommateGenderPreferenceInputMessage();
                 roommateGenderInput = input.nextInt();
             }
             if (roommateGenderInput == ONE) {
@@ -223,8 +231,9 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printRoommateFoodHabitsPreferenceInputMessage();
             roommateFoodHabitsInput = input.nextInt();
-            while (roommateFoodHabitsInput != ONE && roommateFoodHabitsInput != TWO && roommateFoodHabitsInput != THREE) {
+            while (roommateFoodHabitsInput <= ZERO || roommateFoodHabitsInput >= FOUR) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printRoommateFoodHabitsPreferenceInputMessage();
                 roommateFoodHabitsInput = input.nextInt();
             }
             if (roommateFoodHabitsInput == ONE) {
@@ -250,8 +259,9 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printRoommateSmokingHabitsPreferenceInputMessage();
             roommateSmokingHabitsInput = input.nextInt();
-            while (roommateSmokingHabitsInput != ONE && roommateSmokingHabitsInput != TWO && roommateSmokingHabitsInput != THREE) {
+            while (roommateSmokingHabitsInput <= ZERO || roommateSmokingHabitsInput >= FOUR) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printRoommateSmokingHabitsPreferenceInputMessage();
                 roommateSmokingHabitsInput = input.nextInt();
             }
             if (roommateSmokingHabitsInput == ONE) {
@@ -277,8 +287,9 @@ public class UserSurveyController {
         try {
             userSurveyCLI.printRoommateAlcoholHabitsPreferenceInputMessage();
             roommateAlcoholHabitsInput = input.nextInt();
-            while (roommateAlcoholHabitsInput != ONE && roommateAlcoholHabitsInput != TWO && roommateAlcoholHabitsInput != THREE) {
+            while (roommateAlcoholHabitsInput <= ZERO || roommateAlcoholHabitsInput >= FOUR) {
                 userSurveyCLI.printInvalidInputMessage();
+                userSurveyCLI.printRoommateAlcoholHabitsPreferenceInputMessage();
                 roommateAlcoholHabitsInput = input.nextInt();
             }
             if (roommateAlcoholHabitsInput == ONE) {

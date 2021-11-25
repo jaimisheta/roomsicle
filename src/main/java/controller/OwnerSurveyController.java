@@ -7,12 +7,14 @@ import models.OwnerSurveyModel;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static controller.OwnerSurveyConstants.ZERO;
 import static controller.OwnerSurveyConstants.ONE;
 import static controller.OwnerSurveyConstants.TWO;
 import static controller.OwnerSurveyConstants.THREE;
 import static controller.OwnerSurveyConstants.FOUR;
-import static controller.OwnerSurveyConstants.SIX;
-import static controller.OwnerSurveyConstants.TWELVE;
+import static controller.OwnerSurveyConstants.FIVE;
+import static controller.OwnerSurveyConstants.SEVEN;
+import static controller.OwnerSurveyConstants.THIRTEEN;
 import static controller.OwnerSurveyConstants.ZERO_KM;
 import static controller.OwnerSurveyConstants.ONE_KM;
 import static controller.OwnerSurveyConstants.TWO_KM;
@@ -20,6 +22,7 @@ import static controller.OwnerSurveyConstants.FIVE_KM;
 import static controller.OwnerSurveyConstants.FIFTY_KM;
 
 public class OwnerSurveyController {
+    
     OwnerSurveyModel ownerSurveyModel = new OwnerSurveyModel();
     OwnerSurveyDAO ownerSurveyDAO = new OwnerSurveyDAO();
     OwnerSurveyCLI ownerSurveyCLI = new OwnerSurveyCLI();
@@ -83,8 +86,9 @@ public class OwnerSurveyController {
         try {
             ownerSurveyCLI.printNumberOfBedroomsInputMessage();
             numberOfBedrooms = input.nextInt();
-            while (!(numberOfBedrooms >= ONE && numberOfBedrooms <= SIX)) {
+            while (numberOfBedrooms <= ZERO || numberOfBedrooms >= SEVEN) {
                 ownerSurveyCLI.printInvalidInputMessage();
+                ownerSurveyCLI.printNumberOfBedroomsInputMessage();
                 numberOfBedrooms = input.nextInt();
             }
             ownerSurveyModel.setNumberOfBedrooms(numberOfBedrooms);
@@ -102,8 +106,9 @@ public class OwnerSurveyController {
         try {
             ownerSurveyCLI.printNumberOfVacanciesInputMessage();
             numberOfVacancies = input.nextInt();
-            while (!(numberOfVacancies >= ONE && numberOfVacancies <= TWELVE)) {
+            while (numberOfVacancies <= ZERO || numberOfVacancies >= THIRTEEN) {
                 ownerSurveyCLI.printInvalidInputMessage();
+                ownerSurveyCLI.printNumberOfVacanciesInputMessage();
                 numberOfVacancies = input.nextInt();
             }
             ownerSurveyModel.setNumberOfVacancies(numberOfVacancies);
@@ -122,8 +127,9 @@ public class OwnerSurveyController {
         try {
             ownerSurveyCLI.printUtilitiesInputMessage();
             utilitiesIncludedInput = input.nextInt();
-            while (utilitiesIncludedInput != ONE && utilitiesIncludedInput != TWO) {
+            while (utilitiesIncludedInput <= ZERO || utilitiesIncludedInput >= THREE) {
                 ownerSurveyCLI.printInvalidInputMessage();
+                ownerSurveyCLI.printUtilitiesInputMessage();
                 utilitiesIncludedInput = input.nextInt();
             }
             if (utilitiesIncludedInput == ONE) {
@@ -144,11 +150,12 @@ public class OwnerSurveyController {
         try {
             ownerSurveyCLI.printDalhousieUniversityDistanceInputMessage();
             dalhousieUniversityDistanceInput = input.nextInt();
-            while (!(dalhousieUniversityDistanceInput >= ONE && dalhousieUniversityDistanceInput <= FOUR)) {
+            while (dalhousieUniversityDistanceInput <= ZERO || dalhousieUniversityDistanceInput >= FIVE) {
                 ownerSurveyCLI.printInvalidInputMessage();
+                ownerSurveyCLI.printDalhousieUniversityDistanceInputMessage();
                 dalhousieUniversityDistanceInput = input.nextInt();
             }
-            distanceRange=getDistanceRange(dalhousieUniversityDistanceInput);
+            distanceRange = getDistanceRange(dalhousieUniversityDistanceInput);
             ownerSurveyModel.setDalDistanceMin(distanceRange[0]);
             ownerSurveyModel.setDalDistanceMax(distanceRange[1]);
         } catch (InputMismatchException e) {
@@ -165,11 +172,12 @@ public class OwnerSurveyController {
         try {
             ownerSurveyCLI.printGroceryStoreDistanceInputMessage();
             groceryStoreDistanceInput = input.nextInt();
-            while (!(groceryStoreDistanceInput >= ONE && groceryStoreDistanceInput <= FOUR)) {
+            while (groceryStoreDistanceInput <= ZERO || groceryStoreDistanceInput >= FIVE) {
                 ownerSurveyCLI.printInvalidInputMessage();
+                ownerSurveyCLI.printGroceryStoreDistanceInputMessage();
                 groceryStoreDistanceInput = input.nextInt();
             }
-            distanceRange=getDistanceRange(groceryStoreDistanceInput);
+            distanceRange = getDistanceRange(groceryStoreDistanceInput);
             ownerSurveyModel.setGroceryStoreDistanceMin(distanceRange[0]);
             ownerSurveyModel.setGroceryStoreDistanceMax(distanceRange[1]);
         } catch (InputMismatchException e) {
@@ -186,11 +194,12 @@ public class OwnerSurveyController {
         try {
             ownerSurveyCLI.printTheaterDistanceInputMessage();
             theaterDistanceInput = input.nextInt();
-            while (!(theaterDistanceInput >= ONE && theaterDistanceInput <= FOUR)) {
+            while (theaterDistanceInput <= ZERO || theaterDistanceInput >= FIVE) {
                 ownerSurveyCLI.printInvalidInputMessage();
+                ownerSurveyCLI.printTheaterDistanceInputMessage();
                 theaterDistanceInput = input.nextInt();
             }
-            distanceRange=getDistanceRange(theaterDistanceInput);
+            distanceRange = getDistanceRange(theaterDistanceInput);
             ownerSurveyModel.setTheaterDistanceMin(distanceRange[0]);
             ownerSurveyModel.setTheaterDistanceMax(distanceRange[1]);
         } catch (InputMismatchException e) {
@@ -207,11 +216,12 @@ public class OwnerSurveyController {
         try {
             ownerSurveyCLI.printDowntownDistanceInputMessage();
             downtownDistanceInput = input.nextInt();
-            while (!(downtownDistanceInput >= ONE && downtownDistanceInput <= FOUR)) {
+            while (downtownDistanceInput <= ZERO || downtownDistanceInput >= FIVE) {
                 ownerSurveyCLI.printInvalidInputMessage();
+                ownerSurveyCLI.printDowntownDistanceInputMessage();
                 downtownDistanceInput = input.nextInt();
             }
-            distanceRange=getDistanceRange(downtownDistanceInput);
+            distanceRange = getDistanceRange(downtownDistanceInput);
             ownerSurveyModel.setDowntownDistanceMin(distanceRange[0]);
             ownerSurveyModel.setDowntownDistanceMax(distanceRange[1]);
         } catch (InputMismatchException e) {
