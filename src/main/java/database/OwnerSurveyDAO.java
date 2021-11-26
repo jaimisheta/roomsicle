@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class OwnerSurveyDAO {
-    DatabaseConnection databaseConnection = new DatabaseConnection();
+
+    DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     Connection connection;
     Statement statement;
 
     public void insertOwnerSurveyDetails(OwnerSurveyModel ownerSurveyModel) {
         String query;
-        String propertyDetailsTableName = "property_details";
         String ownerID;
         String address;
         int numberOfBedrooms;
@@ -27,7 +27,6 @@ public class OwnerSurveyDAO {
         int theaterDistanceMax;
         int downtownDistanceMin;
         int downtownDistanceMax;
-        boolean propertyStatus = true;
 
         ownerID = ownerSurveyModel.getOwnerID();
         address = ownerSurveyModel.getAddress();
@@ -46,14 +45,22 @@ public class OwnerSurveyDAO {
             connection = databaseConnection.getConnectionObject();
             statement = connection.createStatement();
 
-            query = "insert into " + propertyDetailsTableName + " (owner_id,address,number_of_bedroom,utilities," +
-                    "number_of_vacancies,dal_distance_min,dal_distance_max,grocery_distance_min," +
-                    "grocery_distance_max,theater_distance_min,theater_distance_max," +
-                    "downtown_distance_min,downtown_distance_max,price,property_status)" +
-                    "values ('" + ownerID + "','" + address + "'," + numberOfBedrooms + "," +
-                    "" + isUtilitiesProvided + "," + numberOfVacancies + "," + dalDistanceMin + "," + dalDistanceMax + "," +
-                    "" + groceryStoreDistanceMin + "," + groceryStoreDistanceMax + "," + theaterDistanceMin + "," +
-                    "" + theaterDistanceMax + "," + downtownDistanceMin + "," + downtownDistanceMax + ",'2000'," + propertyStatus + ")";
+            query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.survey.insert.survey.details.query")
+                    .replace("propertyDetailsTableName", DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.survey.property.details.table.name"))
+                    .replace("ownerID", ownerID).replace("propertyAddress", address)
+                    .replace("numberOfBedrooms", String.valueOf(numberOfBedrooms))
+                    .replace("isUtilitiesProvided", String.valueOf(isUtilitiesProvided))
+                    .replace("numberOfVacancies", String.valueOf(numberOfVacancies))
+                    .replace("dalDistanceMin", String.valueOf(dalDistanceMin))
+                    .replace("dalDistanceMax", String.valueOf(dalDistanceMax))
+                    .replace("groceryStoreDistanceMin", String.valueOf(groceryStoreDistanceMin))
+                    .replace("groceryStoreDistanceMax", String.valueOf(groceryStoreDistanceMax))
+                    .replace("theaterDistanceMin", String.valueOf(theaterDistanceMin))
+                    .replace("theaterDistanceMax", String.valueOf(theaterDistanceMax))
+                    .replace("downtownDistanceMin", String.valueOf(downtownDistanceMin))
+                    .replace("downtownDistanceMax", String.valueOf(downtownDistanceMax))
+                    .replace("propertyPrice", DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.survey.property.price"))
+                    .replace("propertyStatus", DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.survey.property.status"));
 
             statement.executeUpdate(query);
         } catch (SQLException e) {

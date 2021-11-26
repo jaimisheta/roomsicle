@@ -7,18 +7,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserSurveyDAO {
-    DatabaseConnection databaseConnection = new DatabaseConnection();
+
+    DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     Connection connection = databaseConnection.getConnectionObject();
     Statement statement;
 
     public void insertUserPersonalDetails(UserSurveyModel userSurveyModel) {
         String query;
-        String userPersonalDetailsTableName = "user_personal_details";
         String userId;
         String userGender;
         String userFoodHabits;
-        int userSmokingHabits;
-        int userAlcoholHabits;
+        String userSmokingHabits;
+        String userAlcoholHabits;
         int userBudget;
         int userDalDistance;
 
@@ -32,9 +32,14 @@ public class UserSurveyDAO {
         try {
             statement = connection.createStatement();
 
-            query = "insert into " + userPersonalDetailsTableName + " (email_id, gender, food_habits, smoke, alcohol, budget, dal_distance)" +
-                    "values ('" + userId + "','" + userGender + "','" + userFoodHabits + "'," +
-                    "'" + userSmokingHabits + "','" + userAlcoholHabits + "','" + userBudget + "','" + userDalDistance + "')";
+            query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.insert.user.personal.details.query")
+                    .replace("userPersonalDetailsTableName", DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.user.personal.details.table.name"))
+                    .replace("userId", userId).replace("userGender", userGender)
+                    .replace("userFoodHabits", userFoodHabits)
+                    .replace("userSmokingHabits", userSmokingHabits)
+                    .replace("userAlcoholHabits", userAlcoholHabits)
+                    .replace("userBudget", String.valueOf(userBudget))
+                    .replace("userDalDistance", String.valueOf(userDalDistance));
 
             statement.executeUpdate(query);
         } catch (SQLException e) {
@@ -44,7 +49,6 @@ public class UserSurveyDAO {
 
     public void insertRoommatePreferenceDetails(UserSurveyModel userSurveyModel) {
         String query;
-        String roommatePreferenceDetailsTableName = "user_preferences";
         String userId;
         String roommateGender;
         String roommateFoodHabits;
@@ -59,9 +63,12 @@ public class UserSurveyDAO {
         try {
             statement = connection.createStatement();
 
-            query = "insert into " + roommatePreferenceDetailsTableName + " (user_id, roommate_gender, roommate_food_habits, roommate_smoke, roommate_alcohol)" +
-                    "values ('" + userId + "','" + roommateGender + "','" + roommateFoodHabits + "'," +
-                    "'" + roommateSmokingHabits + "','" + roommateAlcoholHabits + "')";
+            query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.insert.roommate.preference.details.query")
+                    .replace("roommatePreferenceDetailsTableName", DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.roommate.preference.details.table.name"))
+                    .replace("userId", userId).replace("roommateGender", roommateGender)
+                    .replace("roommateFoodHabits", roommateFoodHabits)
+                    .replace("roommateSmokingHabits", roommateSmokingHabits)
+                    .replace("roommateAlcoholHabits", roommateAlcoholHabits);
 
             statement.executeUpdate(query);
         } catch (SQLException e) {

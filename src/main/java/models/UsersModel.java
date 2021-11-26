@@ -21,7 +21,7 @@ public class UsersModel {
 
 	public Map<String, String> getUserCreds() {
 			HashMap<String, String> creds = new HashMap<String, String>();
-			DatabaseConnection conn=new DatabaseConnection();
+			DatabaseConnection conn = DatabaseConnection.getDatabaseConnectionObject();
 			
 	        Connection connection = null;
 	        Statement selectStmt = null;
@@ -106,7 +106,7 @@ public void roomSeeker(int userSelectionInt) {
 	Connection connection = null;
     Statement selectStmt = null;
     String users;
-    DatabaseConnection conn=new DatabaseConnection();
+    DatabaseConnection conn = DatabaseConnection.getDatabaseConnectionObject();
     try
     {
     	connection=conn.getConnectionObject();
