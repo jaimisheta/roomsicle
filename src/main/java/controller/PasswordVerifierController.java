@@ -11,7 +11,6 @@ public class PasswordVerifierController {
        if (password.equals(confirmPassword)){
            roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("registration.password.match.message"));
        }else {
-
            throw new PasswordNotMatchException(CommandLineInputProperties.getCommandLineInputPropertyValue("registration.password.do.not.match.message"));
        }
     }

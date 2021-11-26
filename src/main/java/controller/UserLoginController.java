@@ -7,6 +7,7 @@ import database.UserLoginDAO;
 import models.UsersModel;
 
 public class UserLoginController {
+	public static String emailId;
 	EmailVerfierController emailVerfierController=new EmailVerfierController();
 	UsersModel usersModel=new UsersModel();
 	UserLoginDAO userLoginDAO=new UserLoginDAO();
@@ -14,6 +15,7 @@ public class UserLoginController {
 	String email;
 	String password;
 	public UserLoginController() {
+
 		try {
 
 			roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("welcomepage.add.message"));
@@ -21,6 +23,7 @@ public class UserLoginController {
 			roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("welcomepage.add.message"));
 			roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("login.email.id.message"));
 			email = roomsicleCLI.getStringResponse();
+			emailId=email;
 			usersModel.setEmailId(email);
 			emailVerfierController.EmailVerfier(email);
 			roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("login.password.message"));

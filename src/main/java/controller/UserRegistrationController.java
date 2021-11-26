@@ -9,8 +9,8 @@ import static controller.UserRegistrationConstants.owner;
 
 
 public class UserRegistrationController {
+
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
-    Integer userSelection;
     String firstName;
     String lastName;
     String contact;
@@ -32,7 +32,6 @@ public class UserRegistrationController {
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("registration.identify.yourself.message"));
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("registration.identify.profile.message"));
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("welcomepage.welcome.select.user.choice.message"));
-//        userSelection = roomsicleCLI.getNumberResponse();
         setType();
         setFirstName();
         setLastName();
