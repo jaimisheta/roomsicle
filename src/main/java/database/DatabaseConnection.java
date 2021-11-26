@@ -1,33 +1,24 @@
 package database;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DatabaseConnection {
+
     private static DatabaseConnection databaseConnection = null;
     public static Connection connection = null;
+    private String jdbcDriver;
+    private String url;
+    private String user;
+    private String password;
 
-    private String JDBC_DRIVER;
-    private String URL;
-    private String USER;
-    private String PASSWORD;
-
-    public DatabaseConnection() {
-        Properties properties = new Properties();
+    private DatabaseConnection() {
         try {
-            FileInputStream fileInputStream = new FileInputStream("config.properties");
-            properties.load(fileInputStream);
-            fileInputStream.close();
-            JDBC_DRIVER = properties.getProperty("jdbc_driver");
-            URL = properties.getProperty("url");
-            USER = properties.getProperty("user");
-            PASSWORD = properties.getProperty("password");
-        } catch (IOException e) {
-            e.printStackTrace();
+            jdbcDriver = ConfigProperties.getConfigPropertyValue("jdbc.driver");
+            url = ConfigProperties.getConfigPropertyValue("url");
+            user = ConfigProperties.getConfigPropertyValue("user");
+            password = ConfigProperties.getConfigPropertyValue("password");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,15 +26,15 @@ public class DatabaseConnection {
 
     public Connection getConnectionObject() {
         try {
-            Class.forName(JDBC_DRIVER);
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Class.forName(jdbcDriver);
+            connection = DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return connection;
     }
 
-    public static DatabaseConnection databaseConnectionObject() {
+    public static DatabaseConnection getDatabaseConnectionObject() {
         if (databaseConnection == null) {
             databaseConnection = new DatabaseConnection();
         }

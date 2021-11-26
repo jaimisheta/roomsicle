@@ -4,8 +4,8 @@ public class UserSurveyModel {
     private String userId;
     private String userGender;
     private String userFoodHabits;
-    private int userSmokingHabits;
-    private int userAlcoholHabits;
+    private String userSmokingHabits;
+    private String userAlcoholHabits;
     private int userBudget;
     private int userDalDistance;
     private String roommateGender;
@@ -37,19 +37,19 @@ public class UserSurveyModel {
         this.userFoodHabits = userFoodHabits;
     }
 
-    public int getUserSmokingHabits() {
+    public String getUserSmokingHabits() {
         return userSmokingHabits;
     }
 
-    public void setUserSmokingHabits(int userSmokingHabits) {
+    public void setUserSmokingHabits(String userSmokingHabits) {
         this.userSmokingHabits = userSmokingHabits;
     }
 
-    public int getUserAlcoholHabits() {
+    public String getUserAlcoholHabits() {
         return userAlcoholHabits;
     }
 
-    public void setUserAlcoholHabits(int userAlcoholHabits) {
+    public void setUserAlcoholHabits(String userAlcoholHabits) {
         this.userAlcoholHabits = userAlcoholHabits;
     }
 
