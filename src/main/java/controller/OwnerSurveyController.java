@@ -6,7 +6,6 @@ import database.OwnerSurveyDAO;
 import models.OwnerSurveyModel;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import static controller.OwnerSurveyConstants.ZERO;
 import static controller.OwnerSurveyConstants.ONE;
@@ -27,7 +26,6 @@ public class OwnerSurveyController {
     OwnerSurveyModel ownerSurveyModel = new OwnerSurveyModel();
     OwnerSurveyDAO ownerSurveyDAO = new OwnerSurveyDAO();
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
-    Scanner input = new Scanner(System.in);
     int[] distanceRange = new int[2];
 
     public void takeSurvey(String emailId) {
@@ -56,7 +54,7 @@ public class OwnerSurveyController {
                 distanceMinMax[0] = ZERO_KM;
                 distanceMinMax[1] = ONE_KM;
             } else if (input == TWO) {
-                distanceMinMax[0] = ZERO_KM;
+                distanceMinMax[0] = ONE_KM;
                 distanceMinMax[1] = TWO_KM;
             } else if (input == THREE) {
                 distanceMinMax[0] = TWO_KM;
@@ -75,7 +73,7 @@ public class OwnerSurveyController {
         String propertyAddress;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.property.address.message"));
-            propertyAddress = input.nextLine();
+            propertyAddress = roomsicleCLI.getStringResponse();
             ownerSurveyModel.setAddress(propertyAddress);
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,16 +84,15 @@ public class OwnerSurveyController {
         int numberOfBedrooms;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.number.of.bedrooms.message"));
-            numberOfBedrooms = input.nextInt();
+            numberOfBedrooms = roomsicleCLI.getNumberResponse();
             while (numberOfBedrooms <= ZERO || numberOfBedrooms >= SEVEN) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.number.of.bedrooms.message"));
-                numberOfBedrooms = input.nextInt();
+                numberOfBedrooms = roomsicleCLI.getNumberResponse();
             }
             ownerSurveyModel.setNumberOfBedrooms(numberOfBedrooms);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            input.nextLine();
             setNumberOfBedrooms();
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,16 +103,15 @@ public class OwnerSurveyController {
         int numberOfVacancies;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.number.of.vacancies.message"));
-            numberOfVacancies = input.nextInt();
+            numberOfVacancies = roomsicleCLI.getNumberResponse();
             while (numberOfVacancies <= ZERO || numberOfVacancies >= THIRTEEN) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.number.of.vacancies.message"));
-                numberOfVacancies = input.nextInt();
+                numberOfVacancies = roomsicleCLI.getNumberResponse();
             }
             ownerSurveyModel.setNumberOfVacancies(numberOfVacancies);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            input.nextLine();
             setNumberOfVacancies();
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,11 +123,11 @@ public class OwnerSurveyController {
         int utilitiesIncludedInput;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.utilities.message"));
-            utilitiesIncludedInput = input.nextInt();
+            utilitiesIncludedInput = roomsicleCLI.getNumberResponse();
             while (utilitiesIncludedInput <= ZERO || utilitiesIncludedInput >= THREE) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.utilities.message"));
-                utilitiesIncludedInput = input.nextInt();
+                utilitiesIncludedInput = roomsicleCLI.getNumberResponse();
             }
             if (utilitiesIncludedInput == ONE) {
                 utilitiesIncluded = true;
@@ -139,7 +135,6 @@ public class OwnerSurveyController {
             ownerSurveyModel.setUtilitiesProvided(utilitiesIncluded);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            input.nextLine();
             setUtilitiesConfirmation();
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,19 +146,18 @@ public class OwnerSurveyController {
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.dalhousie.university.distance.message"));
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.distance.options.message"));
-            dalhousieUniversityDistanceInput = input.nextInt();
+            dalhousieUniversityDistanceInput = roomsicleCLI.getNumberResponse();
             while (dalhousieUniversityDistanceInput <= ZERO || dalhousieUniversityDistanceInput >= FIVE) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.dalhousie.university.distance.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.distance.options.message"));
-                dalhousieUniversityDistanceInput = input.nextInt();
+                dalhousieUniversityDistanceInput = roomsicleCLI.getNumberResponse();
             }
             distanceRange = getDistanceRange(dalhousieUniversityDistanceInput);
             ownerSurveyModel.setDalDistanceMin(distanceRange[0]);
             ownerSurveyModel.setDalDistanceMax(distanceRange[1]);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            input.nextLine();
             setDalhousieUniversityDistance();
         } catch (Exception e) {
             e.printStackTrace();
@@ -175,19 +169,18 @@ public class OwnerSurveyController {
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.grocery.store.distance.message"));
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.distance.options.message"));
-            groceryStoreDistanceInput = input.nextInt();
+            groceryStoreDistanceInput = roomsicleCLI.getNumberResponse();
             while (groceryStoreDistanceInput <= ZERO || groceryStoreDistanceInput >= FIVE) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.grocery.store.distance.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.distance.options.message"));
-                groceryStoreDistanceInput = input.nextInt();
+                groceryStoreDistanceInput = roomsicleCLI.getNumberResponse();
             }
             distanceRange = getDistanceRange(groceryStoreDistanceInput);
             ownerSurveyModel.setGroceryStoreDistanceMin(distanceRange[0]);
             ownerSurveyModel.setGroceryStoreDistanceMax(distanceRange[1]);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            input.nextLine();
             setGroceryStoreDistance();
         } catch (Exception e) {
             e.printStackTrace();
@@ -199,19 +192,18 @@ public class OwnerSurveyController {
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.theater.distance.message"));
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.distance.options.message"));
-            theaterDistanceInput = input.nextInt();
+            theaterDistanceInput = roomsicleCLI.getNumberResponse();
             while (theaterDistanceInput <= ZERO || theaterDistanceInput >= FIVE) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.theater.distance.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.distance.options.message"));
-                theaterDistanceInput = input.nextInt();
+                theaterDistanceInput = roomsicleCLI.getNumberResponse();
             }
             distanceRange = getDistanceRange(theaterDistanceInput);
             ownerSurveyModel.setTheaterDistanceMin(distanceRange[0]);
             ownerSurveyModel.setTheaterDistanceMax(distanceRange[1]);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            input.nextLine();
             setTheaterDistance();
         } catch (Exception e) {
             e.printStackTrace();
@@ -223,19 +215,18 @@ public class OwnerSurveyController {
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.downtown.distance.message"));
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.distance.options.message"));
-            downtownDistanceInput = input.nextInt();
+            downtownDistanceInput = roomsicleCLI.getNumberResponse();
             while (downtownDistanceInput <= ZERO || downtownDistanceInput >= FIVE) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.downtown.distance.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.distance.options.message"));
-                downtownDistanceInput = input.nextInt();
+                downtownDistanceInput = roomsicleCLI.getNumberResponse();
             }
             distanceRange = getDistanceRange(downtownDistanceInput);
             ownerSurveyModel.setDowntownDistanceMin(distanceRange[0]);
             ownerSurveyModel.setDowntownDistanceMax(distanceRange[1]);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            input.nextLine();
             setDowntownDistance();
         } catch (Exception e) {
             e.printStackTrace();
