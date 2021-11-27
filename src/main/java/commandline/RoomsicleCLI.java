@@ -1,5 +1,6 @@
 package commandline;
 
+import java.io.Console;
 import java.util.Scanner;
 
 public class RoomsicleCLI implements IRoomsicleCLI {
@@ -26,4 +27,5 @@ public class RoomsicleCLI implements IRoomsicleCLI {
         response = scanner.nextInt();
         return response;
     }
+
 }

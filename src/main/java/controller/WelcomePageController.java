@@ -24,5 +24,8 @@ public class WelcomePageController {
         else if (userSelection==2){
            UserRegistrationController userRegistrationController=new UserRegistrationController();
         }
+        else{
+            roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
+        }
     }
     }

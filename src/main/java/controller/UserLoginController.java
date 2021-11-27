@@ -6,12 +6,14 @@ import Exception.*;
 import database.UserLoginDAO;
 import models.UsersModel;
 
+
 public class UserLoginController {
 	public static String emailId;
 	EmailVerfierController emailVerfierController=new EmailVerfierController();
 	UsersModel usersModel=new UsersModel();
 	UserLoginDAO userLoginDAO=new UserLoginDAO();
 	RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
+	UserHomePageController userHomePageController=new UserHomePageController();
 	String email;
 	String password;
 	public UserLoginController() {
@@ -33,6 +35,7 @@ public class UserLoginController {
 			if (emailValue != null) {
 				if(userLoginDAO.getUserLoginAndPassword().get(usersModel.getEmailId()).equals(usersModel.getPassword()) ) {
 					roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("login.successfull.message"));
+					userHomePageController.showUserHomePageController();
 				}
 				else {
 					throw new PasswordNotMatchException(CommandLineInputProperties.getCommandLineInputPropertyValue("login.email.password.verify.wrong"));

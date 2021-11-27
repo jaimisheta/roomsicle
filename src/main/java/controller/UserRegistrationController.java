@@ -9,7 +9,8 @@ import static controller.UserRegistrationConstants.owner;
 
 
 public class UserRegistrationController {
-
+    public static String emailId;
+    public static Integer userIdentity;
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     String firstName;
     String lastName;
@@ -24,6 +25,8 @@ public class UserRegistrationController {
     UserRegistrationDAO userRegistrationDAO=new UserRegistrationDAO();
     EmailVerfierController emailVerfierController=new EmailVerfierController();
     PasswordVerifierController passwordVerifierController=new PasswordVerifierController();
+    UserSurveyController userSurveyController=new UserSurveyController();
+    OwnerSurveyController ownerSurveyController=new OwnerSurveyController();
     public  UserRegistrationController()  {
         try{
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("welcomepage.add.message"));
@@ -41,6 +44,7 @@ public class UserRegistrationController {
         setSurveyTaken();
         userRegistrationDAO.userRegistration(usersModel);
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("registration.successful.message"));
+        getToTheSurvey();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -50,11 +54,16 @@ public class UserRegistrationController {
     public void setType() {
         try {
             setTypeInput = roomsicleCLI.getNumberResponse();
+            userIdentity=setTypeInput;
             if (setTypeInput.equals(1)){
                 setType=user;
             }
             else if(setTypeInput.equals(2)){
                 setType=owner;
+            }
+            else{
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
+                System.exit(1);
             }
             usersModel.setType(setType);
         }catch (Exception e) {
@@ -97,6 +106,7 @@ public class UserRegistrationController {
             emailVerfierController.EmailVerfier(email);//Verify if email id format is not correct
             emailVerfierController.EmailAlreadyRegistered(email);//Verify if email id is already exists.
             emailVerfierController.EmailAlreadyRegistered(email);
+            emailId=email;
             usersModel.setEmailId(email);
         }
         catch (Exception e) {
@@ -126,6 +136,18 @@ public class UserRegistrationController {
 
     }
         catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void getToTheSurvey(){
+        try {
+            if (userIdentity.equals(1)){
+                userSurveyController.takeSurvey(emailId);
+            }
+            else if(userIdentity.equals(2)){
+                ownerSurveyController.takeSurvey(emailId);
+            }
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
