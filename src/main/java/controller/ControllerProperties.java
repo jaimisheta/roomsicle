@@ -22,7 +22,9 @@ public class ControllerProperties {
     public static String getControllerPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
-        	loadControllerPropertiesFile();
+            if(properties==null) {
+        	    loadControllerPropertiesFile();
+            }
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();
