@@ -24,8 +24,7 @@ public class CommandLineInputProperties {
         try {
             if(properties==null) {
         	    loadCommandLineInputPropertiesFile();
-            if(properties==null) {
-            propertyValue = properties.getProperty(propertyKey);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
