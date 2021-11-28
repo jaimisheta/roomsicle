@@ -6,6 +6,9 @@ import models.OwnerSurveyModel;
 
 import java.util.InputMismatchException;
 
+import static controller.ownersurvey.OwnerSurveyConstants.ONE;
+import static controller.ownersurvey.OwnerSurveyConstants.TWO;
+
 public class Utilities implements IOwnerSurvey {
 
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
@@ -15,12 +18,13 @@ public class Utilities implements IOwnerSurvey {
     boolean utilitiesIncluded;
     int utilitiesInput;
 
-    public Utilities(boolean utilitiesIncluded) {
-        this.utilitiesIncluded = utilitiesIncluded;
-    }
-
     public Utilities(OwnerSurveyModel ownerSurveyModel) {
         this.ownerSurveyModel = ownerSurveyModel;
+    }
+
+    public Utilities(OwnerSurveyModel ownerSurveyModel, int utilitiesInput) {
+        this.ownerSurveyModel = ownerSurveyModel;
+        this.utilitiesInput = utilitiesInput;
     }
 
     @Override
@@ -51,11 +55,11 @@ public class Utilities implements IOwnerSurvey {
     public boolean validateValue() {
         boolean utilitiesResponse = false;
         try {
-            if (utilitiesInput == 1) {
+            if (utilitiesInput == ONE) {
                 utilitiesResponse = true;
                 utilitiesIncluded = true;
                 setValue();
-            } else if (utilitiesInput == 2) {
+            } else if (utilitiesInput == TWO) {
                 utilitiesResponse = true;
                 utilitiesIncluded = false;
                 setValue();

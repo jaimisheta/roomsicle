@@ -6,6 +6,9 @@ import models.OwnerSurveyModel;
 
 import java.util.InputMismatchException;
 
+import static controller.ownersurvey.OwnerSurveyConstants.ONE;
+import static controller.ownersurvey.OwnerSurveyConstants.SIX;
+
 public class BedroomCount implements IOwnerSurvey {
 
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
@@ -14,7 +17,8 @@ public class BedroomCount implements IOwnerSurvey {
     boolean hasValidValue = false;
     int numberOfBedrooms;
 
-    public BedroomCount(int numberOfBedrooms) {
+    public BedroomCount(OwnerSurveyModel ownerSurveyModel, int numberOfBedrooms) {
+        this.ownerSurveyModel = ownerSurveyModel;
         this.numberOfBedrooms = numberOfBedrooms;
     }
 
@@ -50,7 +54,7 @@ public class BedroomCount implements IOwnerSurvey {
     public boolean validateValue() {
         boolean validateBedroomCount = false;
         try {
-            if (numberOfBedrooms >= 1 && numberOfBedrooms <= 6) {
+            if (numberOfBedrooms >= ONE && numberOfBedrooms <= SIX) {
                 validateBedroomCount = true;
                 setValue();
             } else {

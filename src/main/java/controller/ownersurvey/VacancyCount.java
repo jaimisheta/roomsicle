@@ -6,6 +6,9 @@ import models.OwnerSurveyModel;
 
 import java.util.InputMismatchException;
 
+import static controller.ownersurvey.OwnerSurveyConstants.ONE;
+import static controller.ownersurvey.OwnerSurveyConstants.TWELVE;
+
 public class VacancyCount implements IOwnerSurvey {
 
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
@@ -14,12 +17,13 @@ public class VacancyCount implements IOwnerSurvey {
     boolean hasValidValue = false;
     int vacancies;
 
-    public VacancyCount(int vacancies) {
-        this.vacancies = vacancies;
-    }
-
     public VacancyCount(OwnerSurveyModel ownerSurveyModel) {
         this.ownerSurveyModel = ownerSurveyModel;
+    }
+
+    public VacancyCount(OwnerSurveyModel ownerSurveyModel, int vacancies) {
+        this.ownerSurveyModel = ownerSurveyModel;
+        this.vacancies = vacancies;
     }
 
     @Override
@@ -44,14 +48,13 @@ public class VacancyCount implements IOwnerSurvey {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public boolean validateValue() {
         boolean validateVacancyCount = false;
         try {
-            if (vacancies >= 1 && vacancies <= 12) {
+            if (vacancies >= ONE && vacancies <= TWELVE) {
                 validateVacancyCount = true;
                 setValue();
             } else {

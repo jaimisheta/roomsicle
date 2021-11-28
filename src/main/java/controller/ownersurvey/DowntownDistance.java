@@ -6,6 +6,8 @@ import models.OwnerSurveyModel;
 
 import java.util.InputMismatchException;
 
+import static controller.ownersurvey.OwnerSurveyConstants.ONE;
+
 public class DowntownDistance implements IOwnerSurvey {
 
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
@@ -14,12 +16,13 @@ public class DowntownDistance implements IOwnerSurvey {
     boolean hasValidValue = false;
     int propertyDistanceFromDowntown;
 
-    public DowntownDistance(int propertyDistanceFromDowntown) {
-        this.propertyDistanceFromDowntown = propertyDistanceFromDowntown;
-    }
-
     public DowntownDistance(OwnerSurveyModel ownerSurveyModel) {
         this.ownerSurveyModel = ownerSurveyModel;
+    }
+
+    public DowntownDistance(OwnerSurveyModel ownerSurveyModel, int propertyDistanceFromDowntown) {
+        this.ownerSurveyModel = ownerSurveyModel;
+        this.propertyDistanceFromDowntown = propertyDistanceFromDowntown;
     }
 
     @Override
@@ -50,7 +53,7 @@ public class DowntownDistance implements IOwnerSurvey {
     public boolean validateValue() {
         boolean distanceFromDowntown = false;
         try {
-            if (propertyDistanceFromDowntown >= 1) {
+            if (propertyDistanceFromDowntown >= ONE) {
                 distanceFromDowntown = true;
                 setValue();
             } else {

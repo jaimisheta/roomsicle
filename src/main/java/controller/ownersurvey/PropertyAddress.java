@@ -12,12 +12,13 @@ public class PropertyAddress implements IOwnerSurvey {
     boolean hasValidValue = false;
     String propertyAddress;
 
-    public PropertyAddress(String propertyAddress) {
-        this.propertyAddress = propertyAddress;
-    }
-
     public PropertyAddress(OwnerSurveyModel ownerSurveyModel) {
         this.ownerSurveyModel = ownerSurveyModel;
+    }
+
+    public PropertyAddress(OwnerSurveyModel ownerSurveyModel, String propertyAddress) {
+        this.ownerSurveyModel = ownerSurveyModel;
+        this.propertyAddress = propertyAddress;
     }
 
     @Override

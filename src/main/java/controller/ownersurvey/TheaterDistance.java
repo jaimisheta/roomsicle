@@ -7,6 +7,8 @@ import models.OwnerSurveyModel;
 
 import java.util.InputMismatchException;
 
+import static controller.ownersurvey.OwnerSurveyConstants.ONE;
+
 public class TheaterDistance implements IOwnerSurvey {
 
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
@@ -16,12 +18,13 @@ public class TheaterDistance implements IOwnerSurvey {
     boolean hasValidValue = false;
     int propertyDistanceFromTheater;
 
-    public TheaterDistance(int propertyDistanceFromTheater) {
-        this.propertyDistanceFromTheater = propertyDistanceFromTheater;
-    }
-
     public TheaterDistance(OwnerSurveyModel ownerSurveyModel) {
         this.ownerSurveyModel = ownerSurveyModel;
+    }
+
+    public TheaterDistance(OwnerSurveyModel ownerSurveyModel, int propertyDistanceFromTheater) {
+        this.ownerSurveyModel = ownerSurveyModel;
+        this.propertyDistanceFromTheater = propertyDistanceFromTheater;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class TheaterDistance implements IOwnerSurvey {
     public boolean validateValue() {
         boolean distanceFromTheater = false;
         try {
-            if (propertyDistanceFromTheater >= 1) {
+            if (propertyDistanceFromTheater >= ONE) {
                 distanceFromTheater = true;
                 setValue();
             } else {
