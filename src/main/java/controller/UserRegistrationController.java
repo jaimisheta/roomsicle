@@ -25,8 +25,6 @@ public class UserRegistrationController {
     UserRegistrationDAO userRegistrationDAO=new UserRegistrationDAO();
     EmailVerfierController emailVerfierController=new EmailVerfierController();
     PasswordVerifierController passwordVerifierController=new PasswordVerifierController();
-    UserSurveyController userSurveyController=new UserSurveyController();
-    OwnerSurveyController ownerSurveyController=new OwnerSurveyController();
     public  UserRegistrationController()  {
         try{
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("welcomepage.add.message"));
@@ -139,16 +137,7 @@ public class UserRegistrationController {
             e.printStackTrace();
         }
     }
-    public void getToTheSurvey(){
-        try {
-            if (userIdentity.equals(1)){
-                userSurveyController.takeSurvey(emailId);
-            }
-            else if(userIdentity.equals(2)){
-                ownerSurveyController.takeSurvey(emailId);
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void getToTheSurvey() {
+        //TODO refactor survey feature
     }
 }
