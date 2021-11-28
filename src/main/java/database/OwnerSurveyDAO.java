@@ -19,28 +19,20 @@ public class OwnerSurveyDAO {
         int numberOfBedrooms;
         boolean isUtilitiesProvided;
         int numberOfVacancies;
-        int dalDistanceMin;
-        int dalDistanceMax;
-        int groceryStoreDistanceMin;
-        int groceryStoreDistanceMax;
-        int theaterDistanceMin;
-        int theaterDistanceMax;
-        int downtownDistanceMin;
-        int downtownDistanceMax;
+        int dalDistance;
+        int groceryStoreDistance;
+        int theaterDistance;
+        int downtownDistance;
 
         ownerID = ownerSurveyModel.getOwnerID();
         address = ownerSurveyModel.getAddress();
         numberOfBedrooms = ownerSurveyModel.getNumberOfBedrooms();
         isUtilitiesProvided = ownerSurveyModel.isUtilitiesProvided();
         numberOfVacancies = ownerSurveyModel.getNumberOfVacancies();
-        dalDistanceMin = ownerSurveyModel.getDalDistanceMin();
-        dalDistanceMax = ownerSurveyModel.getDalDistanceMax();
-        groceryStoreDistanceMin = ownerSurveyModel.getGroceryStoreDistanceMin();
-        groceryStoreDistanceMax = ownerSurveyModel.getGroceryStoreDistanceMax();
-        theaterDistanceMin = ownerSurveyModel.getTheaterDistanceMin();
-        theaterDistanceMax = ownerSurveyModel.getTheaterDistanceMax();
-        downtownDistanceMin = ownerSurveyModel.getDowntownDistanceMin();
-        downtownDistanceMax = ownerSurveyModel.getDowntownDistanceMax();
+        dalDistance = ownerSurveyModel.getDalhousieDistance();
+        groceryStoreDistance = ownerSurveyModel.getGroceryStoreDistance();
+        theaterDistance = ownerSurveyModel.getTheaterDistance();
+        downtownDistance = ownerSurveyModel.getDowntownDistance();
         try {
             connection = databaseConnection.getConnectionObject();
             statement = connection.createStatement();
@@ -51,14 +43,10 @@ public class OwnerSurveyDAO {
                     .replace("numberOfBedrooms", String.valueOf(numberOfBedrooms))
                     .replace("isUtilitiesProvided", String.valueOf(isUtilitiesProvided))
                     .replace("numberOfVacancies", String.valueOf(numberOfVacancies))
-                    .replace("dalDistanceMin", String.valueOf(dalDistanceMin))
-                    .replace("dalDistanceMax", String.valueOf(dalDistanceMax))
-                    .replace("groceryStoreDistanceMin", String.valueOf(groceryStoreDistanceMin))
-                    .replace("groceryStoreDistanceMax", String.valueOf(groceryStoreDistanceMax))
-                    .replace("theaterDistanceMin", String.valueOf(theaterDistanceMin))
-                    .replace("theaterDistanceMax", String.valueOf(theaterDistanceMax))
-                    .replace("downtownDistanceMin", String.valueOf(downtownDistanceMin))
-                    .replace("downtownDistanceMax", String.valueOf(downtownDistanceMax))
+                    .replace("dalDistance", String.valueOf(dalDistance))
+                    .replace("groceryStoreDistance", String.valueOf(groceryStoreDistance))
+                    .replace("downtownDistance", String.valueOf(downtownDistance))
+                    .replace("theaterDistance", String.valueOf(theaterDistance))
                     .replace("propertyPrice", DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.survey.property.price"))
                     .replace("propertyStatus", DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.survey.property.status"));
 

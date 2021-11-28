@@ -6,14 +6,10 @@ public class OwnerSurveyModel {
     private int numberOfBedrooms;
     private boolean isUtilitiesProvided;
     private int numberOfVacancies;
-    private int dalDistanceMin;
-    private int dalDistanceMax;
-    private int groceryStoreDistanceMin;
-    private int groceryStoreDistanceMax;
-    private int theaterDistanceMin;
-    private int theaterDistanceMax;
-    private int downtownDistanceMin;
-    private int downtownDistanceMax;
+    private int dalhousieDistance;
+    private int groceryStoreDistance;
+    private int downtownDistance;
+    private int theaterDistance;
     private int propertyPrice;
     private boolean propertyStatus;
 
@@ -57,68 +53,36 @@ public class OwnerSurveyModel {
         this.numberOfVacancies = numberOfVacancies;
     }
 
-    public int getDalDistanceMin() {
-        return dalDistanceMin;
+    public int getDalhousieDistance() {
+        return dalhousieDistance;
     }
 
-    public void setDalDistanceMin(int dalDistanceMin) {
-        this.dalDistanceMin = dalDistanceMin;
+    public void setDalhousieDistance(int dalhousieDistance) {
+        this.dalhousieDistance = dalhousieDistance;
     }
 
-    public int getDalDistanceMax() {
-        return dalDistanceMax;
+    public int getGroceryStoreDistance() {
+        return groceryStoreDistance;
     }
 
-    public void setDalDistanceMax(int dalDistanceMax) {
-        this.dalDistanceMax = dalDistanceMax;
+    public void setGroceryStoreDistance(int groceryStoreDistance) {
+        this.groceryStoreDistance = groceryStoreDistance;
     }
 
-    public int getGroceryStoreDistanceMin() {
-        return groceryStoreDistanceMin;
+    public int getDowntownDistance() {
+        return downtownDistance;
     }
 
-    public void setGroceryStoreDistanceMin(int groceryStoreDistanceMin) {
-        this.groceryStoreDistanceMin = groceryStoreDistanceMin;
+    public void setDowntownDistance(int downtownDistance) {
+        this.downtownDistance = downtownDistance;
     }
 
-    public int getGroceryStoreDistanceMax() {
-        return groceryStoreDistanceMax;
+    public int getTheaterDistance() {
+        return theaterDistance;
     }
 
-    public void setGroceryStoreDistanceMax(int groceryStoreDistanceMax) {
-        this.groceryStoreDistanceMax = groceryStoreDistanceMax;
-    }
-
-    public int getTheaterDistanceMin() {
-        return theaterDistanceMin;
-    }
-
-    public void setTheaterDistanceMin(int theaterDistanceMin) {
-        this.theaterDistanceMin = theaterDistanceMin;
-    }
-
-    public int getTheaterDistanceMax() {
-        return theaterDistanceMax;
-    }
-
-    public void setTheaterDistanceMax(int theaterDistanceMax) {
-        this.theaterDistanceMax = theaterDistanceMax;
-    }
-
-    public int getDowntownDistanceMin() {
-        return downtownDistanceMin;
-    }
-
-    public void setDowntownDistanceMin(int downtownDistanceMin) {
-        this.downtownDistanceMin = downtownDistanceMin;
-    }
-
-    public int getDowntownDistanceMax() {
-        return downtownDistanceMax;
-    }
-
-    public void setDowntownDistanceMax(int downtownDistanceMax) {
-        this.downtownDistanceMax = downtownDistanceMax;
+    public void setTheaterDistance(int theaterDistance) {
+        this.theaterDistance = theaterDistance;
     }
 
     public int getPropertyPrice() {
