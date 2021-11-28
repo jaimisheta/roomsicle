@@ -22,7 +22,7 @@ test:
     when: always
     reports:
       junit:
-        - target/RoomsicleReports/TEST_*.xml
+        - target/surefire-reports/TEST-*.xml
 
   script:
     - echo "Pipeline test started"
