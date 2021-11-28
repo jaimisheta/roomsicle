@@ -22,10 +22,17 @@ public class ConfigProperties {
     public static String getConfigPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
+        	
+        	if(properties==null) {
+        		properties = new Properties();
+        		FileInputStream fileInputStream = new FileInputStream("src/main/resources/Config.properties");
+                properties.load(fileInputStream);
+        	}
+        	
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return propertyValue.trim();
+        return propertyValue;
     }
 }

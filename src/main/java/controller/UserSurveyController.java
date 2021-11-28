@@ -6,6 +6,7 @@ import database.UserSurveyDAO;
 import models.UserSurveyModel;
 
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 import static controller.UserSurveyConstants.ZERO;
 import static controller.UserSurveyConstants.ONE;
@@ -27,6 +28,7 @@ public class UserSurveyController {
     UserSurveyModel userSurveyModel = new UserSurveyModel();
     UserSurveyDAO userSurveyDAO = new UserSurveyDAO();
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
+    Scanner input = new Scanner(System.in);
 
     public void takeSurvey(String emailId) {
         try {
@@ -58,11 +60,11 @@ public class UserSurveyController {
         int userGenderInput;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.gender.message"));
-            userGenderInput = roomsicleCLI.getNumberResponse();
+            userGenderInput = input.nextInt();
             while (userGenderInput <= ZERO || userGenderInput >= FOUR) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.gender.message"));
-                userGenderInput = roomsicleCLI.getNumberResponse();
+                userGenderInput = input.nextInt();
             }
             if (userGenderInput == ONE) {
                 userGender = MALE;
@@ -74,6 +76,7 @@ public class UserSurveyController {
             userSurveyModel.setUserGender(userGender);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setUserGender();
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,11 +88,11 @@ public class UserSurveyController {
         int userFoodHabitsInput;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.food.habits.message"));
-            userFoodHabitsInput = roomsicleCLI.getNumberResponse();
+            userFoodHabitsInput = input.nextInt();
             while (userFoodHabitsInput <= ZERO || userFoodHabitsInput >= FOUR) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.food.habits.message"));
-                userFoodHabitsInput = roomsicleCLI.getNumberResponse();
+                userFoodHabitsInput = input.nextInt();
             }
             if (userFoodHabitsInput == ONE) {
                 userFoodHabits = VEG;
@@ -101,6 +104,7 @@ public class UserSurveyController {
             userSurveyModel.setUserFoodHabits(userFoodHabits);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setUserFoodHabits();
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,11 +116,11 @@ public class UserSurveyController {
         int smokingHabitsInput;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.smoking.habits.message"));
-            smokingHabitsInput = roomsicleCLI.getNumberResponse();
+            smokingHabitsInput = input.nextInt();
             while (smokingHabitsInput <= ZERO || smokingHabitsInput >= THREE) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.smoking.habits.message"));
-                smokingHabitsInput = roomsicleCLI.getNumberResponse();
+                smokingHabitsInput = input.nextInt();
             }
             if (smokingHabitsInput == ONE) {
                 smokingHabits = YES;
@@ -126,6 +130,7 @@ public class UserSurveyController {
             userSurveyModel.setUserSmokingHabits(smokingHabits);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setUserSmokingHabits();
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,11 +142,11 @@ public class UserSurveyController {
         int alcoholHabitsInput;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.alcohol.habits.message"));
-            alcoholHabitsInput = roomsicleCLI.getNumberResponse();
+            alcoholHabitsInput = input.nextInt();
             while (alcoholHabitsInput <= ZERO || alcoholHabitsInput >= THREE) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.alcohol.habits.message"));
-                alcoholHabitsInput = roomsicleCLI.getNumberResponse();
+                alcoholHabitsInput = input.nextInt();
             }
             if (alcoholHabitsInput == ONE) {
                 alcoholHabits = YES;
@@ -151,6 +156,7 @@ public class UserSurveyController {
             userSurveyModel.setUserAlcoholHabits(alcoholHabits);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setUserAlcoholHabits();
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,15 +167,16 @@ public class UserSurveyController {
         int userBudget;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.budget.message"));
-            userBudget = roomsicleCLI.getNumberResponse();
+            userBudget = input.nextInt();
             while (userBudget <= ZERO) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.budget.message"));
-                userBudget = roomsicleCLI.getNumberResponse();
+                userBudget = input.nextInt();
             }
             userSurveyModel.setUserBudget(userBudget);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setUserBudget();
         } catch (Exception e) {
             e.printStackTrace();
@@ -180,15 +187,16 @@ public class UserSurveyController {
         int dalProximity;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.proximity.dalhousie.university.message"));
-            dalProximity = roomsicleCLI.getNumberResponse();
+            dalProximity = input.nextInt();
             while (dalProximity <= ZERO) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.proximity.dalhousie.university.message"));
-                dalProximity = roomsicleCLI.getNumberResponse();
+                dalProximity = input.nextInt();
             }
             userSurveyModel.setUserDalDistance(dalProximity);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setUsersProximityToDalhousieUniversity();
         } catch (Exception e) {
             e.printStackTrace();
@@ -200,11 +208,11 @@ public class UserSurveyController {
         int roommateGenderInput;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.gender.preferences.message"));
-            roommateGenderInput = roomsicleCLI.getNumberResponse();
+            roommateGenderInput = input.nextInt();
             while (roommateGenderInput <= ZERO || roommateGenderInput >= FOUR) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.gender.preferences.message"));
-                roommateGenderInput = roomsicleCLI.getNumberResponse();
+                roommateGenderInput = input.nextInt();
             }
             if (roommateGenderInput == ONE) {
                 roommateGender = MALE;
@@ -216,6 +224,7 @@ public class UserSurveyController {
             userSurveyModel.setRoommateGender(roommateGender);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setRoommateGenderPreference();
         } catch (Exception e) {
             e.printStackTrace();
@@ -227,11 +236,11 @@ public class UserSurveyController {
         int roommateFoodHabitsInput;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.food.habits.message"));
-            roommateFoodHabitsInput = roomsicleCLI.getNumberResponse();
+            roommateFoodHabitsInput = input.nextInt();
             while (roommateFoodHabitsInput <= ZERO || roommateFoodHabitsInput >= FOUR) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.food.habits.message"));
-                roommateFoodHabitsInput = roomsicleCLI.getNumberResponse();
+                roommateFoodHabitsInput = input.nextInt();
             }
             if (roommateFoodHabitsInput == ONE) {
                 roommateFoodHabits = VEG;
@@ -243,6 +252,7 @@ public class UserSurveyController {
             userSurveyModel.setRoommateFoodHabits(roommateFoodHabits);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setRoommateFoodHabitsPreference();
         } catch (Exception e) {
             e.printStackTrace();
@@ -254,11 +264,11 @@ public class UserSurveyController {
         int roommateSmokingHabitsInput;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.smoking.habits.message"));
-            roommateSmokingHabitsInput = roomsicleCLI.getNumberResponse();
+            roommateSmokingHabitsInput = input.nextInt();
             while (roommateSmokingHabitsInput <= ZERO || roommateSmokingHabitsInput >= FOUR) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.smoking.habits.message"));
-                roommateSmokingHabitsInput = roomsicleCLI.getNumberResponse();
+                roommateSmokingHabitsInput = input.nextInt();
             }
             if (roommateSmokingHabitsInput == ONE) {
                 roommateSmokingHabits = YES;
@@ -270,6 +280,7 @@ public class UserSurveyController {
             userSurveyModel.setRoommateSmokingHabits(roommateSmokingHabits);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setRoommateSmokingHabitsPreference();
         } catch (Exception e) {
             e.printStackTrace();
@@ -281,11 +292,11 @@ public class UserSurveyController {
         int roommateAlcoholHabitsInput;
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.alcohol.habits.message"));
-            roommateAlcoholHabitsInput = roomsicleCLI.getNumberResponse();
+            roommateAlcoholHabitsInput = input.nextInt();
             while (roommateAlcoholHabitsInput <= ZERO || roommateAlcoholHabitsInput >= FOUR) {
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
                 roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.alcohol.habits.message"));
-                roommateAlcoholHabitsInput = roomsicleCLI.getNumberResponse();
+                roommateAlcoholHabitsInput = input.nextInt();
             }
             if (roommateAlcoholHabitsInput == ONE) {
                 roommateAlcoholHabits = YES;
@@ -297,6 +308,7 @@ public class UserSurveyController {
             userSurveyModel.setRoommateAlcoholHabits(roommateAlcoholHabits);
         } catch (InputMismatchException e) {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
+            input.nextLine();
             setRoommateAlcoholHabitsPreference();
         } catch (Exception e) {
             e.printStackTrace();

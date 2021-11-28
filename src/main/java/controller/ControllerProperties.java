@@ -1,17 +1,17 @@
-package database;
+package controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class DatabaseQueryProperties {
+public class ControllerProperties {
 
     private static Properties properties;
 
-    public static void loadDatabaseQueryPropertiesFile() {
+    public static void loadControllerPropertiesFile() {
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream("src/main/resources/DatabaseQuery.properties");
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/Controller.properties");
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {
@@ -19,16 +19,14 @@ public class DatabaseQueryProperties {
         }
     }
 
-    public static String getDatabaseQueryPropertyValue(String propertyKey) {
+    public static String getControllerPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
-        	
-        	loadDatabaseQueryPropertiesFile();
-        	
+        	loadControllerPropertiesFile();
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return propertyValue.trim();
+        return propertyValue;
     }
 }
