@@ -25,7 +25,6 @@ public class RoomsicleCLI implements IRoomsicleCLI {
         int response;
         scanner = new Scanner(System.in);
         response = scanner.nextInt();
-        scanner.nextLine();
         return response;
     }
 

@@ -1,17 +1,17 @@
-package database;
+package controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigProperties {
+public class ControllerProperties {
 
     private static Properties properties;
 
-    public static void loadConfigPropertiesFile() {
+    public static void loadControllerPropertiesFile() {
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream("src/main/resources/Config.properties");
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/Controller.properties");
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {
@@ -19,16 +19,12 @@ public class ConfigProperties {
         }
     }
 
-    public static String getConfigPropertyValue(String propertyKey) {
+    public static String getControllerPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
-        	
-        	if(properties==null) {
-        		properties = new Properties();
-        		FileInputStream fileInputStream = new FileInputStream("src/main/resources/Config.properties");
-                properties.load(fileInputStream);
-        	}
-        	
+            if(properties==null) {
+        	    loadControllerPropertiesFile();
+            }
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();
