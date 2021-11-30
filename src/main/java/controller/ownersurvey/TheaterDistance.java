@@ -2,8 +2,11 @@ package controller.ownersurvey;
 
 import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
+import controller.usersurvey.UserAlcoholHabits;
 import database.OwnerSurveyDAO;
 import models.OwnerSurveyModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.InputMismatchException;
 
@@ -13,6 +16,7 @@ public class TheaterDistance implements IOwnerSurvey {
 
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     OwnerSurveyDAO ownerSurveyDAO = new OwnerSurveyDAO();
+    static final Logger logger = LogManager.getLogger(UserAlcoholHabits.class);
 
     OwnerSurveyModel ownerSurveyModel;
     boolean hasValidValue = false;
@@ -27,11 +31,13 @@ public class TheaterDistance implements IOwnerSurvey {
         this.propertyDistanceFromTheater = propertyDistanceFromTheater;
     }
 
+    //get theater distance input from owner
     @Override
     public void getValue() {
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.theater.distance.message"));
             propertyDistanceFromTheater = roomsicleCLI.getNumberResponse();
+            logger.info("theater distance input from owner: " + propertyDistanceFromTheater);
             while (hasValidValue == false) {
                 if (validateValue()) {
                     hasValidValue = true;
@@ -51,10 +57,12 @@ public class TheaterDistance implements IOwnerSurvey {
         }
     }
 
+    //validate theater distance input from owner
     @Override
     public boolean validateValue() {
         boolean distanceFromTheater = false;
         try {
+            logger.info("validating distance input from owner: " + propertyDistanceFromTheater);
             if (propertyDistanceFromTheater >= ONE) {
                 distanceFromTheater = true;
                 setValue();
@@ -67,9 +75,11 @@ public class TheaterDistance implements IOwnerSurvey {
         return distanceFromTheater;
     }
 
+    //set theater distance
     @Override
     public void setValue() {
         ownerSurveyModel.setTheaterDistance(propertyDistanceFromTheater);
+        logger.info("theater distance is set to: " + propertyDistanceFromTheater);
     }
 
 }

@@ -2,7 +2,10 @@ package controller.ownersurvey;
 
 import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
+import controller.usersurvey.UserAlcoholHabits;
 import models.OwnerSurveyModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.InputMismatchException;
 
@@ -12,6 +15,7 @@ import static controller.ownersurvey.OwnerSurveyConstants.TWO;
 public class Utilities implements IOwnerSurvey {
 
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
+    static final Logger logger = LogManager.getLogger(UserAlcoholHabits.class);
 
     OwnerSurveyModel ownerSurveyModel;
     boolean hasValidValue = false;
@@ -27,12 +31,14 @@ public class Utilities implements IOwnerSurvey {
         this.utilitiesInput = utilitiesInput;
     }
 
+    //get utilities input from owner
     @Override
     public void getValue() {
         DalhousieDistance dalhousieDistance = new DalhousieDistance(ownerSurveyModel);
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.utilities.message"));
             utilitiesInput = roomsicleCLI.getNumberResponse();
+            logger.info("utilities input from owner: " + utilitiesInput);
             while (hasValidValue == false) {
                 if (validateValue()) {
                     hasValidValue = true;
@@ -51,10 +57,12 @@ public class Utilities implements IOwnerSurvey {
         }
     }
 
+    //validate utilities input from owner
     @Override
     public boolean validateValue() {
         boolean utilitiesResponse = false;
         try {
+            logger.info("validating utilities input from owner: " + utilitiesInput);
             if (utilitiesInput == ONE) {
                 utilitiesResponse = true;
                 utilitiesIncluded = true;
@@ -72,8 +80,10 @@ public class Utilities implements IOwnerSurvey {
         return utilitiesResponse;
     }
 
+    //set utilities
     @Override
     public void setValue() {
         ownerSurveyModel.setUtilitiesProvided(utilitiesIncluded);
+        logger.info("utilities is set to: " + utilitiesInput);
     }
 }

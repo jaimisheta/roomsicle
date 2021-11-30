@@ -1,4 +1,4 @@
-package controllertest.ownersurvey;
+package controllertest.ownersurveytest;
 
 import commandline.CommandLineInputProperties;
 import controller.ownersurvey.DowntownDistance;

@@ -1,7 +1,5 @@
 package controller.ownersurvey;
 
-import models.OwnerSurveyModel;
-
 public interface IOwnerSurvey {
 
      void getValue();

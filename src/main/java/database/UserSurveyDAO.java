@@ -20,7 +20,8 @@ public class UserSurveyDAO {
         String userSmokingHabits;
         String userAlcoholHabits;
         int userBudget;
-        int userDalDistance;
+        int userDalDistanceMin;
+        int userDalDistanceMax;
 
         userId = userSurveyModel.getUserId();
         userGender = userSurveyModel.getUserGender();
@@ -28,7 +29,8 @@ public class UserSurveyDAO {
         userSmokingHabits = userSurveyModel.getUserSmokingHabits();
         userAlcoholHabits = userSurveyModel.getUserAlcoholHabits();
         userBudget = userSurveyModel.getUserBudget();
-        userDalDistance = userSurveyModel.getUserDalDistance();
+        userDalDistanceMin = userSurveyModel.getUserDalDistanceMin();
+        userDalDistanceMax = userSurveyModel.getUserDalDistanceMax();
         try {
             statement = connection.createStatement();
 
@@ -39,7 +41,8 @@ public class UserSurveyDAO {
                     .replace("userSmokingHabits", userSmokingHabits)
                     .replace("userAlcoholHabits", userAlcoholHabits)
                     .replace("userBudget", String.valueOf(userBudget))
-                    .replace("userDalDistance", String.valueOf(userDalDistance));
+                    .replace("userDalDistanceMin", String.valueOf(userDalDistanceMin))
+                    .replace("userDalDistanceMax", String.valueOf(userDalDistanceMax));
 
             statement.executeUpdate(query);
         } catch (SQLException e) {
