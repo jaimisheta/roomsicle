@@ -7,7 +7,8 @@ public class UserSurveyModel {
     private String userSmokingHabits;
     private String userAlcoholHabits;
     private int userBudget;
-    private int userDalDistance;
+    private int userDalDistanceMin;
+    private int userDalDistanceMax;
     private String roommateGender;
     private String roommateFoodHabits;
     private String roommateSmokingHabits;
@@ -61,12 +62,20 @@ public class UserSurveyModel {
         this.userBudget = userBudget;
     }
 
-    public int getUserDalDistance() {
-        return userDalDistance;
+    public int getUserDalDistanceMin() {
+        return userDalDistanceMin;
     }
 
-    public void setUserDalDistance(int userDalDistance) {
-        this.userDalDistance = userDalDistance;
+    public void setUserDalDistanceMin(int userDalDistanceMin) {
+        this.userDalDistanceMin = userDalDistanceMin;
+    }
+
+    public int getUserDalDistanceMax() {
+        return userDalDistanceMax;
+    }
+
+    public void setUserDalDistanceMax(int userDalDistanceMax) {
+        this.userDalDistanceMax = userDalDistanceMax;
     }
 
     public String getRoommateGender() {

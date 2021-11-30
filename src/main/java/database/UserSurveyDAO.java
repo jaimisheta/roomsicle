@@ -12,34 +12,37 @@ public class UserSurveyDAO {
 	Connection connection = databaseConnection.getConnectionObject();
 	Statement statement;
 
-	public void insertUserPersonalDetails(UserSurveyModel userSurveyModel) {
-		String query;
-		String userId;
-		String userGender;
-		String userFoodHabits;
-		String userSmokingHabits;
-		String userAlcoholHabits;
-		int userBudget;
-		int userDalDistance;
+    public void insertUserPersonalDetails(UserSurveyModel userSurveyModel) {
+        String query;
+        String userId;
+        String userGender;
+        String userFoodHabits;
+        String userSmokingHabits;
+        String userAlcoholHabits;
+        int userBudget;
+        int userDalDistanceMin;
+        int userDalDistanceMax;
 
-		userId = userSurveyModel.getUserId();
-		userGender = userSurveyModel.getUserGender();
-		userFoodHabits = userSurveyModel.getUserFoodHabits();
-		userSmokingHabits = userSurveyModel.getUserSmokingHabits();
-		userAlcoholHabits = userSurveyModel.getUserAlcoholHabits();
-		userBudget = userSurveyModel.getUserBudget();
-		userDalDistance = userSurveyModel.getUserDalDistance();
-		try {
-			statement = connection.createStatement();
+        userId = userSurveyModel.getUserId();
+        userGender = userSurveyModel.getUserGender();
+        userFoodHabits = userSurveyModel.getUserFoodHabits();
+        userSmokingHabits = userSurveyModel.getUserSmokingHabits();
+        userAlcoholHabits = userSurveyModel.getUserAlcoholHabits();
+        userBudget = userSurveyModel.getUserBudget();
+        userDalDistanceMin = userSurveyModel.getUserDalDistanceMin();
+        userDalDistanceMax = userSurveyModel.getUserDalDistanceMax();
+        try {
+            statement = connection.createStatement();
 
-			query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.insert.user.personal.details.query")
-					.replace("userPersonalDetailsTableName", DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.user.personal.details.table.name"))
-					.replace("userId", userId).replace("userGender", userGender)
-					.replace("userFoodHabits", userFoodHabits)
-					.replace("userSmokingHabits", userSmokingHabits)
-					.replace("userAlcoholHabits", userAlcoholHabits)
-					.replace("userBudget", String.valueOf(userBudget))
-					.replace("userDalDistance", String.valueOf(userDalDistance));
+            query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.insert.user.personal.details.query")
+                    .replace("userPersonalDetailsTableName", DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.user.personal.details.table.name"))
+                    .replace("userId", userId).replace("userGender", userGender)
+                    .replace("userFoodHabits", userFoodHabits)
+                    .replace("userSmokingHabits", userSmokingHabits)
+                    .replace("userAlcoholHabits", userAlcoholHabits)
+                    .replace("userBudget", String.valueOf(userBudget))
+                    .replace("userDalDistanceMin", String.valueOf(userDalDistanceMin))
+                    .replace("userDalDistanceMax", String.valueOf(userDalDistanceMax));
 
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
