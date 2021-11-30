@@ -22,9 +22,7 @@ public class CommandLineInputProperties {
     public static String getCommandLineInputPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
-            if(properties==null) {
-        	    loadCommandLineInputPropertiesFile();
-            }
+            propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -22,13 +22,10 @@ public class ControllerProperties {
     public static String getControllerPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
-            if(properties==null) {
-        	    loadControllerPropertiesFile();
-            }
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return propertyValue;
+        return propertyValue.trim();
     }
 }
