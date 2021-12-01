@@ -6,7 +6,7 @@ import models.UsersModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class RoommateFinder {
+public class Main {
 
     static final Logger logger = LogManager.getLogger(RoommateFinder.class);
 
