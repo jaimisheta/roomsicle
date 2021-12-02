@@ -12,7 +12,7 @@ public class ControllerProperties {
         String path = System.getProperty("user.dir");
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream(path + "/src/main/resources/Controller.properties");
+            FileInputStream fileInputStream = new FileInputStream(path + "/classes/Controller.properties");
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {

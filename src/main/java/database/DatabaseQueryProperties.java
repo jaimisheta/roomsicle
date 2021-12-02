@@ -12,7 +12,7 @@ public class DatabaseQueryProperties {
         String path = System.getProperty("user.dir");
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream(path + "/src/main/resources/DatabaseQuery.properties");
+            FileInputStream fileInputStream = new FileInputStream(path + "/classes/DatabaseQuery.properties");
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {
