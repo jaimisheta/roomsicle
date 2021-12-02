@@ -12,7 +12,7 @@ public class ConfigProperties {
         properties = new Properties();
         String path = System.getProperty("user.dir");
         try {
-            FileInputStream fileInputStream = new FileInputStream(path + "/src/main/resources/Config.properties");
+            FileInputStream fileInputStream = new FileInputStream(path + "/classes/Config.properties");
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {
