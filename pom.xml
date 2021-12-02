@@ -122,7 +122,7 @@
                             <manifest>
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
-                                <mainClass>com.finder.roomsiclee.Main</mainClass>
+                                <mainClass>com.finder.roomsicle.Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
