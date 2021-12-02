@@ -121,8 +121,8 @@
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <classpathPrefix>lib/</classpathPrefix>
-                                <mainClass>com.finder.roomsicle.Main</mainClass>
+<!--                                <classpathPrefix>lib/</classpathPrefix>-->
+                                <mainClass>com.finder.Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
