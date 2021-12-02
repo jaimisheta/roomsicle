@@ -1,6 +1,7 @@
 package models;
 
 public class OwnerSurveyModel {
+    private int propertyID;
     private String ownerID;
     private String address;
     private int numberOfBedrooms;
@@ -10,8 +11,24 @@ public class OwnerSurveyModel {
     private int groceryStoreDistance;
     private int downtownDistance;
     private int theaterDistance;
-    private int propertyPrice;
-    private boolean propertyStatus;
+
+    public OwnerSurveyModel() {
+    }
+
+    public OwnerSurveyModel(int numberOfBedrooms) {
+        this.numberOfBedrooms = numberOfBedrooms;
+    }
+
+    public OwnerSurveyModel(boolean isUtilitiesProvided) {
+        this.isUtilitiesProvided = isUtilitiesProvided;
+    }
+
+    public OwnerSurveyModel(int dalhousieDistance, int groceryStoreDistance, int downtownDistance, int theaterDistance) {
+        this.dalhousieDistance = dalhousieDistance;
+        this.groceryStoreDistance = groceryStoreDistance;
+        this.downtownDistance = downtownDistance;
+        this.theaterDistance = theaterDistance;
+    }
 
     public String getOwnerID() {
         return ownerID;
@@ -85,19 +102,11 @@ public class OwnerSurveyModel {
         this.theaterDistance = theaterDistance;
     }
 
-    public int getPropertyPrice() {
-        return propertyPrice;
+    public int getPropertyID() {
+        return propertyID;
     }
 
-    public void setPropertyPrice(int propertyPrice) {
-        this.propertyPrice = propertyPrice;
-    }
-
-    public boolean isPropertyStatus() {
-        return propertyStatus;
-    }
-
-    public void setPropertyStatus(boolean propertyStatus) {
-        this.propertyStatus = propertyStatus;
+    public void setPropertyID(int propertyID) {
+        this.propertyID = propertyID;
     }
 }
