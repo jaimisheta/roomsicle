@@ -84,6 +84,6 @@ public class Utilities implements IOwnerSurvey {
     @Override
     public void setValue() {
         ownerSurveyModel.setUtilitiesProvided(utilitiesIncluded);
-        logger.info("utilities is set to: " + utilitiesInput);
+        logger.info("utilities is set to: " + utilitiesIncluded);
     }
 }

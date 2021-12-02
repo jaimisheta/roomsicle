@@ -2,7 +2,7 @@ package controller.ownersurvey;
 
 import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
-import controller.usersurvey.UserAlcoholHabits;
+import controller.propertypricepredictor.PropertyPriceCalculator;
 import database.OwnerSurveyDAO;
 import models.OwnerSurveyModel;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +16,8 @@ public class TheaterDistance implements IOwnerSurvey {
 
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     OwnerSurveyDAO ownerSurveyDAO = new OwnerSurveyDAO();
-    static final Logger logger = LogManager.getLogger(UserAlcoholHabits.class);
+    PropertyPriceCalculator propertyPriceCalculator = new PropertyPriceCalculator();
+    static final Logger logger = LogManager.getLogger(TheaterDistance.class);
 
     OwnerSurveyModel ownerSurveyModel;
     boolean hasValidValue = false;
@@ -41,7 +42,10 @@ public class TheaterDistance implements IOwnerSurvey {
             while (hasValidValue == false) {
                 if (validateValue()) {
                     hasValidValue = true;
+                    logger.info("insert owner survey data into database");
                     ownerSurveyDAO.insertOwnerSurveyDetails(ownerSurveyModel);
+                    logger.info("calculate price of the property");
+                    propertyPriceCalculator.propertyPrice(ownerSurveyModel);
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.profile.creation.message"));
                     break;
                 } else {
