@@ -122,7 +122,7 @@
                             <manifest>
                                 <addClasspath>true</addClasspath>
 <!--                                <classpathPrefix>lib/</classpathPrefix>-->
-                                <mainClass>com.finder.Main</mainClass>
+                                <mainClass>Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
