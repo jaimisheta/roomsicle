@@ -9,5 +9,8 @@
         <module name="roomsicle" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="roomsicle" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

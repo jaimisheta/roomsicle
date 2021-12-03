@@ -12,10 +12,11 @@ import models.UserDetailsModel;
 public class FilterRoommatesDisplayController implements IFilterRoommatesDisplayController {
 
 	//Method to display results of filtered roommates
-	//public void getFilteredFits(IFilterRoommates filteredPreferences) {	
-	public static void main(String args[]) {
+	public void getFilteredFits(IFilterRoommates filteredPreferences) {
+	//public static void main(String args[]) {
+		//IFilterRoommates filteredPreferences = new FilterRoommates();
 		
-		IFilterRoommates filteredPreferences = new FilterRoommates();
+		filteredPreferences = new FilterRoommates();
 		
 		String loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
 		IFilterRoommatesInput preferences = new FilterRoommatesInput();

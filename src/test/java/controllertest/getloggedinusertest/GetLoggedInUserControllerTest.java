@@ -25,7 +25,11 @@ public class GetLoggedInUserControllerTest {
 	@Test
 	public void testGetLoggedInUser() {	
 		IGetLoggedInUserController loggedInUser = new GetLoggedInUserController();
+<<<<<<< HEAD
 		assertEquals(loggedInUser.getLoggedInUser().getUserId(),ControllerProperties.getControllerPropertyValue("loggedInUser"));
+=======
+		assertEquals(loggedInUser.getLoggedInUser().getUserId(),"rikin@gmail.com");     
+>>>>>>> 4069eef09075fa3310cd53244fe9c30e158972cb
 	}
 
 }
