@@ -1,34 +1,38 @@
-package controller;
+package controller.bestfitroommates;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import controller.ControllerProperties;
+import controller.getloggedinuser.IGetLoggedInUserController;
 import database.UserPreferencesDAO;
 import models.UserPreferencesModel;
 
 public class BestFitRoommateController implements IBestFitRoommateController{
 
-	public HashMap<String, Integer> findBestFit() {
+	public HashMap<String, Integer> findBestFit(IGetLoggedInUserController getLoggedInUserObject) {
+
+		String loggedInUserId;
+		UserPreferencesDAO userPreferences;
+		ArrayList<UserPreferencesModel> listOfUserPreferences;
+		UserPreferencesModel loggedInUser;
+		HashMap<String, Integer> matchScoresMap;
 
 		//Stored Logged-In user-id into the string
-		String loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
+		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
 		
 		//Made Object of DAO class to get list of all users' preferences
-		UserPreferencesDAO userPreferences = new UserPreferencesDAO();
-		ArrayList<UserPreferencesModel> listOfUserPreferences = userPreferences.getUserPreferences();
-		/*
-		 * Created object for logged-in user to compare his preferences further with other users keeping in mind
-		 * Dependency Inversion Principle by making the reference of Interface 
-		*/
-		IGetLoggedInUserController getLoggedInUserObject = new GetLoggedInUserController();
+		userPreferences = new UserPreferencesDAO();
+		listOfUserPreferences = userPreferences.getUserPreferences();
 		
 		//Get the logged-in user with getLoggedInUser() method of object made above 
-		UserPreferencesModel loggedInUser = getLoggedInUserObject.getLoggedInUser();
+		loggedInUser = getLoggedInUserObject.getLoggedInUser();
 		
 		//Initiated counter variable for matching logged-in user's preferences with other user's preferences
 		int matchScore;
 		
 		//Matched Preferences will be stored in the HashMap
-		HashMap<String, Integer> matchScoresMap = new HashMap<String, Integer>();
+		matchScoresMap = new HashMap<String, Integer>();
 
 		//Comparing logged-in user preferences with other user's preferences 
 		for(UserPreferencesModel userPreferenceObject : listOfUserPreferences) {
