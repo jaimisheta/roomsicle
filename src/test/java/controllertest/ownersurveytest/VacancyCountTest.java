@@ -6,7 +6,6 @@ import models.OwnerSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class VacancyCountTest {
 
@@ -35,13 +34,13 @@ public class VacancyCountTest {
     @Test
     public void validateNegativeVacancyInputReturnValueTest() {
         vacancyCountInput = new VacancyCount(ownerSurveyModel, -1);
-        Assertions.assertEquals(false, vacancyCountInput.validateValue());
+        Assert.assertFalse(vacancyCountInput.validateValue());
     }
 
     @Test
     public void validateInValidVacancyInput() {
         vacancyCountInput = new VacancyCount(ownerSurveyModel, 15);
-        Assertions.assertEquals(false, vacancyCountInput.validateValue());
+        Assert.assertFalse(vacancyCountInput.validateValue());
     }
 
 }

@@ -9,10 +9,9 @@ public class DatabaseQueryProperties {
     private static Properties properties;
 
     public static void loadDatabaseQueryPropertiesFile() {
-        String path = System.getProperty("user.dir");
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream(path + "/classes/DatabaseQuery.properties");
+            FileInputStream fileInputStream = new FileInputStream(DatabaseConstant.DATABASE_QUERY_PROPERTIES_FILE_PATH);
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {

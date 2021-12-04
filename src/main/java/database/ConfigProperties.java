@@ -10,9 +10,8 @@ public class ConfigProperties {
 
     public static void loadConfigPropertiesFile() {
         properties = new Properties();
-        String path = System.getProperty("user.dir");
         try {
-            FileInputStream fileInputStream = new FileInputStream(path + "/classes/Config.properties");
+            FileInputStream fileInputStream = new FileInputStream(ConfigConstant.CONFIG_PROPERTIES_FILE_PATH);
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {

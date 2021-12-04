@@ -6,7 +6,6 @@ import models.OwnerSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class GroceryStoreDistanceTest {
 
@@ -35,13 +34,13 @@ public class GroceryStoreDistanceTest {
     @Test
     public void validateNegativeGroceryStoreDistanceReturnValueTest() {
         groceryStoreDistanceInput = new GroceryStoreDistance(ownerSurveyModel, -1);
-        Assertions.assertEquals(false, groceryStoreDistanceInput.validateValue());
+        Assert.assertFalse(groceryStoreDistanceInput.validateValue());
     }
 
     @Test
     public void validateInvalidGroceryStoreDistanceInputTest() {
         groceryStoreDistanceInput = new GroceryStoreDistance(ownerSurveyModel, 0);
-        Assertions.assertEquals(false, groceryStoreDistanceInput.validateValue());
+        Assert.assertFalse(groceryStoreDistanceInput.validateValue());
     }
 
 }

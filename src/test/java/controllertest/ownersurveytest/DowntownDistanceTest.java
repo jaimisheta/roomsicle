@@ -6,7 +6,6 @@ import models.OwnerSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class DowntownDistanceTest {
 
@@ -35,12 +34,12 @@ public class DowntownDistanceTest {
     @Test
     public void validateNegativeDowntownDistanceReturnValueTest() {
         downtownDistanceInput = new DowntownDistance(ownerSurveyModel, -1);
-        Assertions.assertEquals(false, downtownDistanceInput.validateValue());
+        Assert.assertFalse(downtownDistanceInput.validateValue());
     }
 
     @Test
     public void validateInvalidDowntownDistanceInputTest() {
         downtownDistanceInput = new DowntownDistance(ownerSurveyModel, 0);
-        Assertions.assertEquals(false, downtownDistanceInput.validateValue());
+        Assert.assertFalse(downtownDistanceInput.validateValue());
     }
 }
