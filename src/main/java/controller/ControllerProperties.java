@@ -9,10 +9,10 @@ public class ControllerProperties {
     private static Properties properties;
 
     public static void loadControllerPropertiesFile() {
-        String path = System.getProperty("user.dir");
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream(path + "/classes/Controller.properties");
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/Controller.properties");
+//            FileInputStream fileInputStream = new FileInputStream(ControllerConstant.CONTROLLER_PROPERTIES_FILE_PATH);
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {

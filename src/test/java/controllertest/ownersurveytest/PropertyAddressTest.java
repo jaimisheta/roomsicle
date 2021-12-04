@@ -6,7 +6,6 @@ import models.OwnerSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class PropertyAddressTest {
 
@@ -28,18 +27,18 @@ public class PropertyAddressTest {
     @Test
     public void validateNullPropertyAddressInputTest() {
         propertyAddressInput = new PropertyAddress(ownerSurveyModel, "");
-        Assert.assertEquals(false, propertyAddressInput.validateValue());
+        Assert.assertFalse(propertyAddressInput.validateValue());
     }
 
     @Test
     public void validateEmptyPropertyAddressReturnValueTest() {
         propertyAddressInput = new PropertyAddress(ownerSurveyModel, " ");
-        Assertions.assertEquals(false, propertyAddressInput.validateValue());
+        Assert.assertFalse(propertyAddressInput.validateValue());
     }
 
     @Test
     public void validateNullPropertyAddressReturnValueTest() {
         propertyAddressInput = new PropertyAddress(ownerSurveyModel, null);
-        Assertions.assertEquals(false, propertyAddressInput.validateValue());
+        Assert.assertFalse(propertyAddressInput.validateValue());
     }
 }

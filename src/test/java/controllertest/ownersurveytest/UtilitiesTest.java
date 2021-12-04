@@ -6,7 +6,6 @@ import models.OwnerSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class UtilitiesTest {
 
@@ -22,26 +21,26 @@ public class UtilitiesTest {
     public void validateUtilitiesProvidedInputTest() {
         utilitiesInput = new Utilities(ownerSurveyModel, 1);
         utilitiesInput.validateValue();
-        Assert.assertEquals(true, ownerSurveyModel.isUtilitiesProvided());
+        Assert.assertTrue(ownerSurveyModel.isUtilitiesProvided());
     }
 
     @Test
     public void validateUtilitiesNotProvidedInputTest() {
         utilitiesInput = new Utilities(ownerSurveyModel, 2);
         utilitiesInput.validateValue();
-        Assert.assertEquals(false, ownerSurveyModel.isUtilitiesProvided());
+        Assert.assertFalse(ownerSurveyModel.isUtilitiesProvided());
     }
 
     @Test
     public void validateNegativeUtilitiesInputReturnValueTest() {
         utilitiesInput = new Utilities(ownerSurveyModel, -1);
-        Assertions.assertEquals(false, utilitiesInput.validateValue());
+        Assert.assertFalse(utilitiesInput.validateValue());
     }
 
     @Test
     public void validateInValidUtilitiesInputTest() {
         utilitiesInput = new Utilities(ownerSurveyModel, 10);
-        Assertions.assertEquals(false, utilitiesInput.validateValue());
+        Assert.assertFalse(utilitiesInput.validateValue());
     }
 
 }
