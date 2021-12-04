@@ -106,7 +106,7 @@
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
-
+<!--
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
                     <configuration>
@@ -130,8 +130,9 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!--<plugin>
-                    &lt;!&ndash; Build an executable JAR &ndash;&gt;
+-->
+                <plugin>
+                    <!-- Build an executable JAR -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.1.0</version>
@@ -144,7 +145,7 @@
                             </manifest>
                         </archive>
                     </configuration>
-                </plugin>-->
+                </plugin>
 
             </plugins>
         </pluginManagement>
