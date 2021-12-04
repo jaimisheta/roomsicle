@@ -76,6 +76,8 @@
                         </descriptorRefs>
                         <archive>
                             <manifest>
+                                <Class-Path>.</Class-Path>
+                                <addClasspath>true</addClasspath>
                                 <mainClass>RoommateFinder</mainClass>
                             </manifest>
                         </archive>
