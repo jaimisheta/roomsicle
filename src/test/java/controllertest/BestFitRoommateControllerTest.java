@@ -9,6 +9,14 @@ import controller.ControllerProperties;
 public class BestFitRoommateControllerTest {
 
 
+	@BeforeClass
+	public static void init() {
+		ControllerProperties.loadControllerPropertiesFile();
+		DatabaseQueryProperties.loadDatabaseQueryPropertiesFile();
+		ConfigProperties.loadConfigPropertiesFile();
+	}
+
+
 	@Test
 	public void testFindBestFit() {
 		HashMap<String, Integer> map = new HashMap<String, Integer>(){{
