@@ -11,7 +11,8 @@ public class DatabaseQueryProperties {
     public static void loadDatabaseQueryPropertiesFile() {
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream(DatabaseConstant.DATABASE_QUERY_PROPERTIES_FILE_PATH);
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/DatabaseQuery.properties");
+//            FileInputStream fileInputStream = new FileInputStream(DatabaseConstant.DATABASE_QUERY_PROPERTIES_FILE_PATH);
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {

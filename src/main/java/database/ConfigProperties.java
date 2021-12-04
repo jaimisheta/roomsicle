@@ -11,7 +11,8 @@ public class ConfigProperties {
     public static void loadConfigPropertiesFile() {
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream(ConfigConstant.CONFIG_PROPERTIES_FILE_PATH);
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/Config.properties");
+//            FileInputStream fileInputStream = new FileInputStream(ConfigConstant.CONFIG_PROPERTIES_FILE_PATH);
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {

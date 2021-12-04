@@ -11,7 +11,8 @@ public class ControllerProperties {
     public static void loadControllerPropertiesFile() {
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream(ControllerConstant.CONTROLLER_PROPERTIES_FILE_PATH);
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/Controller.properties");
+//            FileInputStream fileInputStream = new FileInputStream(ControllerConstant.CONTROLLER_PROPERTIES_FILE_PATH);
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {

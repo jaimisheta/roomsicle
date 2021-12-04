@@ -11,7 +11,8 @@ public class CommandLineInputProperties {
     public static void loadCommandLineInputPropertiesFile() {
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream(CommandLineConstant.COMMAND_LINE_INPUT_PROPERTIES_FILE_PATH);
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/CommandLineInput.properties");
+//            FileInputStream fileInputStream = new FileInputStream(CommandLineConstant.COMMAND_LINE_INPUT_PROPERTIES_FILE_PATH);
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {
