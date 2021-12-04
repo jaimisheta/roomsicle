@@ -7,10 +7,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class RoommateFinder {
-
-    static final Logger logger = LogManager.getLogger(RoommateFinder.class);
-
+    
     public static void main(String[] args) {
+        System.setProperty("logFilename", "logs/application.logs");
+        final Logger logger = LogManager.getLogger(RoommateFinder.class);
         WelcomePageController wp = new WelcomePageController();
         try {
             ConfigProperties.loadConfigPropertiesFile();
