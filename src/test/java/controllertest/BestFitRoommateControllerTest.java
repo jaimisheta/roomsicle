@@ -7,7 +7,7 @@ import controller.BestFitRoommateController;
 import controller.ControllerProperties;
 
 public class BestFitRoommateControllerTest {
-/*
+
 
 	@Test
 	public void testFindBestFit() {
@@ -18,7 +18,6 @@ public class BestFitRoommateControllerTest {
 			put(ControllerProperties.getControllerPropertyValue("bestFitData4.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData4.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData5.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData5.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData6.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData6.value")));
-			put(ControllerProperties.getControllerPropertyValue("bestFitData7.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData7.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData8.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData8.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData9.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData9.value")));
 		}};
@@ -26,5 +25,4 @@ public class BestFitRoommateControllerTest {
 		assertEquals(bestFitRoommateController.findBestFit(), map);     
 	}
 
-*/
 }
