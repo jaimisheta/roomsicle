@@ -67,8 +67,8 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M5</version>
                 </plugin>
-                <plugin>
-                    <!-- Build an executable JAR -->
+<!--                <plugin>
+                    &lt;!&ndash; Build an executable JAR &ndash;&gt;
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.1.0</version>
@@ -81,8 +81,30 @@
                             </manifest>
                         </archive>
                     </configuration>
-                </plugin>
+                </plugin>-->
 
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <mainClass>RoommateFinder</mainClass>
+                            </manifest>
+                        </archive>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
