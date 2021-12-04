@@ -21,7 +21,7 @@ public class UserBudgetTest {
     public void validateValidUserBudgetInputTest() {
         userBudgetInput = new UserBudget(userSurveyModel, 500);
         userBudgetInput.validateValue();
-        Assert.assertEquals(5, userSurveyModel.getUserBudget());
+        Assert.assertEquals(500, userSurveyModel.getUserBudget());
     }
 
     @Test
