@@ -1,6 +1,9 @@
 package database;
 
+import controller.ControllerConstant;
+
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -12,9 +15,16 @@ public class ConfigProperties {
         properties = new Properties();
         try {
             FileInputStream fileInputStream = new FileInputStream("src/main/resources/Config.properties");
-//            FileInputStream fileInputStream = new FileInputStream(ConfigConstant.CONFIG_PROPERTIES_FILE_PATH);
             properties.load(fileInputStream);
             fileInputStream.close();
+        } catch (FileNotFoundException e) {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(ConfigConstant.CONFIG_PROPERTIES_FILE_PATH);
+                properties.load(fileInputStream);
+                fileInputStream.close();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

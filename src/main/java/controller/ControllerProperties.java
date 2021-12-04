@@ -1,6 +1,9 @@
 package controller;
 
+import commandline.CommandLineConstant;
+
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -12,9 +15,16 @@ public class ControllerProperties {
         properties = new Properties();
         try {
             FileInputStream fileInputStream = new FileInputStream("src/main/resources/Controller.properties");
-//            FileInputStream fileInputStream = new FileInputStream(ControllerConstant.CONTROLLER_PROPERTIES_FILE_PATH);
             properties.load(fileInputStream);
             fileInputStream.close();
+        } catch (FileNotFoundException e) {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(ControllerConstant.CONTROLLER_PROPERTIES_FILE_PATH);
+                properties.load(fileInputStream);
+                fileInputStream.close();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
