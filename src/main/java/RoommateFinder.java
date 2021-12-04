@@ -6,9 +6,9 @@ import database.DatabaseQueryProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Main {
+public class RoommateFinder {
 
-    static final Logger logger = LogManager.getLogger(Main.class);
+    static final Logger logger = LogManager.getLogger(RoommateFinder.class);
 
     public static void main(String[] args) {
         WelcomePageController wp = new WelcomePageController();
