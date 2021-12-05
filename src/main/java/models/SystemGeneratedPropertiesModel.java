@@ -10,6 +10,21 @@ public class SystemGeneratedPropertiesModel {
     private int rent;
     private int dalhousieDistance;
 
+    public SystemGeneratedPropertiesModel() {
+    }
+
+    public SystemGeneratedPropertiesModel(String ownerEmailId, String firstName,
+                                          String lastName, String address, long contactNumber,
+                                          int rent, int dalhousieDistance) {
+        this.ownerEmailId = ownerEmailId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.contactNumber = contactNumber;
+        this.rent = rent;
+        this.dalhousieDistance = dalhousieDistance;
+    }
+
     public String getOwnerEmailId() {
         return ownerEmailId;
     }

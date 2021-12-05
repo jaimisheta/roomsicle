@@ -19,7 +19,7 @@ public class SystemGeneratedPropertiesDAO {
     Connection connection = databaseConnection.getConnectionObject();
     Statement statement;
 
-    public HashMap getUserBudgetAndDistancePreference(UserSurveyModel userSurveyModel) {
+    public HashMap<String, Integer> getUserBudgetAndDistancePreference(UserSurveyModel userSurveyModel) {
         HashMap<String, Integer> userDetails = new HashMap<>();
         String query;
         String userEmailId;
@@ -55,7 +55,7 @@ public class SystemGeneratedPropertiesDAO {
     }
 
     public ArrayList<SystemGeneratedPropertiesModel> getSystemGeneratedPropertyDetails(HashMap<String, Integer> userDetails) {
-        ArrayList<SystemGeneratedPropertiesModel> models = new ArrayList<>();
+        ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModelArrayList = new ArrayList<>();
         SystemGeneratedPropertiesModel systemGeneratedPropertiesModel = new SystemGeneratedPropertiesModel();
         String query;
         int userBudget;
@@ -84,12 +84,12 @@ public class SystemGeneratedPropertiesDAO {
                 systemGeneratedPropertiesModel.setOwnerEmailId(resultSet.getString(DatabaseQueryProperties.getDatabaseQueryPropertyValue("system.generated.properties.email.id.column.name")));
                 systemGeneratedPropertiesModel.setRent(resultSet.getInt(DatabaseQueryProperties.getDatabaseQueryPropertyValue("system.generated.properties.price.column.name")));
                 systemGeneratedPropertiesModel.setDalhousieDistance(resultSet.getInt(DatabaseQueryProperties.getDatabaseQueryPropertyValue("system.generated.properties.dalhousie.distance.column.name")));
-                models.add(systemGeneratedPropertiesModel);
+                systemGeneratedPropertiesModelArrayList.add(systemGeneratedPropertiesModel);
             }
         } catch (SQLException e) {
             logger.error("Error while getting System Generated Property Details");
             e.printStackTrace();
         }
-        return models;
+        return systemGeneratedPropertiesModelArrayList;
     }
 }

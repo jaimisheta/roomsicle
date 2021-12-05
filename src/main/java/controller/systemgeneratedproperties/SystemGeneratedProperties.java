@@ -13,45 +13,63 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SystemGeneratedProperties {
+public class SystemGeneratedProperties implements ISystemGeneratedProperties {
 
     SystemGeneratedPropertiesDAO systemGeneratedPropertiesDAO = new SystemGeneratedPropertiesDAO();
     static final Logger logger = LogManager.getLogger(OwnerSurveyDAO.class);
 
     UserSurveyModel userSurveyModel;
     HashMap<String, Integer> userDetails = new HashMap<>();
-    ArrayList<SystemGeneratedPropertiesModel> models = new ArrayList<>();
+    ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModels = new ArrayList<>();
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
+
+    public SystemGeneratedProperties() {
+    }
 
     public SystemGeneratedProperties(UserSurveyModel userSurveyModel) {
         this.userSurveyModel = userSurveyModel;
     }
 
-    //get property details based on user preferences
-    public void getUserPreferenceBasedProperties() {
+    public void initializeSystemGeneratedProperties() {
+        getUserBudgetAndDistanceValues();
+        getSystemGeneratedProperties();
+        printSystemGeneratedProperties(systemGeneratedPropertiesModels);
+    }
 
-        int ownerCount = ControllerConstant.OWNER_COUNT;
+    //get user budget and distance values
+    @Override
+    public HashMap<String, Integer> getUserBudgetAndDistanceValues() {
         logger.info("Getting user budget and distance from dalhousie preference");
         userDetails = systemGeneratedPropertiesDAO.getUserBudgetAndDistancePreference(userSurveyModel);
-        logger.info("Getting system generated property details based on user preference");
-        models = systemGeneratedPropertiesDAO.getSystemGeneratedPropertyDetails(userDetails);
+        return userDetails;
+    }
 
+    @Override
+    public ArrayList<SystemGeneratedPropertiesModel> getSystemGeneratedProperties() {
+        logger.info("Getting system generated property details based on user preference");
+        systemGeneratedPropertiesModels = systemGeneratedPropertiesDAO.getSystemGeneratedPropertyDetails(userDetails);
+        return systemGeneratedPropertiesModels;
+    }
+
+    @Override
+    public void printSystemGeneratedProperties(ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModels) {
+        int ownerCount = ControllerConstant.OWNER_COUNT;
         logger.info("Display properties matching user preferences");
-        for (SystemGeneratedPropertiesModel model : models) {
+        for (SystemGeneratedPropertiesModel propertiesModel : systemGeneratedPropertiesModels) {
             roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.owner.name")
                     .replace("ownerCount", String.valueOf(ownerCount))
-                    .replace("firstName", model.getFirstName())
-                    .replace("lastName", String.valueOf(model.getLastName())));
+                    .replace("firstName", propertiesModel.getFirstName())
+                    .replace("lastName", String.valueOf(propertiesModel.getLastName())));
             roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.property.address")
-                    .replace("propertyAddress", model.getAddress()));
+                    .replace("propertyAddress", propertiesModel.getAddress()));
             roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.owner.email.id")
-                    .replace("ownerEmailId", model.getOwnerEmailId()));
+                    .replace("ownerEmailId", propertiesModel.getOwnerEmailId()));
             roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.owner.contact.number")
-                    .replace("contactNumber", String.valueOf(model.getContactNumber())));
+                    .replace("contactNumber", String.valueOf(propertiesModel.getContactNumber())));
             roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.property.rent")
-                    .replace("propertyRent", String.valueOf(model.getRent())));
+                    .replace("propertyRent", String.valueOf(propertiesModel.getRent())));
             roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.dalhousie.distance")
-                    .replace("dalhousieDistance", String.valueOf(model.getDalhousieDistance())));
+                    .replace("dalhousieDistance", String.valueOf(propertiesModel.getDalhousieDistance())));
             roomsicleCLI.printMessage("");
             ownerCount++;
         }
