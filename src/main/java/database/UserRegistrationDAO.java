@@ -1,25 +1,23 @@
 package database;
 
-import models.UserSurveyModel;
-import models.UsersModel;
+import models.IUsersModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserRegistrationDAO {
+public class UserRegistrationDAO implements IUserRegistrationDAO {
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     Connection connection = databaseConnection.getConnectionObject();
     Statement statement;
-    public void userRegistration(UsersModel usersModel){
+    public void userRegistration(IUsersModel usersModel){
         String query;
         String type;
         String emailId;
         String firstName;
         String lastName;
-        String contactNumber;
+        long contactNumber;
         String password;
-        Integer surveyTaken;
 
         type= usersModel.getType();
         emailId=usersModel.getEmailId();
@@ -27,7 +25,6 @@ public class UserRegistrationDAO {
         lastName=usersModel.getLastName();
         contactNumber=usersModel.getContactNumber();
         password=usersModel.getPassword();
-        surveyTaken=usersModel.getSurveyTaken();
         try {
             statement = connection.createStatement();
 
@@ -36,16 +33,12 @@ public class UserRegistrationDAO {
                     .replace("EmailId", emailId)
                     .replace("fName", firstName)
                     .replace("lName", lastName)
-                    .replace("cno",  contactNumber)
-                    .replace("password00", password)
-                    .replace("suvtak", String.valueOf(surveyTaken));
+                    .replace("cno",  String.valueOf(contactNumber))
+                    .replace("password00", password);
             statement.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-
-
     }
 

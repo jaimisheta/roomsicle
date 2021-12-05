@@ -7,4 +7,6 @@ public interface IRoomsicleCLI {
     String getStringResponse();
 
     int getNumberResponse();
+
+    long getLongNumberResponse();
 }
