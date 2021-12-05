@@ -33,6 +33,7 @@ public class ControllerProperties {
     public static String getControllerPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
+            ControllerProperties.loadControllerPropertiesFile();
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();
