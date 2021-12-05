@@ -14,7 +14,7 @@ public class ControllerProperties {
     public static void loadControllerPropertiesFile() {
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream("src/main/resources/Controller.properties");
+            FileInputStream fileInputStream = new FileInputStream(ControllerConstant.CONTROLLER_PROPERTIES_FILE_PATH_UNDER_RESOURCES);
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (FileNotFoundException e) {
@@ -38,5 +38,13 @@ public class ControllerProperties {
             e.printStackTrace();
         }
         return propertyValue.trim();
+    }
+
+    public static void setControllerPropertyValue(String propertyKey, String propertyValue) {
+        try {
+            properties.setProperty(propertyKey, propertyValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
