@@ -36,38 +36,7 @@ public class SystemGeneratedProperties implements ISystemGeneratedProperties {
         printSystemGeneratedProperties(systemGeneratedPropertiesModels);
     }
 
-    //get property details based on user preferences
-/*
-    public void getUserPreferenceBasedProperties() {
-
-        int ownerCount = ControllerConstant.OWNER_COUNT;
-        logger.info("Getting user budget and distance from dalhousie preference");
-        userDetails = systemGeneratedPropertiesDAO.getUserBudgetAndDistancePreference(userSurveyModel);
-        logger.info("Getting system generated property details based on user preference");
-        systemGeneratedPropertiesModels = systemGeneratedPropertiesDAO.getSystemGeneratedPropertyDetails(userDetails);
-
-        logger.info("Display properties matching user preferences");
-        for (SystemGeneratedPropertiesModel propertiesModel : systemGeneratedPropertiesModels) {
-            roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.owner.name")
-                    .replace("ownerCount", String.valueOf(ownerCount))
-                    .replace("firstName", propertiesModel.getFirstName())
-                    .replace("lastName", String.valueOf(propertiesModel.getLastName())));
-            roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.property.address")
-                    .replace("propertyAddress", propertiesModel.getAddress()));
-            roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.owner.email.id")
-                    .replace("ownerEmailId", propertiesModel.getOwnerEmailId()));
-            roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.owner.contact.number")
-                    .replace("contactNumber", String.valueOf(propertiesModel.getContactNumber())));
-            roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.property.rent")
-                    .replace("propertyRent", String.valueOf(propertiesModel.getRent())));
-            roomsicleCLI.printMessage(ControllerProperties.getControllerPropertyValue("system.generated.properties.display.dalhousie.distance")
-                    .replace("dalhousieDistance", String.valueOf(propertiesModel.getDalhousieDistance())));
-            roomsicleCLI.printMessage("");
-            ownerCount++;
-        }
-    }
-*/
-
+    //get user budget and distance values
     @Override
     public HashMap<String, Integer> getUserBudgetAndDistanceValues() {
         logger.info("Getting user budget and distance from dalhousie preference");
