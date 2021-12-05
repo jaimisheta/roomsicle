@@ -30,63 +30,40 @@ public class SystemGeneratedPropertiesTest {
     @Test
     public void printSystemGeneratedPropertiesPositiveScenarioTest() {
         ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModels;
-        String expectedOutput;
+        String expectedOutput = "";
+        int ownerNumber;
 
         systemGeneratedPropertiesModels = systemGeneratedPropertiesDAOMocks.getSystemGeneratedPropertyDetails();
         systemGeneratedProperties.printSystemGeneratedProperties(systemGeneratedPropertiesModels);
 
-        expectedOutput = "1. Owner Name: jaimi sheta\r\n" +
-                "Property Address: address1\r\n" +
-                "Owner email id: jaimi@gmail.com\r\n" +
-                "Owner contact number: 9898989898\r\n" +
-                "Property Rent: 1500\r\n" +
-                "Distance from Dalhousie: 3 km\r\n" +
-                "\r\n" +
-                "2. Owner Name: rikin patel\r\n" +
-                "Property Address: address2\r\n" +
-                "Owner email id: rikin@gmail.com\r\n" +
-                "Owner contact number: 6767676767\r\n" +
-                "Property Rent: 1300\r\n" +
-                "Distance from Dalhousie: 4 km\r\n" +
-                "\r\n" +
-                "3. Owner Name: hardik kumar\r\n" +
-                "Property Address: address3\r\n" +
-                "Owner email id: hardik@gmail.com\r\n" +
-                "Owner contact number: 5656565656\r\n" +
-                "Property Rent: 1700\r\n" +
-                "Distance from Dalhousie: 2 km\r\n\r\n";
-
+        ownerNumber = 1;
+        for (SystemGeneratedPropertiesModel systemGeneratedPropertiesModel : systemGeneratedPropertiesModels) {
+            expectedOutput = expectedOutput + ownerNumber + ". Owner Name: " + systemGeneratedPropertiesModel.getFirstName() + " " + systemGeneratedPropertiesModel.getLastName() + System.getProperty("line.separator")
+                    + "Property Address: " + systemGeneratedPropertiesModel.getAddress() + System.getProperty("line.separator") + "Owner email id: " + systemGeneratedPropertiesModel.getOwnerEmailId() + System.getProperty("line.separator")
+                    + "Owner contact number: " + systemGeneratedPropertiesModel.getContactNumber() + System.getProperty("line.separator") + "Property Rent: " + systemGeneratedPropertiesModel.getRent() + System.getProperty("line.separator")
+                    + "Distance from Dalhousie: " + systemGeneratedPropertiesModel.getDalhousieDistance() + " km" + System.getProperty("line.separator") + System.getProperty("line.separator");
+            ownerNumber++;
+        }
         Assert.assertEquals(expectedOutput, systemOutRule.getLog());
     }
 
     @Test
     public void printSystemGeneratedPropertiesNegativeScenarioTest() {
         ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModels;
-        String expectedOutput;
+        String expectedOutput = "";
+        int ownerNumber;
 
         systemGeneratedPropertiesModels = systemGeneratedPropertiesDAOMocks.getSystemGeneratedPropertyDetails();
         systemGeneratedProperties.printSystemGeneratedProperties(systemGeneratedPropertiesModels);
 
-        expectedOutput = "1. Owner Name: jaimi sheta\r\n" +
-                "Property Address: address1\r\n" +
-                "Owner email id: jaimi@gmail.com\r\n" +
-                "Owner contact number: 9898989898\r\n" +
-                "Property Rent: 2500\r\n" +
-                "Distance from Dalhousie: 3 km\r\n" +
-                "\r\n" +
-                "2. Owner Name: rikin patel\r\n" +
-                "Property Address: address2\r\n" +
-                "Owner email id: rikin@gmail.com\r\n" +
-                "Owner contact number: 6767676767\r\n" +
-                "Property Rent: 2200\r\n" +
-                "Distance from Dalhousie: 4 km\r\n" +
-                "\r\n" +
-                "3. Owner Name: hardik kumar\r\n" +
-                "Property Address: address3\r\n" +
-                "Owner email id: hardik@gmail.com\r\n" +
-                "Owner contact number: 5656565656\r\n" +
-                "Property Rent: 1700\r\n" +
-                "Distance from Dalhousie: 2 km\r\n\r\n";
+        ownerNumber = 1;
+        for (SystemGeneratedPropertiesModel systemGeneratedPropertiesModel : systemGeneratedPropertiesModels) {
+            expectedOutput = expectedOutput + ownerNumber + ". Name: " + systemGeneratedPropertiesModel.getFirstName() + " " + systemGeneratedPropertiesModel.getLastName() + System.getProperty("line.separator")
+                    + "Property Address: " + systemGeneratedPropertiesModel.getAddress() + System.getProperty("line.separator") + "Owner email id: " + systemGeneratedPropertiesModel.getOwnerEmailId() + System.getProperty("line.separator")
+                    + "Owner contact number: " + systemGeneratedPropertiesModel.getContactNumber() + System.getProperty("line.separator") + "Property Rent: " + systemGeneratedPropertiesModel.getRent() + System.getProperty("line.separator")
+                    + "Distance from Dalhousie: " + systemGeneratedPropertiesModel.getDalhousieDistance() + " km" + System.getProperty("line.separator") + System.getProperty("line.separator");
+            ownerNumber++;
+        }
 
         Assert.assertNotEquals(expectedOutput, systemOutRule.getLog());
     }
@@ -100,7 +77,6 @@ public class SystemGeneratedPropertiesTest {
         systemGeneratedProperties.printSystemGeneratedProperties(systemGeneratedPropertiesModels);
 
         expectedOutput = "";
-
         Assert.assertNotEquals(expectedOutput, systemOutRule.getLog());
     }
 }
