@@ -61,11 +61,19 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
+        <!-- <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.26</version>
-        </dependency>
+        </dependency> -->
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.27</version>
+</dependency>
+
 
     </dependencies>
 
@@ -121,8 +129,8 @@
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <classpathPrefix>lib/</classpathPrefix>
-                                <mainClass>com.finder.roomsiclee.Main</mainClass>
+<!--                                <classpathPrefix>lib/</classpathPrefix>-->
+                                <mainClass>Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>

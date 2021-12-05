@@ -9,9 +9,10 @@ public class CommandLineInputProperties {
     private static Properties properties;
 
     public static void loadCommandLineInputPropertiesFile() {
+        String path = System.getProperty("user.dir");
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream("src/main/resources/CommandLineInput.properties");
+            FileInputStream fileInputStream = new FileInputStream(path + "/classes/CommandLineInput.properties");
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {
