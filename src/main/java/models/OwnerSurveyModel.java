@@ -11,6 +11,7 @@ public class OwnerSurveyModel {
     private int groceryStoreDistance;
     private int downtownDistance;
     private int theaterDistance;
+    private int propertyPrice;
 
     public OwnerSurveyModel() {
     }
@@ -108,5 +109,13 @@ public class OwnerSurveyModel {
 
     public void setPropertyID(int propertyID) {
         this.propertyID = propertyID;
+    }
+
+    public int getPropertyPrice() {
+        return propertyPrice;
+    }
+
+    public void setPropertyPrice(int propertyPrice) {
+        this.propertyPrice = propertyPrice;
     }
 }
