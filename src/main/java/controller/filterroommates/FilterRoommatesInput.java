@@ -8,8 +8,10 @@ import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
 import controller.ControllerProperties;
 
+import java.util.HashMap;
+
 public class FilterRoommatesInput implements IFilterRoommatesInput{
-	
+
 	int foodPreferenceSelect;
     int smokePreferenceSelect;
     int alcoholPreferenceSelect;
@@ -17,22 +19,38 @@ public class FilterRoommatesInput implements IFilterRoommatesInput{
     String smokePreference;
     String alcoholPreference;
     RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
-	
+    HashMap<Integer,String> foodPreferenceMap = new HashMap<Integer,String>(){{
+        foodPreferenceMap.put(ONE, ControllerProperties.getControllerPropertyValue("food.one"));
+        foodPreferenceMap.put(TWO, ControllerProperties.getControllerPropertyValue("food.two"));
+        foodPreferenceMap.put(THREE, ControllerProperties.getControllerPropertyValue("food.three"));
+    }};
+    HashMap<Integer,String> smokingPreferenceMap = new HashMap<Integer,String>(){{
+        smokingPreferenceMap.put(ONE, ControllerProperties.getControllerPropertyValue("smoke.one"));
+        smokingPreferenceMap.put(TWO, ControllerProperties.getControllerPropertyValue("smoke.two"));
+        smokingPreferenceMap.put(THREE, ControllerProperties.getControllerPropertyValue("smoke.three"));
+    }};
+    HashMap<Integer,String> alcoholPreferenceMap = new HashMap<Integer,String>(){{
+        alcoholPreferenceMap.put(ONE, ControllerProperties.getControllerPropertyValue("alcohol.one"));
+        alcoholPreferenceMap.put(TWO, ControllerProperties.getControllerPropertyValue("alcohol.two"));
+        alcoholPreferenceMap.put(THREE, ControllerProperties.getControllerPropertyValue("alcohol.three"));
+    }};
+
     public String[] setPreferences() {
         try {
         	roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.roommate.preference.details.message"));
         	roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.roommate.food.habits.message"));
-        	foodPreferenceSelect = roomsicleCLI.getNumberResponse();
-        	if (foodPreferenceSelect == ONE){
-                foodPreference= ControllerProperties.getControllerPropertyValue("food.one");
+            foodPreferenceSelect = roomsicleCLI.getNumberResponse();
+
+            if (foodPreferenceSelect == ONE) {
+                foodPreference = ControllerProperties.getControllerPropertyValue("food.one");
             }
-            if (foodPreferenceSelect == TWO){
-                foodPreference=ControllerProperties.getControllerPropertyValue("food.two");
+            if (foodPreferenceSelect == TWO) {
+                foodPreference = ControllerProperties.getControllerPropertyValue("food.two");
             }
-            if (foodPreferenceSelect == THREE){
-                foodPreference=ControllerProperties.getControllerPropertyValue("food.three");
+            if (foodPreferenceSelect == THREE) {
+                foodPreference = ControllerProperties.getControllerPropertyValue("food.three");
             }
-            
+
         	roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.roommate.smoking.habits.message"));
         	smokePreferenceSelect = roomsicleCLI.getNumberResponse();
         	if (smokePreferenceSelect == ONE){
