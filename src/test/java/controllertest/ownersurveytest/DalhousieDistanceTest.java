@@ -6,7 +6,6 @@ import models.OwnerSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class DalhousieDistanceTest {
 
@@ -35,12 +34,12 @@ public class DalhousieDistanceTest {
     @Test
     public void validateNegativeDalhousieDistanceReturnValueTest() {
         dalhousieDistanceInput = new DalhousieDistance(ownerSurveyModel, -1);
-        Assertions.assertEquals(false, dalhousieDistanceInput.validateValue());
+        Assert.assertFalse(dalhousieDistanceInput.validateValue());
     }
 
     @Test
     public void validateInvalidDalhousieDistanceInputTest() {
         dalhousieDistanceInput = new DalhousieDistance(ownerSurveyModel, 0);
-        Assertions.assertEquals(false, dalhousieDistanceInput.validateValue());
+        Assert.assertFalse(dalhousieDistanceInput.validateValue());
     }
 }
