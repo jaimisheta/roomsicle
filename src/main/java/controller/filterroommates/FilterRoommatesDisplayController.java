@@ -6,6 +6,7 @@ import java.util.HashMap;
 import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
 import controller.ControllerProperties;
+import database.DatabaseQueryProperties;
 import database.UserDetailsDAO;
 import models.UserDetailsModel;
 

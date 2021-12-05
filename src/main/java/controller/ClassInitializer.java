@@ -12,15 +12,14 @@ import controller.userlogin.CheckSurveyTaken;
 import controller.userlogin.ICheckSurveyTaken;
 import controller.userlogin.IUserLoginController;
 import controller.userlogin.UserLoginController;
+import controller.userprofile.IUserProfile;
+import controller.userprofile.UserProfile;
 import controller.userregistration.IUserRegistrationController;
 import controller.userregistration.UserRegistrationController;
 import controller.verifications.EmailVerfierController;
 import controller.verifications.*;
 import controller.verifications.PasswordVerifierController;
-import database.IUserLoginDAO;
-import database.IUserRegistrationDAO;
-import database.UserLoginDAO;
-import database.UserRegistrationDAO;
+import database.*;
 import models.IUsersModel;
 import models.UsersModel;
 
@@ -40,6 +39,9 @@ public class ClassInitializer {
     IUserLoginController iuserLoginController;
     IWelcomePageController iWelcomePageController;
     ICheckSurveyTaken iCheckSurveyTaken;
+    IUserDetailsDAO iUserDetailsDAO;
+    IUserProfile iUserProfile;
+
    private ClassInitializer()
 
     {
@@ -57,6 +59,8 @@ public class ClassInitializer {
         iuserLoginController =new UserLoginController();
         iWelcomePageController=new WelcomePageController();
         iCheckSurveyTaken=new CheckSurveyTaken();
+        iUserDetailsDAO=new UserDetailsDAO();
+        iUserProfile=new UserProfile();
        }
 
     public static ClassInitializer initializer() {
@@ -65,6 +69,10 @@ public class ClassInitializer {
         }
 
         return initializer;
+    }
+
+    public IUserDetailsDAO getIUserDetailsDAO(){
+        return iUserDetailsDAO;
     }
 
     public IRoomsicleCLI getIroomsicleCLI(){
@@ -121,6 +129,10 @@ public class ClassInitializer {
 
     public ICheckSurveyTaken getICheckSurveyTaken(){
         return iCheckSurveyTaken;
+    }
+
+    public IUserProfile getiUserProfile(){
+       return iUserProfile;
     }
 
 }

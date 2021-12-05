@@ -7,11 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import models.UserDetailsModel;
 
-public class UserDetailsDAO {
+public class UserDetailsDAO implements IUserDetailsDAO{
 
 	DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
-	Connection connection;
-	Statement statement;
 
 	public ArrayList<UserDetailsModel> getUserDetails() {
 
