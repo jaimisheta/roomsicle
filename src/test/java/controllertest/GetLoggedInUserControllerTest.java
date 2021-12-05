@@ -1,8 +1,8 @@
 package controllertest;
 
 import controller.ControllerProperties;
-import controller.GetLoggedInUserController;
-import controller.IGetLoggedInUserController;
+import controller.getloggedinuser.GetLoggedInUserController;
+import controller.getloggedinuser.IGetLoggedInUserController;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
 import org.junit.BeforeClass;

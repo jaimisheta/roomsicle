@@ -1,21 +1,27 @@
-package controllertest;
+package controllertest.bestfitroommatetest;
 
+import commandline.CommandLineInputProperties;
+import database.ConfigProperties;
+import database.DatabaseQueryProperties;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import java.util.HashMap;
-import controller.BestFitRoommateController;
+import controller.bestfitroommates.BestFitRoommateController;
 import controller.ControllerProperties;
+import controller.getloggedinuser.GetLoggedInUserController;
+import controller.bestfitroommates.IBestFitRoommateController;
+import controller.getloggedinuser.IGetLoggedInUserController;
 
 public class BestFitRoommateControllerTest {
 
-/*
 	@BeforeClass
 	public static void init() {
+		CommandLineInputProperties.loadCommandLineInputPropertiesFile();
 		ControllerProperties.loadControllerPropertiesFile();
-		DatabaseQueryProperties.loadDatabaseQueryPropertiesFile();
 		ConfigProperties.loadConfigPropertiesFile();
+		DatabaseQueryProperties.loadDatabaseQueryPropertiesFile();
 	}
-
 
 	@Test
 	public void testFindBestFit() {
@@ -29,8 +35,9 @@ public class BestFitRoommateControllerTest {
 			put(ControllerProperties.getControllerPropertyValue("bestFitData8.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData8.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData9.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData9.value")));
 		}};
-		BestFitRoommateController bestFitRoommateController = new BestFitRoommateController();   
-		assertEquals(bestFitRoommateController.findBestFit(), map);     
+		IBestFitRoommateController bestFitRoommateController = new BestFitRoommateController();
+		IGetLoggedInUserController loggedInUser = new GetLoggedInUserController();
+		assertEquals(bestFitRoommateController.findBestFit(loggedInUser), map);     
 	}
-*/
+
 }
