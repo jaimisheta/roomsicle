@@ -21,14 +21,14 @@ public class PasswordVerifierControllerTest {
     }
 
     @Test
-    public void testPasswordVerifierValidatorController()  {
+    public void passwordVerifierValidatorControllerTest()  {
         PasswordVerifierController passwordVerifierController=new PasswordVerifierController();
         String actual=passwordVerifierController.PasswordVerifierValidatorController(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"),CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"));
         String expected=CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.expected.message");
         Assert.assertEquals(actual,expected);
     }
     @Test
-    public void testPasswordVerifierValidatorControllerNegative() {
+    public void passwordVerifierValidatorControllerNegativeTest() {
         PasswordVerifierController passwordVerifierController=new PasswordVerifierController();
         String actual=passwordVerifierController.PasswordVerifierValidatorController(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"),CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.negative.test.email.message"));
         String expected=CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.failed.expected.message");
@@ -36,7 +36,7 @@ public class PasswordVerifierControllerTest {
     }
 
     @Test(expected= PasswordNotMatchException.class)
-    public void testPasswordVerifierValidatorControllerPasswordException() throws PasswordNotMatchException {
+    public void passwordVerifierValidatorControllerPasswordExceptionTest() throws PasswordNotMatchException {
         PasswordVerifierController passwordVerifierController=new PasswordVerifierController();
         passwordVerifierController.PasswordVerifierController(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"),CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.negative.test.email.message"));
     }

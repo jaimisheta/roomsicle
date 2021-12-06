@@ -19,7 +19,7 @@ public class PhoneNumberVerifierControllerTest {
     }
 
     @Test(expected = PhoneNumberException.class)
-    public void testPhoneNumberVerifierControllerException() throws PhoneNumberException {
+    public void phoneNumberVerifierControllerExceptionTest() throws PhoneNumberException {
         PhoneNumberVerifierController phoneNumberVerifierController=new PhoneNumberVerifierController();
         phoneNumberVerifierController.PhoneNumberVerifierController(0000);
     }

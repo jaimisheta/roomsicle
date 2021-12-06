@@ -23,19 +23,19 @@ public class UserLoginControllerTest {
         DatabaseQueryProperties.loadDatabaseQueryPropertiesFile();
     }
     @Test
-    public void PasswordMatchesTest()  {
+    public void passwordMatchesTest()  {
         UserLoginController userLoginController = mock(UserLoginController.class);
         when(userLoginController.ValidatecheckCreds("hardik22@gmail.com")).thenReturn("hardik");
         assertEquals(userLoginController.ValidatecheckCreds("hardik22@gmail.com"), "hardik");
     }
 
     @Test(expected =PasswordNotMatchException.class)
-    public void LoginPasswordExceptionTest() throws PasswordNotMatchException {
+    public void loginPasswordExceptionTest() throws PasswordNotMatchException {
         userLoginController.Login();
     }
 
     @Test
-    public void UserLoginControllerTest(){
+    public void userLoginControllerTest(){
          String actual=userLoginController.CheckCreds();
          String expected= null;
          assertEquals(actual,expected);

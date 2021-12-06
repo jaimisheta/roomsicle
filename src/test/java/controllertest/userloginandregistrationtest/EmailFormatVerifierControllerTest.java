@@ -22,7 +22,7 @@ public class EmailFormatVerifierControllerTest  {
     }
 
     @Test
-    public void ValidEmailFormatVerifierPositiveTest(){
+    public void validEmailFormatVerifierPositiveTest(){
         Boolean actual;
         Boolean expected;
         actual=emailFormatVerifier.ValidEmailFormatVerifier(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.message"));
@@ -30,7 +30,7 @@ public class EmailFormatVerifierControllerTest  {
         Assert.assertEquals(actual, expected);
     }
     @Test
-    public void ValidEmailFormatVerifierNegativeTest(){
+    public void validEmailFormatVerifierNegativeTest(){
         Boolean actual;
         Boolean expected;
         actual=emailFormatVerifier.ValidEmailFormatVerifier(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"));
@@ -39,7 +39,7 @@ public class EmailFormatVerifierControllerTest  {
     }
 
     @Test(expected= EmailException.class)
-    public void ValidEmailFormatVerifierExceptionTest() throws EmailException {
+    public void validEmailFormatVerifierExceptionTest() throws EmailException {
         emailFormatVerifier.EmailFormatVerifier(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"));
     }
 }

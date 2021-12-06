@@ -22,7 +22,7 @@ public class MakeCLICommentListControllerTest  {
     }
 
     @Test
-    public void testMakeCLICommentListController() {
+    public void makeCLICommentListControllerTest() {
         MakeCLICommentListController makeCLICommentListController=new MakeCLICommentListController();
         String com1;
         List<String> expResult = new ArrayList<>();

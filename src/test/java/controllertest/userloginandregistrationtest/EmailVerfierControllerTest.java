@@ -24,13 +24,13 @@ public class EmailVerfierControllerTest  {
     }
 
     @Test(expected=EmailException.class)
-    public void testVaidateUserEmailAlreadyRegistered() throws EmailException {
+    public void vaidateUserEmailAlreadyRegisteredTest() throws EmailException {
         userData=DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.login.email.password.query");
         iEmailVerifierController.UserEmailAlreadyRegistered(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.message"),userData);
     }
 
     @Test(expected=EmailException.class)
-    public void testEmailDoesnotExists() throws EmailException {
+    public void emailDoesnotExistsTest() throws EmailException {
         userData=DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.login.email.password.query");
         iEmailVerifierController.EmailDoesnotExists(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.negative.test.email.message"),userData);
     }
