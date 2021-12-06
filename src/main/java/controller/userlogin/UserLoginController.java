@@ -34,10 +34,14 @@ public class UserLoginController implements IUserLoginController {
 		}
 	}
 
+	public  int getUserID(){
+		return userId;
+	}
+
 	public String CheckCreds()  {
-		if (userId==ONE) {
+		if (getUserID()==ONE) {
 			getUserData = DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.login.email.password.query");
-		}else if (userId==TWO){
+		}else if (getUserID()==TWO){
 			getUserData = DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.login.email.password.query");
 		}
 		return getUserData;

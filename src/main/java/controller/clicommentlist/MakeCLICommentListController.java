@@ -2,7 +2,7 @@ package controller.clicommentlist;
 
 import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
-import commandline.RoomsicleCLI;
+import controller.ClassInitializer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +17,7 @@ public class MakeCLICommentListController implements IMakeCLICommentListControll
         for (String comment : comments) {
             Collections.addAll(CliList,comment);
         }
-        IRoomsicleCLI iroomsicleCLI=new RoomsicleCLI();
+        IRoomsicleCLI iroomsicleCLI= ClassInitializer.initializer().getIroomsicleCLI();
         int limit;
         for (limit=ZERO;limit<CliList.size();limit++){
             iroomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue(CliList.get(limit)));

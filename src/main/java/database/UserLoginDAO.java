@@ -6,6 +6,10 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
+import static controller.filterroommates.FilterRoommatesInputConstants.ONE;
+import static controller.ownersurvey.OwnerSurveyConstants.SIX;
+import static controller.usersurvey.UserSurveyConstants.FIVE;
+
 public class UserLoginDAO implements IUserLoginDAO{
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     Connection connection = databaseConnection.getConnectionObject();
@@ -19,7 +23,7 @@ public class UserLoginDAO implements IUserLoginDAO{
              getCredentials=statement.executeQuery(query);
             while(getCredentials.next())
             {
-                getCredential.put(getCredentials.getString(1),getCredentials.getString(2));
+                getCredential.put(getCredentials.getString(ONE),getCredentials.getString(FIVE));
             }
     }catch (Exception e){
             e.printStackTrace();
@@ -34,7 +38,7 @@ public class UserLoginDAO implements IUserLoginDAO{
             getCredentials=statement.executeQuery(query);
             while(getCredentials.next())
             {
-                getCredential.put(getCredentials.getString(1),getCredentials.getString(3));
+                getCredential.put(getCredentials.getString(ONE),getCredentials.getString(SIX));
             }
         }catch (Exception e){
             e.printStackTrace();
