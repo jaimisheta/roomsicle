@@ -4,13 +4,14 @@ import commandline.CommandLineInputProperties;
 import controller.ControllerProperties;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
+import models.OwnerDetailsModel;
 import models.UserDetailsModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OwnerProfileTest {
-    UserDetailsModel userDetailsModel=new UserDetailsModel();
+    OwnerDetailsModel ownerDetailsModel=new OwnerDetailsModel();
     @BeforeClass
     public static void init() {
         CommandLineInputProperties.loadCommandLineInputPropertiesFile();
@@ -21,26 +22,26 @@ public class OwnerProfileTest {
 
     @Test
     public void displayOwnerFirstNameTest(){
-        userDetailsModel.setFirstName("harsh");
-        Assert.assertSame("harsh",userDetailsModel.getFirstName());
+        ownerDetailsModel.setFirstName("harsh");
+        Assert.assertSame("harsh",ownerDetailsModel.getFirstName());
     }
 
     @Test
     public void displayOwnerLastNameTest(){
-        userDetailsModel.setLastName("kadia");
-        Assert.assertSame("kadia",userDetailsModel.getLastName());
+        ownerDetailsModel.setLastName("kadia");
+        Assert.assertSame("kadia",ownerDetailsModel.getLastName());
     }
 
     @Test
     public void displayOwnerContactNumberTest(){
-        userDetailsModel.setContactNumber("9898989898");
-        Assert.assertSame("9898989898",userDetailsModel.getContactNumber());
+        ownerDetailsModel.setContactNumber("9898989898");
+        Assert.assertSame("9898989898",ownerDetailsModel.getContactNumber());
     }
 
     @Test
     public void displayOwnerEmailIdTest(){
-        userDetailsModel.setEmailId("hkhk@gmail.com");
-        Assert.assertSame("hkhk@gmail.com",userDetailsModel.getEmailId());
+        ownerDetailsModel.setEmailId("hkhk@gmail.com");
+        Assert.assertSame("hkhk@gmail.com",ownerDetailsModel.getEmailId());
     }
 
 }

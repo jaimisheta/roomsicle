@@ -4,6 +4,8 @@ import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
 import controller.clicommentlist.IMakeCLICommentListController;
 import controller.clicommentlist.MakeCLICommentListController;
+import controller.ownerprofile.IOwnerProfile;
+import controller.ownerprofile.OwnerProfile;
 import controller.userhomepage.IUserHomePageController;
 import controller.userhomepage.IWelcomePageController;
 import controller.userhomepage.UserHomePageController;
@@ -41,7 +43,8 @@ public class ClassInitializer {
     ICheckSurveyTaken iCheckSurveyTaken;
     IUserDetailsDAO iUserDetailsDAO;
     IUserProfile iUserProfile;
-
+    IOwnersDetailsDAO iOwnersDetailsDAO;
+    IOwnerProfile iOwnerProfile;
    private ClassInitializer()
 
     {
@@ -61,6 +64,8 @@ public class ClassInitializer {
         iCheckSurveyTaken=new CheckSurveyTaken();
         iUserDetailsDAO=new UserDetailsDAO();
         iUserProfile=new UserProfile();
+        iOwnersDetailsDAO=new OwnersDetailsDAO();
+        iOwnerProfile=new OwnerProfile();
        }
 
     public static ClassInitializer initializer() {
@@ -69,6 +74,10 @@ public class ClassInitializer {
         }
 
         return initializer;
+    }
+
+    public IOwnersDetailsDAO getIOwnersDetailsDAO(){
+        return iOwnersDetailsDAO;
     }
 
     public IUserDetailsDAO getIUserDetailsDAO(){
@@ -133,6 +142,10 @@ public class ClassInitializer {
 
     public IUserProfile getiUserProfile(){
        return iUserProfile;
+    }
+
+    public IOwnerProfile getiOwnerProfile(){
+        return iOwnerProfile;
     }
 
 }
