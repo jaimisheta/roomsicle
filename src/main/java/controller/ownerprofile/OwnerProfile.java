@@ -4,27 +4,38 @@ import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
+import database.IOwnerPropertyDetailsDAO;
 import database.IOwnersDetailsDAO;
-import models.OwnerDetailsModel;
+import models.IOwnerDetailsModel;
+import models.IOwnerPropertyDetailsModel;
 
 import java.util.ArrayList;
 
 public class OwnerProfile implements IOwnerProfile {
     public void ownerProfile(){
         IRoomsicleCLI iRoomsicleCLI=ClassInitializer.initializer().getIroomsicleCLI();
+        IOwnerPropertyDetailsDAO iOwnerPropertyDetailsDAO=ClassInitializer.initializer().getIOwnerPropertyDetailsDAO();
+        IOwnersDetailsDAO iOwnersDetailsDAO=ClassInitializer.initializer().getIOwnersDetailsDAO();
         String loggedInUserId;
         loggedInUserId=ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
-        IOwnersDetailsDAO iOwnersDetailsDAO=ClassInitializer.initializer().getIOwnersDetailsDAO();
-        ArrayList<OwnerDetailsModel> listOfOwnerDetails;
+        ArrayList<IOwnerDetailsModel> listOfOwnerDetails;
+        ArrayList<IOwnerPropertyDetailsModel> listofOwnerPropertyDetails;
         listOfOwnerDetails = iOwnersDetailsDAO.getOwnersDetails();
+        listofOwnerPropertyDetails= iOwnerPropertyDetailsDAO.getOwnersPropertyDetails();
 
-        for(OwnerDetailsModel ownerDetailsObject : listOfOwnerDetails) {
-            if(ownerDetailsObject.getEmailId().equals(loggedInUserId) ){
-                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.firstname")+ownerDetailsObject.getFirstName());
-                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.lastname")+ownerDetailsObject.getLastName());
-                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.contactnumber")+ownerDetailsObject.getContactNumber());
-                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.emailid")+ownerDetailsObject.getEmailId());
+        for(IOwnerDetailsModel ownerDetailsModel : listOfOwnerDetails) {
+            if(ownerDetailsModel.getEmailId().equals(loggedInUserId) ){
+                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.firstname")+ownerDetailsModel.getFirstName());
+                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.lastname")+ownerDetailsModel.getLastName());
+                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.contactnumber")+ownerDetailsModel.getContactNumber());
+                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.emailid")+ownerDetailsModel.getEmailId());
             }
+        }
+        for(IOwnerPropertyDetailsModel ownerPropertyDetailsObject : listofOwnerPropertyDetails) {
+            if(ownerPropertyDetailsObject.getOwnerId().equals(loggedInUserId) ){
+                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.property.address.message")+ownerPropertyDetailsObject.getAddress());
+                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.property.price.message")+ownerPropertyDetailsObject.getPrice());
+                }
         }
     }
 }

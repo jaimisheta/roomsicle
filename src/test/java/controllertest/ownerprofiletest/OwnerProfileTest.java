@@ -5,13 +5,14 @@ import controller.ControllerProperties;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
 import models.OwnerDetailsModel;
-import models.UserDetailsModel;
+import models.OwnerPropertyDetailsModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OwnerProfileTest {
     OwnerDetailsModel ownerDetailsModel=new OwnerDetailsModel();
+    OwnerPropertyDetailsModel ownerPropertyDetailsModel=new OwnerPropertyDetailsModel();
     @BeforeClass
     public static void init() {
         CommandLineInputProperties.loadCommandLineInputPropertiesFile();
@@ -42,6 +43,12 @@ public class OwnerProfileTest {
     public void displayOwnerEmailIdTest(){
         ownerDetailsModel.setEmailId("hkhk@gmail.com");
         Assert.assertSame("hkhk@gmail.com",ownerDetailsModel.getEmailId());
+    }
+
+    @Test
+    public void displayOwnerPropertyAddressTest(){
+        ownerPropertyDetailsModel.setAddress("halifax");
+        Assert.assertSame("halifax",ownerPropertyDetailsModel.getAddress());
     }
 
 }

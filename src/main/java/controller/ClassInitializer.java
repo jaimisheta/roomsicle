@@ -22,8 +22,7 @@ import controller.verifications.EmailVerfierController;
 import controller.verifications.*;
 import controller.verifications.PasswordVerifierController;
 import database.*;
-import models.IUsersModel;
-import models.UsersModel;
+import models.*;
 
 public class ClassInitializer {
     private static ClassInitializer initializer = null;
@@ -45,6 +44,9 @@ public class ClassInitializer {
     IUserProfile iUserProfile;
     IOwnersDetailsDAO iOwnersDetailsDAO;
     IOwnerProfile iOwnerProfile;
+    IOwnerDetailsModel iOwnerDetailsModel;
+    IOwnerPropertyDetailsModel iOwnerPropertyDetailsModel;
+    IOwnerPropertyDetailsDAO iOwnerPropertyDetailsDAO;
    private ClassInitializer()
 
     {
@@ -66,6 +68,9 @@ public class ClassInitializer {
         iUserProfile=new UserProfile();
         iOwnersDetailsDAO=new OwnersDetailsDAO();
         iOwnerProfile=new OwnerProfile();
+        iOwnerDetailsModel=new OwnerDetailsModel();
+        iOwnerPropertyDetailsModel=new OwnerPropertyDetailsModel();
+        iOwnerPropertyDetailsDAO=new OwnerPropertyDetailsDAO();
        }
 
     public static ClassInitializer initializer() {
@@ -74,6 +79,14 @@ public class ClassInitializer {
         }
 
         return initializer;
+    }
+
+    public IOwnerPropertyDetailsDAO getIOwnerPropertyDetailsDAO(){return iOwnerPropertyDetailsDAO; }
+
+    public IOwnerPropertyDetailsModel getIOwnerPropertyDetailsModel(){return iOwnerPropertyDetailsModel;}
+
+    public IOwnerDetailsModel getIOwnerDetailsModel(){
+        return iOwnerDetailsModel;
     }
 
     public IOwnersDetailsDAO getIOwnersDetailsDAO(){

@@ -17,7 +17,6 @@ public class CheckSurveyTaken implements ICheckSurveyTaken {
         IUserLoginDAO iUserLoginDAO= ClassInitializer.initializer().getIUserLoginDAO();
         getUserData=iUserLoginController.CheckCreds();
         survey=iUserLoginDAO.getSurveyTaken(getUserData).get(email);
-        System.out.println(survey);
         if (survey.equals(ONESTRING)){
             iUserHomePageController.showUserHomePageController();
         }

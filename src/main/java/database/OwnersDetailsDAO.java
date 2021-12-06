@@ -1,5 +1,7 @@
 package database;
 
+import controller.ClassInitializer;
+import models.IOwnerDetailsModel;
 import models.OwnerDetailsModel;
 
 import java.sql.Connection;
@@ -13,16 +15,16 @@ import static controller.usersurvey.UserSurveyConstants.FOUR;
 
 public class OwnersDetailsDAO implements IOwnersDetailsDAO{
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
-    public ArrayList<OwnerDetailsModel> getOwnersDetails() {
-        ArrayList<OwnerDetailsModel> listOfAllOwnersDetails = new ArrayList<>();
+    public ArrayList<IOwnerDetailsModel> getOwnersDetails() {
+        ArrayList<IOwnerDetailsModel> listOfAllOwnersDetails = new ArrayList<>();
         String query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.details.query");
-
         try(Connection conn = databaseConnection.getConnectionObject();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
         ) {
             while(rs.next()){
-                OwnerDetailsModel ownerDetails = new OwnerDetailsModel();
+                OwnerDetailsModel ownerDetails=new OwnerDetailsModel();
+//                IOwnerDetailsModel iOwnerDetailsModel=ClassInitializer.initializer().getIOwnerDetailsModel();
                 ownerDetails.setEmailId(rs.getString(ONE));
                 ownerDetails.setFirstName(rs.getString(TWO));
                 ownerDetails.setLastName(rs.getString(THREE));
