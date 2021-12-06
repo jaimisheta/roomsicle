@@ -33,7 +33,9 @@ public class AvailableProperties {
                 }
             }
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("property.details.display.propertyid")+propertyDetailsObject.getPropertyId());
-            roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("property.details.display.propertyrent")+(propertyDetailsObject.getPropertyPrice()/4));
+            roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("property.details.display.propertyrent")+(propertyDetailsObject.getPropertyPrice()));
+            roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("property.details.display.individualrent")+(propertyDetailsObject.getPropertyPrice()/4));
+            roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("separator"));
         }
 
     }
