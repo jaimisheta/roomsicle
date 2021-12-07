@@ -1,6 +1,6 @@
-package database;
+package database.ownerdetailsdao;
 
-import models.IOwnerDetailsModel;
+import models.ownerdetailsmodel.IOwnerDetailsModel;
 
 import java.util.ArrayList;
 

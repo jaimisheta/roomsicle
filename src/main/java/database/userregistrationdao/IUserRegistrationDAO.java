@@ -1,6 +1,6 @@
-package database;
+package database.userregistrationdao;
 
-import models.IUsersModel;
+import models.usermodel.IUsersModel;
 
 public interface IUserRegistrationDAO {
     void userRegistration(IUsersModel usersModel);

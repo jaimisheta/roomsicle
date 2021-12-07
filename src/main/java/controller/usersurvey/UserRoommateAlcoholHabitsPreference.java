@@ -31,7 +31,7 @@ public class UserRoommateAlcoholHabitsPreference implements IUserSurvey {
     //get roommate alcohol preference input
     @Override
     public void getValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.alcohol.habits.message"));
             userRoommateAlcoholHabitsInput = roomsicleCLI.getNumberResponse();
@@ -55,7 +55,7 @@ public class UserRoommateAlcoholHabitsPreference implements IUserSurvey {
     //validate roommate alcohol preference input
     @Override
     public boolean validateValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         boolean validateAlcoholHabitsResponse = false;
         try {
             logger.info("Validating roommate alcohol preference input");

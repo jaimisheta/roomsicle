@@ -1,18 +1,19 @@
 package controllertest.ownerprofiletest;
 
 import commandline.CommandLineInputProperties;
+import controller.ClassInitializer;
 import controller.ControllerProperties;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
-import models.OwnerDetailsModel;
-import models.OwnerPropertyDetailsModel;
+import models.ownerdetailsmodel.IOwnerDetailsModel;
+import models.ownerpropertydetailsmodel.IOwnerPropertyDetailsModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OwnerProfileTest {
-    OwnerDetailsModel ownerDetailsModel=new OwnerDetailsModel();
-    OwnerPropertyDetailsModel ownerPropertyDetailsModel=new OwnerPropertyDetailsModel();
+    IOwnerDetailsModel ownerDetailsModel= ClassInitializer.initializer().getIOwnerDetailsModel();
+    IOwnerPropertyDetailsModel ownerPropertyDetailsModel=ClassInitializer.initializer().getIOwnerPropertyDetailsModel();
     @BeforeClass
     public static void init() {
         CommandLineInputProperties.loadCommandLineInputPropertiesFile();
@@ -23,32 +24,32 @@ public class OwnerProfileTest {
 
     @Test
     public void displayOwnerFirstNameTest(){
-        ownerDetailsModel.setFirstName("harsh");
-        Assert.assertSame("harsh",ownerDetailsModel.getFirstName());
+        ownerDetailsModel.setFirstName(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.first.name"));
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.first.name"),ownerDetailsModel.getFirstName());
     }
 
     @Test
     public void displayOwnerLastNameTest(){
-        ownerDetailsModel.setLastName("kadia");
-        Assert.assertSame("kadia",ownerDetailsModel.getLastName());
+        ownerDetailsModel.setLastName(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"));
+        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"),ownerDetailsModel.getLastName());
     }
 
     @Test
     public void displayOwnerContactNumberTest(){
-        ownerDetailsModel.setContactNumber("9898989898");
-        Assert.assertSame("9898989898",ownerDetailsModel.getContactNumber());
+        ownerDetailsModel.setContactNumber(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.contact.number"));
+        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.contact.number"),ownerDetailsModel.getContactNumber());
     }
 
     @Test
     public void displayOwnerEmailIdTest(){
-        ownerDetailsModel.setEmailId("hkhk@gmail.com");
-        Assert.assertSame("hkhk@gmail.com",ownerDetailsModel.getEmailId());
+        ownerDetailsModel.setEmailId(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.email.id"));
+        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.email.id"),ownerDetailsModel.getEmailId());
     }
 
     @Test
     public void displayOwnerPropertyAddressTest(){
-        ownerPropertyDetailsModel.setAddress("halifax");
-        Assert.assertSame("halifax",ownerPropertyDetailsModel.getAddress());
+        ownerPropertyDetailsModel.setAddress(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.property.address"));
+        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.property.address"),ownerPropertyDetailsModel.getAddress());
     }
 
 }

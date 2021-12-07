@@ -18,7 +18,7 @@ public class OwnerSurveyMain {
         IOwnerSurvey propertyAddress = ClassInitializer.initializer().getPropertyAddress();
         IOwnerSurvey theaterDistance = ClassInitializer.initializer().getTheaterDistance();
         IOwnerSurvey utilities = ClassInitializer.initializer().getUtilities();
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         OwnerSurveyModel ownerSurveyModel = ClassInitializer.initializer().getOwnerSurveyModel();
         IOwnerSurveyDAO ownerSurveyDAO = ClassInitializer.initializer().getOwnerSurveyDAO();
         PropertyPriceCalculator propertyPriceCalculator = ClassInitializer.initializer().getPropertyPriceCalculator();

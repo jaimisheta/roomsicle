@@ -1,26 +1,28 @@
-package controller.userhomepage;
+package controller.userprofile;
 
 import commandline.IRoomsicleCLI;
 import controller.clicommentlist.IMakeCLICommentListController;
 import controller.ClassInitializer;
 import controller.ownerprofile.IOwnerProfile;
+import controller.welcomepage.IWelcomePageController;
 import controller.userlogin.IUserLoginController;
-import controller.userprofile.IUserProfile;
 
 import static controller.filterroommates.FilterRoommatesInputConstants.ONE;
 import static controller.filterroommates.FilterRoommatesInputConstants.TWO;
+import static controller.welcomepage.WelcomePageController.userId;
 
 public class UserHomePageController implements IUserHomePageController {
     public void showUserHomePageController() {
         int userInput;
-        IUserLoginController iUserLoginController=ClassInitializer.initializer().getUserLoginController();
-        IMakeCLICommentListController iMakeCLICommentListController= ClassInitializer.initializer().getIMakeCLICommentListController();
-        IRoomsicleCLI iRoomsicleCLI=ClassInitializer.initializer().getIroomsicleCLI();
-        IWelcomePageController iWelcomePageController= ClassInitializer.initializer().getIWelcomePageController();
-        IUserProfile iUserProfile=ClassInitializer.initializer().getiUserProfile();
-        IOwnerProfile iOwnerProfile=ClassInitializer.initializer().getiOwnerProfile();
-        if(iUserLoginController.getUserID()==ONE) {
-            iMakeCLICommentListController.MakeCLICommentListController("welcomepage.add.message"
+        IUserLoginController userLoginController=ClassInitializer.initializer().getUserLoginController();
+        IMakeCLICommentListController makeCLICommentListController= ClassInitializer.initializer().getIMakeCLICommentListController();
+        IRoomsicleCLI roomsicleCLI=ClassInitializer.initializer().getRoomsicleCLI();
+        IWelcomePageController welcomePageController= ClassInitializer.initializer().getIWelcomePageController();
+        IUserProfile userProfile=ClassInitializer.initializer().getUserProfile();
+        IOwnerProfile ownerProfile=ClassInitializer.initializer().getOwnerProfile();
+
+        if(userId==ONE) {
+            makeCLICommentListController.makeCLICommentListController("welcomepage.add.message"
                     , "user.home.page.main.message", "welcomepage.add.message"
                     , "user.home.page.option.message", "user.home.page.my.profile.option.message",
                     "user.home.page.my.best.git.option.message", "user.home.page.filter.roommate.option.message",
@@ -29,8 +31,9 @@ public class UserHomePageController implements IUserHomePageController {
             );
 
         }
-        else if(iUserLoginController.getUserID()==TWO) {
-            iMakeCLICommentListController.MakeCLICommentListController("welcomepage.add.message"
+
+        else if(userId==TWO) {
+            makeCLICommentListController.makeCLICommentListController("welcomepage.add.message"
                     , "user.home.page.main.message", "welcomepage.add.message"
                     , "user.home.page.option.message", "user.home.page.my.profile.option.message",
                     "user.home.page.logout.option.message"
@@ -38,15 +41,15 @@ public class UserHomePageController implements IUserHomePageController {
 
         }
 
-        userInput=iRoomsicleCLI.getNumberResponse();
+        userInput=roomsicleCLI.getNumberResponse();
 
         switch (userInput) {
             case 1:
-                if(iUserLoginController.getUserID()==ONE) {
-                    iUserProfile.userProfile();
+                if(userId==ONE) {
+                    userProfile.userProfile();
                 }
-                else if(iUserLoginController.getUserID()==TWO) {
-                    iOwnerProfile.ownerProfile();
+                else if(userId==TWO) {
+                    ownerProfile.ownerProfile();
                 }
                 break;
             case 2:
@@ -60,8 +63,8 @@ public class UserHomePageController implements IUserHomePageController {
             case 6:
                 //Yet to integrate
             case 7:
-                iMakeCLICommentListController.MakeCLICommentListController("logged.out.successfully.message");
-                iWelcomePageController.showWelcomePage();
+                makeCLICommentListController.makeCLICommentListController("logged.out.successfully.message");
+                welcomePageController.showWelcomePage();
         }
   }
 }

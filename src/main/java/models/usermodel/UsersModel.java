@@ -1,4 +1,4 @@
-package models;
+package models.usermodel;
 
 public class UsersModel implements IUsersModel {
 	private String emailId;
@@ -6,7 +6,6 @@ public class UsersModel implements IUsersModel {
 	private String lastName;
 	private long contactNumber;
 	private String password;
-	private int surveyTaken;
 	private String type;
 
 	public UsersModel() {}

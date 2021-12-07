@@ -32,7 +32,7 @@ public class UserUniversityDistancePreference implements IUserSurvey {
     //get user university distance preference input
     @Override
     public void getValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.proximity.dalhousie.university.message"));
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.university.distance.options.message"));
@@ -58,7 +58,7 @@ public class UserUniversityDistancePreference implements IUserSurvey {
     //validate user university distance preference input
     @Override
     public boolean validateValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         boolean validateUniversityDistanceInput = false;
         try {
             logger.info("validating user university distance preference input: " + userUniversityDistanceInput);

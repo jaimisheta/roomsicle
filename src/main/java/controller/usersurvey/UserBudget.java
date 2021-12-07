@@ -30,7 +30,7 @@ public class UserBudget implements IUserSurvey {
     //get budget value from user
     @Override
     public void getValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.budget.message"));
             userBudget = roomsicleCLI.getNumberResponse();
@@ -54,7 +54,7 @@ public class UserBudget implements IUserSurvey {
     //validate budget value input from user
     @Override
     public boolean validateValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         boolean validateUserBudget = false;
         try {
             logger.info("validating user input for user Budget: " + userBudget);

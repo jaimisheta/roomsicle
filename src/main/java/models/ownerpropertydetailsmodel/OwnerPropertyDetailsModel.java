@@ -1,6 +1,6 @@
-package models;
+package models.ownerpropertydetailsmodel;
 
-public class OwnerPropertyDetailsModel implements IOwnerPropertyDetailsModel{
+public class OwnerPropertyDetailsModel implements IOwnerPropertyDetailsModel {
     private int price;
     private String address;
     private String ownerId;

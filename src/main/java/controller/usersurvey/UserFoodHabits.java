@@ -31,7 +31,7 @@ public class UserFoodHabits implements IUserSurvey {
     //get user food habits input
     @Override
     public void getValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.food.habits.message"));
             userFoodHabitsInput = roomsicleCLI.getNumberResponse();
@@ -55,7 +55,7 @@ public class UserFoodHabits implements IUserSurvey {
     //validate user food habits input
     @Override
     public boolean validateValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         boolean validateFoodHabitsResponse = false;
         try {
             logger.info("validating user food habits input");

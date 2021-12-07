@@ -1,8 +1,9 @@
-package database;
+package database.ownerdetailsdao;
 
-import controller.ClassInitializer;
-import models.IOwnerDetailsModel;
-import models.OwnerDetailsModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.ownerdetailsmodel.IOwnerDetailsModel;
+import models.ownerdetailsmodel.OwnerDetailsModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import static controller.filterroommates.FilterRoommatesInputConstants.*;
 import static controller.usersurvey.UserSurveyConstants.FOUR;
 
-public class OwnersDetailsDAO implements IOwnersDetailsDAO{
+public class OwnersDetailsDAO implements IOwnersDetailsDAO {
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     public ArrayList<IOwnerDetailsModel> getOwnersDetails() {
         ArrayList<IOwnerDetailsModel> listOfAllOwnersDetails = new ArrayList<>();
@@ -36,5 +37,4 @@ public class OwnersDetailsDAO implements IOwnersDetailsDAO{
         }
         return listOfAllOwnersDetails;
     }
-
 }

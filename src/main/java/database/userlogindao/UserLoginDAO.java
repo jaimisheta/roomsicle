@@ -1,4 +1,6 @@
-package database;
+package database.userlogindao;
+
+import database.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,7 +12,7 @@ import static controller.filterroommates.FilterRoommatesInputConstants.ONE;
 import static controller.ownersurvey.OwnerSurveyConstants.TWO;
 import static controller.usersurvey.UserSurveyConstants.THREE;
 
-public class UserLoginDAO implements IUserLoginDAO{
+public class UserLoginDAO implements IUserLoginDAO {
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     Connection connection = databaseConnection.getConnectionObject();
     Statement statement;
@@ -31,18 +33,4 @@ public class UserLoginDAO implements IUserLoginDAO{
         return getCredential;
     }
 
-    public Map<String, String> getSurveyTaken(String query){
-        HashMap<String, String> getCredential = new HashMap<String, String>();
-        try{
-            statement = connection.createStatement();
-            getCredentials=statement.executeQuery(query);
-            while(getCredentials.next())
-            {
-                getCredential.put(getCredentials.getString(ONE),getCredentials.getString(THREE));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return getCredential;
-    }
 }

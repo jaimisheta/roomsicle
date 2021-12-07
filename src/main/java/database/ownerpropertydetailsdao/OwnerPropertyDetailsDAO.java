@@ -1,9 +1,10 @@
-package database;
+package database.ownerpropertydetailsdao;
 
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import models.IOwnerPropertyDetailsModel;
-import models.OwnerPropertyDetailsModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.ownerpropertydetailsmodel.IOwnerPropertyDetailsModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 import static controller.filterroommates.FilterRoommatesInputConstants.*;
 
-public class OwnerPropertyDetailsDAO  implements IOwnerPropertyDetailsDAO{
+public class OwnerPropertyDetailsDAO  implements IOwnerPropertyDetailsDAO {
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
 
     public ArrayList<IOwnerPropertyDetailsModel> getOwnersPropertyDetails() {

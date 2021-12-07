@@ -31,7 +31,7 @@ public class UserGender implements IUserSurvey {
     //get user gender input
     @Override
     public void getValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.gender.message"));
             userGenderInput = roomsicleCLI.getNumberResponse();
@@ -54,7 +54,7 @@ public class UserGender implements IUserSurvey {
     //validate user gender input
     @Override
     public boolean validateValue(UserSurveyModel userSurveyModel) {
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         boolean validateGenderResponse = false;
         try {
             logger.info("Validating user gender input");

@@ -1,6 +1,8 @@
-package database;
+package database.userregistrationdao;
 
-import models.IUsersModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.usermodel.IUsersModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;

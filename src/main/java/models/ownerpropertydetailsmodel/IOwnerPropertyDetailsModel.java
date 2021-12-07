@@ -1,4 +1,4 @@
-package models;
+package models.ownerpropertydetailsmodel;
 
  public interface IOwnerPropertyDetailsModel {
 

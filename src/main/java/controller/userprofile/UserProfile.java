@@ -12,19 +12,18 @@ import java.util.ArrayList;
 
 public class UserProfile implements IUserProfile{
     public void userProfile(){
-        IRoomsicleCLI iRoomsicleCLI=ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI=ClassInitializer.initializer().getRoomsicleCLI();
         String loggedInUserId;
         loggedInUserId=ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
-        IUserDetailsDAO iUserDetailsDAO=ClassInitializer.initializer().getIUserDetailsDAO();
+        IUserDetailsDAO userDetailsDAO=ClassInitializer.initializer().getIUserDetailsDAO();
         ArrayList<UserDetailsModel> listOfUserDetails;
-        listOfUserDetails = iUserDetailsDAO.getUserDetails();
-
+        listOfUserDetails = userDetailsDAO.getUserDetails();
         for(UserDetailsModel userDetailsObject : listOfUserDetails) {
             if(userDetailsObject.getEmailId().equals(loggedInUserId) ){
-                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.firstname")+userDetailsObject.getFirstName());
-                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.lastname")+userDetailsObject.getLastName());
-                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.contactnumber")+userDetailsObject.getContactNumber());
-                iRoomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.emailid")+userDetailsObject.getEmailId());
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.firstname")+userDetailsObject.getFirstName());
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.lastname")+userDetailsObject.getLastName());
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.contactnumber")+userDetailsObject.getContactNumber());
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.emailid")+userDetailsObject.getEmailId());
             }
         }
     }

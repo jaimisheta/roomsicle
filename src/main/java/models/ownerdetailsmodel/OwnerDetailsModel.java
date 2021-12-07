@@ -1,6 +1,6 @@
-package models;
+package models.ownerdetailsmodel;
 
-public class OwnerDetailsModel implements IOwnerDetailsModel{
+public class OwnerDetailsModel implements IOwnerDetailsModel {
 
 	private String emailId;
 	private String firstName;

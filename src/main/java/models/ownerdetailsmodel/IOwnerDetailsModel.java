@@ -1,4 +1,4 @@
-package models;
+package models.ownerdetailsmodel;
 
 public interface IOwnerDetailsModel {
      String getEmailId();

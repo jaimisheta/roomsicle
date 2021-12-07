@@ -23,7 +23,7 @@ public class UserSurveyMain {
         IUserSurvey userUniversityDistancePreference = ClassInitializer.initializer().getUserUniversityDistancePreference();
         UserSurveyModel userSurveyModel = ClassInitializer.initializer().getUserSurveyModel();
         IUserSurveyDAO userSurveyDAO = ClassInitializer.initializer().getUserSurveyDAO();
-        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
 
         //get logged-in user email id and set it in model
         userSurveyModel.setUserId(ControllerProperties.getControllerPropertyValue("user.logged.in.email.id"));

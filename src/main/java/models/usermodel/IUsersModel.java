@@ -1,4 +1,4 @@
-package models;
+package models.usermodel;
 public interface IUsersModel {
 
          String getEmailId();
