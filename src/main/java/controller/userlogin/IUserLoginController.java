@@ -5,9 +5,7 @@ import Exception.PasswordNotMatchException;
 
 
 public interface IUserLoginController {
-    void UserLoginController() throws  EmailException, PasswordNotMatchException;
-    void Login() throws PasswordNotMatchException;
-    String CheckCreds();
-    int getUserID();
-    void giveCreds() throws  EmailException, PasswordNotMatchException;
+    void userLoginController() throws  EmailException, PasswordNotMatchException;
+    void Login() throws PasswordNotMatchException, EmailException;
+    String validatecheckCreds(String email);
 }

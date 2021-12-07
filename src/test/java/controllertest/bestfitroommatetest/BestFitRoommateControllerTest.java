@@ -27,7 +27,6 @@ public class BestFitRoommateControllerTest {
 	public void testFindBestFit() {
 		HashMap<String, Integer> map = new HashMap<String, Integer>(){{
 			put(ControllerProperties.getControllerPropertyValue("bestFitData1.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData1.value")));
-			put(ControllerProperties.getControllerPropertyValue("bestFitData2.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData2.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData3.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData3.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData4.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData4.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData5.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData5.value")));
@@ -37,7 +36,7 @@ public class BestFitRoommateControllerTest {
 		}};
 		IBestFitRoommateController bestFitRoommateController = new BestFitRoommateController();
 		IGetLoggedInUserController loggedInUser = new GetLoggedInUserController();
-		assertEquals(bestFitRoommateController.findBestFit(loggedInUser), map);     
+		assertEquals(bestFitRoommateController.findBestFit(loggedInUser), map);
 	}
 
 }

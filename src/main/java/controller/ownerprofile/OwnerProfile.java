@@ -4,24 +4,25 @@ import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import database.IOwnerPropertyDetailsDAO;
-import database.IOwnersDetailsDAO;
-import models.IOwnerDetailsModel;
-import models.IOwnerPropertyDetailsModel;
+import database.ownerpropertydetailsdao.IOwnerPropertyDetailsDAO;
+import database.ownerdetailsdao.IOwnersDetailsDAO;
+import models.ownerdetailsmodel.IOwnerDetailsModel;
+import models.ownerpropertydetailsmodel.IOwnerPropertyDetailsModel;
 
 import java.util.ArrayList;
 
 public class OwnerProfile implements IOwnerProfile {
+
     public void ownerProfile(){
-        IRoomsicleCLI iRoomsicleCLI=ClassInitializer.initializer().getIroomsicleCLI();
-        IOwnerPropertyDetailsDAO iOwnerPropertyDetailsDAO=ClassInitializer.initializer().getIOwnerPropertyDetailsDAO();
-        IOwnersDetailsDAO iOwnersDetailsDAO=ClassInitializer.initializer().getIOwnersDetailsDAO();
+        IRoomsicleCLI iRoomsicleCLI=ClassInitializer.initializer().getRoomsicleCLI();
+        IOwnerPropertyDetailsDAO ownerPropertyDetailsDAO=ClassInitializer.initializer().getIOwnerPropertyDetailsDAO();
+        IOwnersDetailsDAO ownersDetailsDAO=ClassInitializer.initializer().getIOwnersDetailsDAO();
         String loggedInUserId;
         loggedInUserId=ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
         ArrayList<IOwnerDetailsModel> listOfOwnerDetails;
         ArrayList<IOwnerPropertyDetailsModel> listofOwnerPropertyDetails;
-        listOfOwnerDetails = iOwnersDetailsDAO.getOwnersDetails();
-        listofOwnerPropertyDetails= iOwnerPropertyDetailsDAO.getOwnersPropertyDetails();
+        listOfOwnerDetails = ownersDetailsDAO.getOwnersDetails();
+        listofOwnerPropertyDetails= ownerPropertyDetailsDAO.getOwnersPropertyDetails();
 
         for(IOwnerDetailsModel ownerDetailsModel : listOfOwnerDetails) {
             if(ownerDetailsModel.getEmailId().equals(loggedInUserId) ){

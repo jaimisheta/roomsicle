@@ -1,24 +1,23 @@
 package controller.userlogin;
 
 import controller.ClassInitializer;
-import controller.userhomepage.IUserHomePageController;
-import database.IUserLoginDAO;
+import controller.userprofile.IUserHomePageController;
+import database.surveytakendao.ISurveyTakenDAO;
 
 import static controller.userregistration.UserRegistrationConstants.ONESTRING;
 import static controller.userregistration.UserRegistrationConstants.ZEROSTRING;
 
 public class CheckSurveyTaken implements ICheckSurveyTaken {
-
-    public void CheckSurveyTaken(String email){
+    public void checkSurveyTaken(String email){
         String getUserData;
         String survey;
-        IUserHomePageController iUserHomePageController=ClassInitializer.initializer().getIUserHomePageController();
-        IUserLoginController iUserLoginController=ClassInitializer.initializer().getUserLoginController();
-        IUserLoginDAO iUserLoginDAO= ClassInitializer.initializer().getIUserLoginDAO();
-        getUserData=iUserLoginController.CheckCreds();
-        survey=iUserLoginDAO.getSurveyTaken(getUserData).get(email);
+        IUserHomePageController userHomePageController=ClassInitializer.initializer().getIUserHomePageController();
+        ICheckCredentials checkCredentials=ClassInitializer.initializer().getICheckCredentials();
+        ISurveyTakenDAO surveyTakenDAO=ClassInitializer.initializer().getISurveyTakenDAO();
+        getUserData=checkCredentials.checkCredentials();
+        survey=surveyTakenDAO.getSurveyTaken(getUserData).get(email);
         if (survey.equals(ONESTRING)){
-            iUserHomePageController.showUserHomePageController();
+            userHomePageController.showUserHomePageController();
         }
         else if (survey.equals(ZEROSTRING)){
             //Yet to initialize;

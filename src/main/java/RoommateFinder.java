@@ -1,7 +1,7 @@
 import commandline.CommandLineInputProperties;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import controller.userhomepage.IWelcomePageController;
+import controller.welcomepage.IWelcomePageController;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
 import org.apache.logging.log4j.LogManager;

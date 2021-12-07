@@ -28,7 +28,7 @@ public class MakeCLICommentListControllerTest  {
         List<String> expResult = new ArrayList<>();
         com1= CommandLineInputProperties.getCommandLineInputPropertyValue("login.fail.makecli.message");
         expResult.add(com1);
-        List<String> actual = makeCLICommentListController.MakeCLICommentListController("login.fail.message");
+        List<String> actual = makeCLICommentListController.makeCLICommentListController("login.fail.message");
         Assert.assertEquals(expResult, actual);
     }
 }

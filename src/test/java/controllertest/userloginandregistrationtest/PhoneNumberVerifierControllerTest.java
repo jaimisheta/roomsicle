@@ -2,14 +2,16 @@ package controllertest.userloginandregistrationtest;
 
 import Exception.PhoneNumberException;
 import commandline.CommandLineInputProperties;
+import controller.ClassInitializer;
 import controller.ControllerProperties;
-import controller.verifications.PhoneNumberVerifierController;
+import controller.verifications.IPhoneNumberVerifierController;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PhoneNumberVerifierControllerTest {
+    IPhoneNumberVerifierController phoneNumberVerifierController= ClassInitializer.initializer().getIPhoneNumberVerifierController();
     @BeforeClass
     public static void init() {
         CommandLineInputProperties.loadCommandLineInputPropertiesFile();
@@ -20,7 +22,6 @@ public class PhoneNumberVerifierControllerTest {
 
     @Test(expected = PhoneNumberException.class)
     public void phoneNumberVerifierControllerExceptionTest() throws PhoneNumberException {
-        PhoneNumberVerifierController phoneNumberVerifierController=new PhoneNumberVerifierController();
-        phoneNumberVerifierController.PhoneNumberVerifierController(0000);
+        phoneNumberVerifierController.phoneNumberVerifierController(0000);
     }
 }

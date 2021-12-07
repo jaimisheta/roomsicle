@@ -7,14 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmailFormatVerifierController implements IEmailFormatVerfier {
-    public void EmailFormatVerifier(String email) throws EmailException {
-        if (ValidEmailFormatVerifier(email) == false ) {
+    public void emailFormatVerifier(String email) throws EmailException {
+        if (validEmailFormatVerifier(email) == false ) {
             throw new EmailException(CommandLineInputProperties.getCommandLineInputPropertyValue("login.email.verify.wrong"));
         }
     }
 
     @Override
-    public boolean ValidEmailFormatVerifier(String email) {
+    public boolean validEmailFormatVerifier(String email) {
         Pattern pattern;
         Matcher matcher;
         String regex = CommandLineInputProperties.getCommandLineInputPropertyValue("login.email.id.verify");
