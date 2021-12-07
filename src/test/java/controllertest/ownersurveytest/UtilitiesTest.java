@@ -20,27 +20,27 @@ public class UtilitiesTest {
     @Test
     public void validateUtilitiesProvidedInputTest() {
         utilitiesInput = new Utilities(ownerSurveyModel, 1);
-        utilitiesInput.validateValue();
+        utilitiesInput.validateValue(ownerSurveyModel);
         Assert.assertTrue(ownerSurveyModel.isUtilitiesProvided());
     }
 
     @Test
     public void validateUtilitiesNotProvidedInputTest() {
         utilitiesInput = new Utilities(ownerSurveyModel, 2);
-        utilitiesInput.validateValue();
+        utilitiesInput.validateValue(ownerSurveyModel);
         Assert.assertFalse(ownerSurveyModel.isUtilitiesProvided());
     }
 
     @Test
     public void validateNegativeUtilitiesInputReturnValueTest() {
         utilitiesInput = new Utilities(ownerSurveyModel, -1);
-        Assert.assertFalse(utilitiesInput.validateValue());
+        Assert.assertFalse(utilitiesInput.validateValue(ownerSurveyModel));
     }
 
     @Test
     public void validateInValidUtilitiesInputTest() {
         utilitiesInput = new Utilities(ownerSurveyModel, 10);
-        Assert.assertFalse(utilitiesInput.validateValue());
+        Assert.assertFalse(utilitiesInput.validateValue(ownerSurveyModel));
     }
 
 }

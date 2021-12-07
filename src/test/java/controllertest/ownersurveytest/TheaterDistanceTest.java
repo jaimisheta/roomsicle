@@ -22,26 +22,26 @@ public class TheaterDistanceTest {
     @Test
     public void validateValidTheaterDistanceInputTest() {
         theaterDistanceInput = new TheaterDistance(ownerSurveyModel, 5);
-        theaterDistanceInput.validateValue();
+        theaterDistanceInput.validateValue(ownerSurveyModel);
         Assert.assertEquals(5, ownerSurveyModel.getTheaterDistance());
     }
 
     @Test
     public void validateNegativeTheaterDistanceInputTest() {
         theaterDistanceInput = new TheaterDistance(ownerSurveyModel, -1);
-        theaterDistanceInput.validateValue();
+        theaterDistanceInput.validateValue(ownerSurveyModel);
         Assert.assertEquals(0, ownerSurveyModel.getTheaterDistance());
     }
 
     @Test
     public void validateNegativeTheaterDistanceReturnValueTest() {
         theaterDistanceInput = new TheaterDistance(ownerSurveyModel, -1);
-        Assert.assertFalse(theaterDistanceInput.validateValue());
+        Assert.assertFalse(theaterDistanceInput.validateValue(ownerSurveyModel));
     }
 
     @Test
     public void validateInvalidTheaterDistanceInputTest() {
         theaterDistanceInput = new TheaterDistance(ownerSurveyModel, 0);
-        Assert.assertFalse(theaterDistanceInput.validateValue());
+        Assert.assertFalse(theaterDistanceInput.validateValue(ownerSurveyModel));
     }
 }

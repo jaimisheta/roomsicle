@@ -18,7 +18,7 @@ public class RoommateFinder {
             DatabaseQueryProperties.loadDatabaseQueryPropertiesFile();
             ControllerProperties.loadControllerPropertiesFile();
             logger.info("Started Roomsicle Application");
-            IWelcomePageController iWelcomePageController= ClassInitializer.initializer().getIWelcomePageController();
+            IWelcomePageController iWelcomePageController = ClassInitializer.initializer().getIWelcomePageController();
             iWelcomePageController.showWelcomePage();
         } catch (Exception e) {
             e.printStackTrace();

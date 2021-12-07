@@ -1,24 +1,18 @@
 package controller.usersurvey;
 
 import commandline.CommandLineInputProperties;
-import commandline.RoomsicleCLI;
+import commandline.IRoomsicleCLI;
+import controller.ClassInitializer;
 import models.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.InputMismatchException;
 
-import static controller.usersurvey.UserSurveyConstants.ONE;
-import static controller.usersurvey.UserSurveyConstants.TWO;
-import static controller.usersurvey.UserSurveyConstants.THREE;
-import static controller.usersurvey.UserSurveyConstants.FOUR;
-import static controller.usersurvey.UserSurveyConstants.ZERO;
-import static controller.usersurvey.UserSurveyConstants.FIVE;
-import static controller.usersurvey.UserSurveyConstants.FIFTY;
+import static controller.usersurvey.UserSurveyConstants.*;
 
 public class UserUniversityDistancePreference implements IUserSurvey {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     static final Logger logger = LogManager.getLogger(UserRoommateGenderPreference.class);
 
     UserSurveyModel userSurveyModel;
@@ -27,8 +21,7 @@ public class UserUniversityDistancePreference implements IUserSurvey {
     int userUniversityDistanceMin;
     int userUniversityDistanceMax;
 
-    public UserUniversityDistancePreference(UserSurveyModel userSurveyModel) {
-        this.userSurveyModel = userSurveyModel;
+    public UserUniversityDistancePreference() {
     }
 
     public UserUniversityDistancePreference(UserSurveyModel userSurveyModel, int userUniversityDistanceInput) {
@@ -38,17 +31,16 @@ public class UserUniversityDistancePreference implements IUserSurvey {
 
     //get user university distance preference input
     @Override
-    public void getValue() {
-        UserRoommateGenderPreference userRoommateGenderPreference = new UserRoommateGenderPreference(userSurveyModel);
+    public void getValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.proximity.dalhousie.university.message"));
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.university.distance.options.message"));
             userUniversityDistanceInput = roomsicleCLI.getNumberResponse();
             logger.info("user university distance preference input: " + userUniversityDistanceInput);
             while (hasValidValue == false) {
-                if (validateValue()) {
+                if (validateValue(userSurveyModel)) {
                     hasValidValue = true;
-                    userRoommateGenderPreference.getValue();
                     break;
                 } else {
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.proximity.dalhousie.university.message"));
@@ -57,16 +49,16 @@ public class UserUniversityDistancePreference implements IUserSurvey {
                 }
             }
         } catch (InputMismatchException e) {
+            logger.error("Input Mismatch exception occurred");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            getValue();
-        } catch (Exception e) {
-            e.printStackTrace();
+            getValue(userSurveyModel);
         }
     }
 
     //validate user university distance preference input
     @Override
-    public boolean validateValue() {
+    public boolean validateValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         boolean validateUniversityDistanceInput = false;
         try {
             logger.info("validating user university distance preference input: " + userUniversityDistanceInput);
@@ -74,26 +66,28 @@ public class UserUniversityDistancePreference implements IUserSurvey {
                 validateUniversityDistanceInput = true;
                 userUniversityDistanceMin = ZERO;
                 userUniversityDistanceMax = ONE;
-                setValue();
             } else if (userUniversityDistanceInput == TWO) {
                 validateUniversityDistanceInput = true;
                 userUniversityDistanceMin = ONE;
                 userUniversityDistanceMax = TWO;
-                setValue();
             } else if (userUniversityDistanceInput == THREE) {
                 validateUniversityDistanceInput = true;
                 userUniversityDistanceMin = TWO;
                 userUniversityDistanceMax = FIVE;
-                setValue();
             } else if (userUniversityDistanceInput == FOUR) {
                 validateUniversityDistanceInput = true;
                 userUniversityDistanceMin = FIVE;
                 userUniversityDistanceMax = FIFTY;
-                setValue();
             } else {
-                throw new IllegalArgumentException(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.university.distance.message"));
+                logger.error("validation failed, invalid value entered");
+            }
+            if (validateUniversityDistanceInput == true) {
+                setValue(userSurveyModel);
+            } else {
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.university.distance.message"));
             }
         } catch (Exception e) {
+            logger.error("Exception occurred while validating input");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.university.distance.message"));
         }
         return validateUniversityDistanceInput;
@@ -101,12 +95,10 @@ public class UserUniversityDistancePreference implements IUserSurvey {
 
     //set user university distance preference
     @Override
-    public void setValue() {
+    public void setValue(UserSurveyModel userSurveyModel) {
         userSurveyModel.setUserDalDistanceMin(userUniversityDistanceMin);
         userSurveyModel.setUserDalDistanceMax(userUniversityDistanceMax);
         logger.info("Minimum university distance preference is set to: " + userUniversityDistanceMin);
         logger.info("Maximum university distance preference is set to: " + userUniversityDistanceMax);
     }
-
-
 }

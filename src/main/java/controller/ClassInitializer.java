@@ -11,13 +11,22 @@ import controller.welcomepage.IWelcomePageController;
 import controller.userprofile.UserHomePageController;
 import controller.welcomepage.WelcomePageController;
 import controller.userlogin.*;
+import controller.ownersurvey.*;
+import controller.propertypricepredictor.PropertyPriceCalculator;
+import controller.userprofile.IUserHomePageController;
+import controller.welcomepage.IWelcomePageController;
+import controller.userprofile.UserHomePageController;
+import controller.welcomepage.WelcomePageController;
+import controller.userlogin.CheckSurveyTaken;
+import controller.userlogin.ICheckSurveyTaken;
+import controller.userlogin.IUserLoginController;
+import controller.userlogin.UserLoginController;
 import controller.userprofile.IUserProfile;
 import controller.userprofile.UserProfile;
 import controller.userregistration.IUserRegistrationController;
 import controller.userregistration.UserRegistrationController;
-import controller.verifications.EmailVerfierController;
+import controller.usersurvey.*;
 import controller.verifications.*;
-import controller.verifications.PasswordVerifierController;
 import database.*;
 import database.ownerdetailsdao.IOwnersDetailsDAO;
 import database.ownerdetailsdao.OwnersDetailsDAO;
@@ -30,6 +39,8 @@ import database.userlogindao.IUserLoginDAO;
 import database.userlogindao.UserLoginDAO;
 import database.userregistrationdao.IUserRegistrationDAO;
 import database.userregistrationdao.UserRegistrationDAO;
+import models.OwnerSurveyModel;
+import models.UserSurveyModel;
 import models.ownerdetailsmodel.IOwnerDetailsModel;
 import models.ownerdetailsmodel.OwnerDetailsModel;
 import models.ownerpropertydetailsmodel.IOwnerPropertyDetailsModel;
@@ -66,9 +77,32 @@ public class ClassInitializer {
     IPasswordValidity passwordValidity;
     ISurveyTakenDAO surveyTakenDAO;
     IUserIdValidation userIdValidation;
+    IUserSurvey userAlcoholHabits;
+    IUserSurvey userBudget;
+    IUserSurvey userFoodHabits;
+    IUserSurvey userGender;
+    IUserSurvey userRoommateAlcoholHabitsPreference;
+    IUserSurvey userRoommateFoodHabitsPreference;
+    IUserSurvey userRoommateGenderPreference;
+    IUserSurvey userRoommateSmokingHabitsPreference;
+    IUserSurvey userSmokingHabits;
+    IUserSurvey userUniversityDistancePreference;
+    UserSurveyModel userSurveyModel;
+    UserSurveyMain userSurveyMain;
+    IUserSurveyDAO userSurveyDAO;
+    IOwnerSurvey bedroomCount;
+    IOwnerSurvey dalhousieDistance;
+    IOwnerSurvey downtownDistance;
+    IOwnerSurvey groceryStoreDistance;
+    IOwnerSurvey propertyAddress;
+    IOwnerSurvey theaterDistance;
+    IOwnerSurvey utilities;
+    OwnerSurveyModel ownerSurveyModel;
+    IOwnerSurveyDAO ownerSurveyDAO;
+    OwnerSurveyMain ownerSurveyMain;
+    PropertyPriceCalculator propertyPriceCalculator;
 
-   private ClassInitializer()
-
+    private ClassInitializer()
     {
         roomsicleCLI = new RoomsicleCLI();
         makeCLICommentListController =new MakeCLICommentListController();
@@ -97,13 +131,36 @@ public class ClassInitializer {
         passwordValidity=new PasswordValidity();
         surveyTakenDAO=new SurveyTakenDAO();
         userIdValidation=new UserIdValidation();
+        userAlcoholHabits = new UserAlcoholHabits();
+        userBudget = new UserBudget();
+        userFoodHabits = new UserFoodHabits();
+        userGender = new UserGender();
+        userRoommateAlcoholHabitsPreference = new UserRoommateAlcoholHabitsPreference();
+        userRoommateFoodHabitsPreference = new UserRoommateFoodHabitsPreference();
+        userRoommateGenderPreference = new UserRoommateGenderPreference();
+        userRoommateSmokingHabitsPreference = new UserRoommateSmokingHabitsPreference();
+        userSmokingHabits = new UserSmokingHabits();
+        userUniversityDistancePreference = new UserUniversityDistancePreference();
+        userSurveyModel = new UserSurveyModel();
+        userSurveyMain = new UserSurveyMain();
+        userSurveyDAO = new UserSurveyDAO();
+        bedroomCount = new BedroomCount();
+        dalhousieDistance = new DalhousieDistance();
+        downtownDistance = new DowntownDistance();
+        groceryStoreDistance = new GroceryStoreDistance();
+        propertyAddress = new PropertyAddress();
+        theaterDistance = new TheaterDistance();
+        utilities = new Utilities();
+        ownerSurveyModel = new OwnerSurveyModel();
+        ownerSurveyDAO = new OwnerSurveyDAO();
+        ownerSurveyMain = new OwnerSurveyMain();
+        propertyPriceCalculator = new PropertyPriceCalculator();
        }
 
     public static ClassInitializer initializer() {
         if (initializer == null) {
             initializer = new ClassInitializer();
         }
-
         return initializer;
     }
 
@@ -199,4 +256,99 @@ public class ClassInitializer {
         return ownerProfile;
     }
 
+    public IUserSurvey getUserAlcoholHabits() {
+        return userAlcoholHabits;
+    }
+
+    public IUserSurvey getUserBudget() {
+        return userBudget;
+    }
+
+    public IUserSurvey getUserSmokingHabits() {
+        return userSmokingHabits;
+    }
+
+    public IUserSurvey getUserFoodHabits() {
+        return userFoodHabits;
+    }
+
+    public IUserSurvey getUserGender() {
+        return userGender;
+    }
+
+    public IUserSurvey getUserRoommateAlcoholHabitsPreference() {
+        return userRoommateAlcoholHabitsPreference;
+    }
+
+    public IUserSurvey getUserRoommateFoodHabitsPreference() {
+        return userRoommateFoodHabitsPreference;
+    }
+
+    public IUserSurvey getUserRoommateGenderPreference() {
+        return userRoommateGenderPreference;
+    }
+
+    public IUserSurvey getUserRoommateSmokingHabitsPreference() {
+        return userRoommateSmokingHabitsPreference;
+    }
+
+    public IUserSurvey getUserUniversityDistancePreference() {
+        return userUniversityDistancePreference;
+    }
+
+    public UserSurveyModel getUserSurveyModel() {
+        return userSurveyModel;
+    }
+
+    public UserSurveyMain getUserSurveyMain() {
+        return userSurveyMain;
+    }
+
+    public IUserSurveyDAO getUserSurveyDAO() {
+        return userSurveyDAO;
+    }
+
+    public IOwnerSurvey getBedroomCount() {
+        return bedroomCount;
+    }
+
+    public IOwnerSurvey getDalhousieDistance() {
+        return dalhousieDistance;
+    }
+
+    public IOwnerSurvey getDowntownDistance() {
+        return downtownDistance;
+    }
+
+    public IOwnerSurvey getGroceryStoreDistance() {
+        return groceryStoreDistance;
+    }
+
+    public IOwnerSurvey getPropertyAddress() {
+        return propertyAddress;
+    }
+
+    public IOwnerSurvey getTheaterDistance() {
+        return theaterDistance;
+    }
+
+    public IOwnerSurvey getUtilities() {
+        return utilities;
+    }
+
+    public OwnerSurveyModel getOwnerSurveyModel() {
+        return ownerSurveyModel;
+    }
+
+    public IOwnerSurveyDAO getOwnerSurveyDAO() {
+        return ownerSurveyDAO;
+    }
+
+    public OwnerSurveyMain getOwnerSurveyMain() {
+        return ownerSurveyMain;
+    }
+
+    public PropertyPriceCalculator getPropertyPriceCalculator() {
+        return propertyPriceCalculator;
+    }
 }
