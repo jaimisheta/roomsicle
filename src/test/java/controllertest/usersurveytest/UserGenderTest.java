@@ -20,27 +20,27 @@ public class UserGenderTest {
     @Test
     public void validateMaleUserGenderInputTest() {
         userGenderInput = new UserGender(userSurveyModel, 1);
-        userGenderInput.validateValue();
+        userGenderInput.validateValue(userSurveyModel);
         Assert.assertEquals("Male", userSurveyModel.getUserGender());
     }
 
     @Test
     public void validateFemaleUserGenderInputTest() {
         userGenderInput = new UserGender(userSurveyModel, 2);
-        userGenderInput.validateValue();
+        userGenderInput.validateValue(userSurveyModel);
         Assert.assertEquals("Female", userSurveyModel.getUserGender());
     }
 
     @Test
     public void validateOtherUserGenderInputTest() {
         userGenderInput = new UserGender(userSurveyModel, 3);
-        userGenderInput.validateValue();
+        userGenderInput.validateValue(userSurveyModel);
         Assert.assertEquals("Other", userSurveyModel.getUserGender());
     }
 
     @Test
     public void validateInvalidUserGenderInputTest() {
         userGenderInput = new UserGender(userSurveyModel, 4);
-        Assert.assertFalse(userGenderInput.validateValue());
+        Assert.assertFalse(userGenderInput.validateValue(userSurveyModel));
     }
 }

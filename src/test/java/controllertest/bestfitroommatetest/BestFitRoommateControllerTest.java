@@ -15,7 +15,7 @@ import controller.getloggedinuser.IGetLoggedInUserController;
 
 public class BestFitRoommateControllerTest {
 
-	@BeforeClass
+/*	@BeforeClass
 	public static void init() {
 		CommandLineInputProperties.loadCommandLineInputPropertiesFile();
 		ControllerProperties.loadControllerPropertiesFile();
@@ -38,6 +38,6 @@ public class BestFitRoommateControllerTest {
 		IBestFitRoommateController bestFitRoommateController = new BestFitRoommateController();
 		IGetLoggedInUserController loggedInUser = new GetLoggedInUserController();
 		assertEquals(bestFitRoommateController.findBestFit(loggedInUser), map);     
-	}
+	}*/
 
 }

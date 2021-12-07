@@ -22,28 +22,28 @@ public class UserRoommateAlcoholHabitsPreferenceTest {
     @Test
     public void validateRoommateAlcoholHabitsYesInputTest() {
         userRoommateAlcoholHabitsPreferenceInput = new UserRoommateAlcoholHabitsPreference(userSurveyModel, 1);
-        userRoommateAlcoholHabitsPreferenceInput.validateValue();
+        userRoommateAlcoholHabitsPreferenceInput.validateValue(userSurveyModel);
         Assert.assertEquals("Yes", userSurveyModel.getRoommateAlcoholHabits());
     }
 
     @Test
     public void validateRoommateAlcoholHabitsNoInputTest() {
         userRoommateAlcoholHabitsPreferenceInput = new UserRoommateAlcoholHabitsPreference(userSurveyModel, 2);
-        userRoommateAlcoholHabitsPreferenceInput.validateValue();
+        userRoommateAlcoholHabitsPreferenceInput.validateValue(userSurveyModel);
         Assert.assertEquals("No", userSurveyModel.getRoommateAlcoholHabits());
     }
 
     @Test
     public void validateRoommateAlcoholHabitsDoesNotMatterInputTest() {
         userRoommateAlcoholHabitsPreferenceInput = new UserRoommateAlcoholHabitsPreference(userSurveyModel, 3);
-        userRoommateAlcoholHabitsPreferenceInput.validateValue();
+        userRoommateAlcoholHabitsPreferenceInput.validateValue(userSurveyModel);
         Assert.assertEquals("Does not matter", userSurveyModel.getRoommateAlcoholHabits());
     }
 
     @Test
     public void validateAlcoholHabitsInvalidInputTest() {
         userRoommateAlcoholHabitsPreferenceInput = new UserRoommateAlcoholHabitsPreference(userSurveyModel, 4);
-        Assert.assertFalse(userRoommateAlcoholHabitsPreferenceInput.validateValue());
+        Assert.assertFalse(userRoommateAlcoholHabitsPreferenceInput.validateValue(userSurveyModel));
     }
 
 }

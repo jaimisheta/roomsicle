@@ -20,25 +20,25 @@ public class PropertyAddressTest {
     @Test
     public void validateValidPropertyAddressInputTest() {
         propertyAddressInput = new PropertyAddress(ownerSurveyModel, "address");
-        propertyAddressInput.validateValue();
+        propertyAddressInput.validateValue(ownerSurveyModel);
         Assert.assertEquals("address", ownerSurveyModel.getAddress());
     }
 
     @Test
     public void validateNullPropertyAddressInputTest() {
         propertyAddressInput = new PropertyAddress(ownerSurveyModel, "");
-        Assert.assertFalse(propertyAddressInput.validateValue());
+        Assert.assertFalse(propertyAddressInput.validateValue(ownerSurveyModel));
     }
 
     @Test
     public void validateEmptyPropertyAddressReturnValueTest() {
         propertyAddressInput = new PropertyAddress(ownerSurveyModel, " ");
-        Assert.assertFalse(propertyAddressInput.validateValue());
+        Assert.assertFalse(propertyAddressInput.validateValue(ownerSurveyModel));
     }
 
     @Test
     public void validateNullPropertyAddressReturnValueTest() {
         propertyAddressInput = new PropertyAddress(ownerSurveyModel, null);
-        Assert.assertFalse(propertyAddressInput.validateValue());
+        Assert.assertFalse(propertyAddressInput.validateValue(ownerSurveyModel));
     }
 }

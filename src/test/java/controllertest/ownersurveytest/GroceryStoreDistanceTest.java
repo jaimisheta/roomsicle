@@ -20,27 +20,27 @@ public class GroceryStoreDistanceTest {
     @Test
     public void validateValidGroceryStoreDistanceInputTest() {
         groceryStoreDistanceInput = new GroceryStoreDistance(ownerSurveyModel, 5);
-        groceryStoreDistanceInput.validateValue();
+        groceryStoreDistanceInput.validateValue(ownerSurveyModel);
         Assert.assertEquals(5, ownerSurveyModel.getGroceryStoreDistance());
     }
 
     @Test
     public void validateNegativeGroceryStoreDistanceInputTest() {
         groceryStoreDistanceInput = new GroceryStoreDistance(ownerSurveyModel, -1);
-        groceryStoreDistanceInput.validateValue();
+        groceryStoreDistanceInput.validateValue(ownerSurveyModel);
         Assert.assertEquals(0, ownerSurveyModel.getGroceryStoreDistance());
     }
 
     @Test
     public void validateNegativeGroceryStoreDistanceReturnValueTest() {
         groceryStoreDistanceInput = new GroceryStoreDistance(ownerSurveyModel, -1);
-        Assert.assertFalse(groceryStoreDistanceInput.validateValue());
+        Assert.assertFalse(groceryStoreDistanceInput.validateValue(ownerSurveyModel));
     }
 
     @Test
     public void validateInvalidGroceryStoreDistanceInputTest() {
         groceryStoreDistanceInput = new GroceryStoreDistance(ownerSurveyModel, 0);
-        Assert.assertFalse(groceryStoreDistanceInput.validateValue());
+        Assert.assertFalse(groceryStoreDistanceInput.validateValue(ownerSurveyModel));
     }
 
 }

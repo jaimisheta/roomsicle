@@ -1,6 +1,7 @@
 package controller.ownersurvey;
 
 import commandline.CommandLineInputProperties;
+import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
 import controller.usersurvey.UserAlcoholHabits;
 import models.OwnerSurveyModel;
@@ -13,15 +14,13 @@ import static controller.ownersurvey.OwnerSurveyConstants.ONE;
 
 public class DalhousieDistance implements IOwnerSurvey {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     static final Logger logger = LogManager.getLogger(UserAlcoholHabits.class);
 
     OwnerSurveyModel ownerSurveyModel;
     boolean hasValidValue = false;
     int propertyDistanceFromDalhousie;
 
-    public DalhousieDistance(OwnerSurveyModel ownerSurveyModel) {
-        this.ownerSurveyModel = ownerSurveyModel;
+    public DalhousieDistance() {
     }
 
     public DalhousieDistance(OwnerSurveyModel ownerSurveyModel, int propertyDistanceFromDalhousie) {
@@ -31,16 +30,15 @@ public class DalhousieDistance implements IOwnerSurvey {
 
     //get dalhousie distance input from owner
     @Override
-    public void getValue() {
-        GroceryStoreDistance groceryStoreDistance = new GroceryStoreDistance(ownerSurveyModel);
+    public void getValue(OwnerSurveyModel ownerSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = new RoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.dalhousie.university.distance.message"));
             propertyDistanceFromDalhousie = roomsicleCLI.getNumberResponse();
             logger.info("dalhousie distance input from owner: " + propertyDistanceFromDalhousie);
             while (hasValidValue == false) {
-                if (validateValue()) {
+                if (validateValue(ownerSurveyModel)) {
                     hasValidValue = true;
-                    groceryStoreDistance.getValue();
                     break;
                 } else {
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.dalhousie.university.distance.message"));
@@ -48,8 +46,9 @@ public class DalhousieDistance implements IOwnerSurvey {
                 }
             }
         } catch (InputMismatchException e) {
+            logger.error("Input Mismatch exception occurred");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            getValue();
+            getValue(ownerSurveyModel);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,17 +56,20 @@ public class DalhousieDistance implements IOwnerSurvey {
 
     //validate dalhousie distance input from owner
     @Override
-    public boolean validateValue() {
+    public boolean validateValue(OwnerSurveyModel ownerSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = new RoomsicleCLI();
         boolean distanceFromDalhousie = false;
         try {
             logger.info("validating dalhousie distance input from owner: " + propertyDistanceFromDalhousie);
             if (propertyDistanceFromDalhousie >= ONE) {
                 distanceFromDalhousie = true;
-                setValue();
+                setValue(ownerSurveyModel);
             } else {
-                throw new IllegalArgumentException(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.illegal.argument.exception.invalid.distance.message"));
+                logger.error("validation failed, invalid value entered");
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.illegal.argument.exception.invalid.distance.message"));
             }
         } catch (Exception e) {
+            logger.error("Exception occurred while validating input");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.illegal.argument.exception.invalid.distance.message"));
         }
         return distanceFromDalhousie;
@@ -75,7 +77,7 @@ public class DalhousieDistance implements IOwnerSurvey {
 
     //set dalhousie distance
     @Override
-    public void setValue() {
+    public void setValue(OwnerSurveyModel ownerSurveyModel) {
         ownerSurveyModel.setDalhousieDistance(propertyDistanceFromDalhousie);
         logger.info("dalhousie distance is set to:" + propertyDistanceFromDalhousie);
     }

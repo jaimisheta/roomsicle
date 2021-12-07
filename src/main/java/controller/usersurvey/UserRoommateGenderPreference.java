@@ -1,23 +1,18 @@
 package controller.usersurvey;
 
 import commandline.CommandLineInputProperties;
-import commandline.RoomsicleCLI;
+import commandline.IRoomsicleCLI;
+import controller.ClassInitializer;
 import models.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.InputMismatchException;
 
-import static controller.usersurvey.UserSurveyConstants.ONE;
-import static controller.usersurvey.UserSurveyConstants.TWO;
-import static controller.usersurvey.UserSurveyConstants.THREE;
-import static controller.usersurvey.UserSurveyConstants.MALE;
-import static controller.usersurvey.UserSurveyConstants.FEMALE;
-import static controller.usersurvey.UserSurveyConstants.DOES_NOT_MATTER;
+import static controller.usersurvey.UserSurveyConstants.*;
 
 public class UserRoommateGenderPreference implements IUserSurvey {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     static final Logger logger = LogManager.getLogger(UserRoommateGenderPreference.class);
 
     UserSurveyModel userSurveyModel;
@@ -25,8 +20,7 @@ public class UserRoommateGenderPreference implements IUserSurvey {
     boolean hasValidValue = false;
     String userRoommateGender;
 
-    public UserRoommateGenderPreference(UserSurveyModel userSurveyModel) {
-        this.userSurveyModel = userSurveyModel;
+    public UserRoommateGenderPreference() {
     }
 
     public UserRoommateGenderPreference(UserSurveyModel userSurveyModel, int userRoommateGenderInput) {
@@ -36,18 +30,15 @@ public class UserRoommateGenderPreference implements IUserSurvey {
 
     //get roommate gender preference input
     @Override
-    public void getValue() {
-        UserRoommateFoodHabitsPreference userRoommateFoodHabitsPreference = new UserRoommateFoodHabitsPreference(userSurveyModel);
+    public void getValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
         try {
-            roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.roommate.division.preferences.message"));
-            roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.preference.details.message"));
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.gender.preferences.message"));
             userRoommateGenderInput = roomsicleCLI.getNumberResponse();
             logger.info("roommate food habits preference input: " + userRoommateGenderInput);
             while (hasValidValue == false) {
-                if (validateValue()) {
+                if (validateValue(userSurveyModel)) {
                     hasValidValue = true;
-                    userRoommateFoodHabitsPreference.getValue();
                     break;
                 } else {
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.gender.preferences.message"));
@@ -55,35 +46,38 @@ public class UserRoommateGenderPreference implements IUserSurvey {
                 }
             }
         } catch (InputMismatchException e) {
+            logger.error("Input Mismatch exception occurred");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
-            getValue();
-        } catch (Exception e) {
-            e.printStackTrace();
+            getValue(userSurveyModel);
         }
     }
 
     //validate roommate gender preference input
     @Override
-    public boolean validateValue() {
+    public boolean validateValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
         boolean validateGenderResponse = false;
         try {
             logger.info("Validating roommate gender preference input");
             if (userRoommateGenderInput == ONE) {
                 validateGenderResponse = true;
                 userRoommateGender = MALE;
-                setValue();
             } else if (userRoommateGenderInput == TWO) {
                 validateGenderResponse = true;
                 userRoommateGender = FEMALE;
-                setValue();
             } else if (userRoommateGenderInput == THREE) {
                 validateGenderResponse = true;
                 userRoommateGender = DOES_NOT_MATTER;
-                setValue();
             } else {
-                throw new IllegalArgumentException(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.gender.message"));
+                logger.error("validation failed, invalid value entered");
+            }
+            if (validateGenderResponse == true) {
+                setValue(userSurveyModel);
+            } else {
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.gender.message"));
             }
         } catch (Exception e) {
+            logger.error("Exception occurred while validating input");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.gender.message"));
         }
         return validateGenderResponse;
@@ -91,9 +85,8 @@ public class UserRoommateGenderPreference implements IUserSurvey {
 
     //set roommate gender preference input
     @Override
-    public void setValue() {
+    public void setValue(UserSurveyModel userSurveyModel) {
         userSurveyModel.setRoommateGender(userRoommateGender);
         logger.info("roommate gender preference is set to: " + userRoommateGender);
     }
-
 }

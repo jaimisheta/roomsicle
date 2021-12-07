@@ -20,26 +20,26 @@ public class UserBudgetTest {
     @Test
     public void validateValidUserBudgetInputTest() {
         userBudgetInput = new UserBudget(userSurveyModel, 500);
-        userBudgetInput.validateValue();
+        userBudgetInput.validateValue(userSurveyModel);
         Assert.assertEquals(500, userSurveyModel.getUserBudget());
     }
 
     @Test
     public void validateNegativeUserBudgetInputTest() {
         userBudgetInput = new UserBudget(userSurveyModel, -1);
-        userBudgetInput.validateValue();
+        userBudgetInput.validateValue(userSurveyModel);
         Assert.assertEquals(0, userSurveyModel.getUserBudget());
     }
 
     @Test
     public void validateNegativeUserBudgetReturnValueTest() {
         userBudgetInput = new UserBudget(userSurveyModel, -1);
-        Assert.assertFalse(userBudgetInput.validateValue());
+        Assert.assertFalse(userBudgetInput.validateValue(userSurveyModel));
     }
 
     @Test
     public void validateInvalidUserBudgetInputTest() {
         userBudgetInput = new UserBudget(userSurveyModel, 0);
-        Assert.assertFalse(userBudgetInput.validateValue());
+        Assert.assertFalse(userBudgetInput.validateValue(userSurveyModel));
     }
 }

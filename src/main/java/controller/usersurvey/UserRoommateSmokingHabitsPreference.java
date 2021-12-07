@@ -1,23 +1,18 @@
 package controller.usersurvey;
 
 import commandline.CommandLineInputProperties;
-import commandline.RoomsicleCLI;
+import commandline.IRoomsicleCLI;
+import controller.ClassInitializer;
 import models.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.InputMismatchException;
 
-import static controller.usersurvey.UserSurveyConstants.ONE;
-import static controller.usersurvey.UserSurveyConstants.TWO;
-import static controller.usersurvey.UserSurveyConstants.THREE;
-import static controller.usersurvey.UserSurveyConstants.YES;
-import static controller.usersurvey.UserSurveyConstants.NO;
-import static controller.usersurvey.UserSurveyConstants.DOES_NOT_MATTER;
+import static controller.usersurvey.UserSurveyConstants.*;
 
 public class UserRoommateSmokingHabitsPreference implements IUserSurvey {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     static final Logger logger = LogManager.getLogger(UserRoommateGenderPreference.class);
 
     UserSurveyModel userSurveyModel;
@@ -25,8 +20,7 @@ public class UserRoommateSmokingHabitsPreference implements IUserSurvey {
     boolean hasValidValue = false;
     String userRoommateSmokingHabits;
 
-    public UserRoommateSmokingHabitsPreference(UserSurveyModel userSurveyModel) {
-        this.userSurveyModel = userSurveyModel;
+    public UserRoommateSmokingHabitsPreference() {
     }
 
     public UserRoommateSmokingHabitsPreference(UserSurveyModel userSurveyModel, int userRoommateSmokingHabitsInput) {
@@ -36,16 +30,15 @@ public class UserRoommateSmokingHabitsPreference implements IUserSurvey {
 
     //get roommate smoking habit preference input
     @Override
-    public void getValue() {
-        UserRoommateAlcoholHabitsPreference userRoommateAlcoholHabitsPreference = new UserRoommateAlcoholHabitsPreference(userSurveyModel);
+    public void getValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.smoking.habits.message"));
             userRoommateSmokingHabitsInput = roomsicleCLI.getNumberResponse();
             logger.info("roommate smoking habit preference input: " + userRoommateSmokingHabitsInput);
             while (hasValidValue == false) {
-                if (validateValue()) {
+                if (validateValue(userSurveyModel)) {
                     hasValidValue = true;
-                    userRoommateAlcoholHabitsPreference.getValue();
                     break;
                 } else {
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.roommate.smoking.habits.message"));
@@ -53,35 +46,38 @@ public class UserRoommateSmokingHabitsPreference implements IUserSurvey {
                 }
             }
         } catch (InputMismatchException e) {
+            logger.error("Input Mismatch exception occurred");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
-            getValue();
-        } catch (Exception e) {
-            e.printStackTrace();
+            getValue(userSurveyModel);
         }
     }
 
     //validate roommate smoking habit preference input
     @Override
-    public boolean validateValue() {
+    public boolean validateValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
         boolean validateSmokingHabitsResponse = false;
         try {
             logger.info("validating roommate smoking habit preference input");
             if (userRoommateSmokingHabitsInput == ONE) {
                 validateSmokingHabitsResponse = true;
                 userRoommateSmokingHabits = YES;
-                setValue();
             } else if (userRoommateSmokingHabitsInput == TWO) {
                 validateSmokingHabitsResponse = true;
                 userRoommateSmokingHabits = NO;
-                setValue();
             } else if (userRoommateSmokingHabitsInput == THREE) {
                 validateSmokingHabitsResponse = true;
                 userRoommateSmokingHabits = DOES_NOT_MATTER;
-                setValue();
             } else {
-                throw new IllegalArgumentException(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.roommate.smoking.habits.message"));
+                logger.error("validation failed, invalid value entered");
+            }
+            if (validateSmokingHabitsResponse == true) {
+                setValue(userSurveyModel);
+            } else {
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.roommate.smoking.habits.message"));
             }
         } catch (Exception e) {
+            logger.error("Exception occurred while validating input");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.roommate.smoking.habits.message"));
         }
         return validateSmokingHabitsResponse;
@@ -89,7 +85,7 @@ public class UserRoommateSmokingHabitsPreference implements IUserSurvey {
 
     //set roommate smoking habit preference
     @Override
-    public void setValue() {
+    public void setValue(UserSurveyModel userSurveyModel) {
         userSurveyModel.setRoommateSmokingHabits(userRoommateSmokingHabits);
         logger.info("roommate smoking habit preference is set to: " + userRoommateSmokingHabits);
     }

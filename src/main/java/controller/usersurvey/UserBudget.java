@@ -1,7 +1,8 @@
 package controller.usersurvey;
 
 import commandline.CommandLineInputProperties;
-import commandline.RoomsicleCLI;
+import commandline.IRoomsicleCLI;
+import controller.ClassInitializer;
 import models.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,15 +13,13 @@ import static controller.ownersurvey.OwnerSurveyConstants.ONE;
 
 public class UserBudget implements IUserSurvey {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     static final Logger logger = LogManager.getLogger(UserBudget.class);
 
     UserSurveyModel userSurveyModel;
     boolean hasValidValue = false;
     int userBudget;
 
-    public UserBudget(UserSurveyModel userSurveyModel) {
-        this.userSurveyModel = userSurveyModel;
+    public UserBudget() {
     }
 
     public UserBudget(UserSurveyModel userSurveyModel, int userBudget) {
@@ -30,16 +29,15 @@ public class UserBudget implements IUserSurvey {
 
     //get budget value from user
     @Override
-    public void getValue() {
-        UserUniversityDistancePreference userUniversityDistancePreference = new UserUniversityDistancePreference(userSurveyModel);
+    public void getValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.budget.message"));
             userBudget = roomsicleCLI.getNumberResponse();
-            logger.info("userBudget: "+userBudget);
+            logger.info("userBudget: " + userBudget);
             while (hasValidValue == false) {
-                if (validateValue()) {
+                if (validateValue(userSurveyModel)) {
                     hasValidValue = true;
-                    userUniversityDistancePreference.getValue();
                     break;
                 } else {
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.budget.message"));
@@ -47,27 +45,29 @@ public class UserBudget implements IUserSurvey {
                 }
             }
         } catch (InputMismatchException e) {
+            logger.error("Input Mismatch exception occurred");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            getValue();
-        } catch (Exception e) {
-            e.printStackTrace();
+            getValue(userSurveyModel);
         }
     }
 
     //validate budget value input from user
     @Override
-    public boolean validateValue() {
+    public boolean validateValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getIroomsicleCLI();
         boolean validateUserBudget = false;
         try {
-            logger.info("validating user input for user Budget: "+userBudget);
+            logger.info("validating user input for user Budget: " + userBudget);
             if (userBudget >= ONE) {
                 validateUserBudget = true;
                 logger.info("valid user budget input");
-                setValue();
+                setValue(userSurveyModel);
             } else {
-                throw new IllegalArgumentException(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.user.budget.message"));
+                logger.info("validation failed, invalid value entered");
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.user.budget.message"));
             }
         } catch (Exception e) {
+            logger.error("Exception occurred while validating input");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.user.budget.message"));
         }
         return validateUserBudget;
@@ -75,8 +75,8 @@ public class UserBudget implements IUserSurvey {
 
     //set budget value
     @Override
-    public void setValue() {
+    public void setValue(UserSurveyModel userSurveyModel) {
         userSurveyModel.setUserBudget(userBudget);
-        logger.info("user budget is set to: "+userBudget);
+        logger.info("user budget is set to: " + userBudget);
     }
 }
