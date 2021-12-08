@@ -4,7 +4,7 @@ import commandline.CommandLineInputProperties;
 import controller.ControllerProperties;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
-import models.UserDetailsModel;
+import models.fitroommatemodels.UserDetailsModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,25 +22,25 @@ public class UserProfileTest {
     @Test
     public void displayUserFirstNameTest(){
         userDetailsModel.setFirstName(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.first.name"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.first.name"),userDetailsModel.getFirstName());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.first.name"),userDetailsModel.getFirstName());
     }
 
     @Test
     public void displayUserLastNameTest(){
         userDetailsModel.setLastName(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"),userDetailsModel.getLastName());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"),userDetailsModel.getLastName());
     }
 
     @Test
     public void displayUserContactNumberTest(){
         userDetailsModel.setContactNumber(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.phone.number"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.phone.number"),userDetailsModel.getContactNumber());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.phone.number"),userDetailsModel.getContactNumber());
     }
 
     @Test
     public void displayUserEmailIdTest(){
         userDetailsModel.setEmailId(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.id"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.id"),userDetailsModel.getEmailId());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.id"),userDetailsModel.getEmailId());
     }
 
 }

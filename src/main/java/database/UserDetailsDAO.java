@@ -6,7 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import models.UserDetailsModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import database.IUserDetailsDAO;
+import models.fitroommatemodels.UserDetailsModel;
 
 public class UserDetailsDAO implements IUserDetailsDAO {
 

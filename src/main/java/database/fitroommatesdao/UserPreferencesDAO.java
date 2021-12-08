@@ -1,4 +1,4 @@
-package database;
+package database.fitroommatesdao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -6,9 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import models.UserPreferencesModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.fitroommatemodels.UserPreferencesModel;
 
-public class UserPreferencesDAO {
+public class UserPreferencesDAO implements IUserPreferencesDAO{
 
 	DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
 	Connection connection;

@@ -1,6 +1,6 @@
-package models;
+package models.fitroommatemodels;
 
-public class UserDetailsModel {
+public class UserDetailsModel implements IUserDetailsModel{
 
 	private String emailId;
 	private String firstName;

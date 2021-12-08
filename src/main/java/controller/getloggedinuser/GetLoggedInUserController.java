@@ -2,21 +2,25 @@ package controller.getloggedinuser;
 
 import java.util.ArrayList;
 
+import controller.ClassInitializer;
 import controller.ControllerProperties;
-import database.UserPreferencesDAO;
-import models.UserPreferencesModel;
+import database.fitroommatesdao.IUserPreferencesDAO;
+import database.fitroommatesdao.UserPreferencesDAO;
+import models.fitroommatemodels.IUserPreferenceModel;
+import models.fitroommatemodels.UserPreferencesModel;
 
 public class GetLoggedInUserController implements IGetLoggedInUserController{
 
 	public UserPreferencesModel getLoggedInUser() {
 
 		String loggedInUserId;
-		UserPreferencesModel loggedInUser;
-		UserPreferencesDAO userPreferences;
+		IUserPreferenceModel loggedInUser;
+		IUserPreferencesDAO userPreferences;
 		ArrayList<UserPreferencesModel> listOfUserPreferences;
+
 		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
-		loggedInUser = new UserPreferencesModel();
-		userPreferences = new UserPreferencesDAO();
+		loggedInUser = ClassInitializer.initializer().getUserPreferenceModel();
+		userPreferences = ClassInitializer.initializer().getUserPreferenceDAO();
 		listOfUserPreferences = userPreferences.getUserPreferences();
 
 		for(UserPreferencesModel userPreferenceObject : listOfUserPreferences) {
@@ -29,7 +33,7 @@ public class GetLoggedInUserController implements IGetLoggedInUserController{
 			}
 		}
 		
-		return loggedInUser;
+		return (UserPreferencesModel) loggedInUser;
 		
 	}
 
