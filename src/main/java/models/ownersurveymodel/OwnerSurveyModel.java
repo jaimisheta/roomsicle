@@ -1,4 +1,4 @@
-package models;
+package models.ownersurveymodel;
 
 public class OwnerSurveyModel {
     private int propertyID;

@@ -3,7 +3,7 @@ package controllertest.usersurveytest;
 import commandline.CommandLineInputProperties;
 import controller.usersurvey.UserRoommateAlcoholHabitsPreference;
 import database.ConfigProperties;
-import models.UserSurveyModel;
+import models.usersurveymodel.UserSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

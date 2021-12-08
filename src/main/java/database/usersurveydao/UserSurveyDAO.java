@@ -1,6 +1,8 @@
-package database;
+package database.usersurveydao;
 
-import models.UserSurveyModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.usersurveymodel.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

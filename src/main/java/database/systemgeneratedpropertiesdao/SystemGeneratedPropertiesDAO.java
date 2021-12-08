@@ -1,8 +1,11 @@
-package database;
+package database.systemgeneratedpropertiesdao;
 
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import models.SystemGeneratedPropertiesModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import database.ownersurveydao.OwnerSurveyDAO;
+import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

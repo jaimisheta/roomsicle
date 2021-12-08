@@ -1,7 +1,9 @@
-package database;
+package database.propertypricepredictordao;
 
-import models.OwnerSurveyModel;
-import models.PropertyPriceCalculatorModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.ownersurveymodel.OwnerSurveyModel;
+import models.propertypricecalculatormodel.PropertyPriceCalculatorModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

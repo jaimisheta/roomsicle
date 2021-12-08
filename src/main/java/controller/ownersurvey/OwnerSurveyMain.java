@@ -5,8 +5,8 @@ import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
 import controller.propertypricepredictor.PropertyPriceCalculator;
-import database.IOwnerSurveyDAO;
-import models.OwnerSurveyModel;
+import database.ownersurveydao.IOwnerSurveyDAO;
+import models.ownersurveymodel.OwnerSurveyModel;
 
 public class OwnerSurveyMain {
 

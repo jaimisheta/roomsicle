@@ -1,7 +1,6 @@
-package database;
+package database.systemgeneratedpropertiesdao;
 
-import models.SystemGeneratedPropertiesModel;
-import models.UserSurveyModel;
+import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

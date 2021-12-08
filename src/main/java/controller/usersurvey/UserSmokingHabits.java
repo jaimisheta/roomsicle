@@ -3,7 +3,7 @@ package controller.usersurvey;
 import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
-import models.UserSurveyModel;
+import models.usersurveymodel.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

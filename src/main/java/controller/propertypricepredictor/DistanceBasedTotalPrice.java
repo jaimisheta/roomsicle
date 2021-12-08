@@ -2,7 +2,7 @@ package controller.propertypricepredictor;
 
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import models.OwnerSurveyModel;
+import models.ownersurveymodel.OwnerSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

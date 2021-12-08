@@ -1,6 +1,6 @@
-package database;
+package database.ownersurveydao;
 
-import models.OwnerSurveyModel;
+import models.ownersurveymodel.OwnerSurveyModel;
 
 public interface IOwnerSurveyDAO {
 
