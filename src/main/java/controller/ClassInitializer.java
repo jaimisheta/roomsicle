@@ -32,6 +32,7 @@ import database.userregistrationdao.IUserRegistrationDAO;
 import database.userregistrationdao.UserRegistrationDAO;
 import models.OwnerSurveyModel;
 import models.PropertyPriceCalculatorModel;
+import models.SystemGeneratedPropertiesModel;
 import models.UserSurveyModel;
 import models.ownerdetailsmodel.IOwnerDetailsModel;
 import models.ownerdetailsmodel.OwnerDetailsModel;
@@ -107,6 +108,8 @@ public class ClassInitializer {
     ICalculateIndividualFeaturePrice distanceBasedTotalPrice;
     ICalculateIndividualFeaturePrice propertyBasePrice;
     ICalculateIndividualFeaturePrice utilitiesBasedPrice;
+    ISystemGeneratedPropertiesDAO systemGeneratedPropertiesDAO;
+    SystemGeneratedPropertiesModel systemGeneratedPropertiesModel;
 
     private ClassInitializer() {
         roomsicleCLI = new RoomsicleCLI();
@@ -174,6 +177,8 @@ public class ClassInitializer {
         distanceBasedTotalPrice = new DistanceBasedTotalPrice();
         propertyBasePrice = new PropertyBasePrice();
         utilitiesBasedPrice = new UtilitiesBasedPrice();
+        systemGeneratedPropertiesDAO = new SystemGeneratedPropertiesDAO();
+        systemGeneratedPropertiesModel = new SystemGeneratedPropertiesModel();
     }
 
     public static ClassInitializer initializer() {
@@ -441,5 +446,13 @@ public class ClassInitializer {
 
     public ICalculateIndividualFeaturePrice getUtilitiesBasedPrice() {
         return utilitiesBasedPrice;
+    }
+
+    public ISystemGeneratedPropertiesDAO getSystemGeneratedPropertiesDAO() {
+        return systemGeneratedPropertiesDAO;
+    }
+
+    public SystemGeneratedPropertiesModel getSystemGeneratedPropertiesModel() {
+        return systemGeneratedPropertiesModel;
     }
 }
