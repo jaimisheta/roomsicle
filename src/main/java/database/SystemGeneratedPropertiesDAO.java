@@ -1,7 +1,8 @@
 package database;
 
+import controller.ClassInitializer;
+import controller.ControllerProperties;
 import models.SystemGeneratedPropertiesModel;
-import models.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,14 +13,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SystemGeneratedPropertiesDAO {
+public class SystemGeneratedPropertiesDAO implements ISystemGeneratedPropertiesDAO {
 
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     static final Logger logger = LogManager.getLogger(OwnerSurveyDAO.class);
     Connection connection = databaseConnection.getConnectionObject();
     Statement statement;
 
-    public HashMap<String, Integer> getUserBudgetAndDistancePreference(UserSurveyModel userSurveyModel) {
+    @Override
+    public HashMap<String, Integer> getUserBudgetAndDistancePreference() {
         HashMap<String, Integer> userDetails = new HashMap<>();
         String query;
         String userEmailId;
@@ -27,7 +29,7 @@ public class SystemGeneratedPropertiesDAO {
         int userDalDistanceMin;
         int userDalDistanceMax;
 
-        userEmailId = userSurveyModel.getUserId();
+        userEmailId = ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
         logger.info("userId: " + userEmailId);
 
         try {
@@ -49,14 +51,14 @@ public class SystemGeneratedPropertiesDAO {
             }
         } catch (SQLException e) {
             logger.error("Error while getting User Budget And Distance Preference");
-            e.printStackTrace();
         }
         return userDetails;
     }
 
+    @Override
     public ArrayList<SystemGeneratedPropertiesModel> getSystemGeneratedPropertyDetails(HashMap<String, Integer> userDetails) {
         ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModelArrayList = new ArrayList<>();
-        SystemGeneratedPropertiesModel systemGeneratedPropertiesModel = new SystemGeneratedPropertiesModel();
+        SystemGeneratedPropertiesModel systemGeneratedPropertiesModel = ClassInitializer.initializer().getSystemGeneratedPropertiesModel();
         String query;
         int userBudget;
         int userDalDistanceMin;
@@ -88,7 +90,6 @@ public class SystemGeneratedPropertiesDAO {
             }
         } catch (SQLException e) {
             logger.error("Error while getting System Generated Property Details");
-            e.printStackTrace();
         }
         return systemGeneratedPropertiesModelArrayList;
     }
