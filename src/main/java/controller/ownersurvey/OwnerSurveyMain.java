@@ -24,6 +24,7 @@ public class OwnerSurveyMain {
         PropertyPriceCalculator propertyPriceCalculator = ClassInitializer.initializer().getPropertyPriceCalculator();
 
         //get logged-in user email id and set it in model
+        ControllerProperties.setControllerPropertyValue("user.logged.in.email.id", "sk@gmail.com");
         ownerSurveyModel.setOwnerID(ControllerProperties.getControllerPropertyValue("user.logged.in.email.id"));
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.take.survey.message"));
         //get property address
