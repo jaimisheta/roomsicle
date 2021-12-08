@@ -43,11 +43,11 @@ public class ExpenseAdditionDAO implements IExpenseAdditionDAO{
             exception.printStackTrace();
         }
 
-        expensePrice = expenseAdditionModel.getExpensePrice() / 4;
         userEmailId = expenseAdditionModel.getUserEmailId();
         receiverEmailId = expenseAdditionModel.getReceiverEmailId();
         description = expenseAdditionModel.getDescription();
         groupId = expenseAdditionModel.getGroupId();
+        expensePrice = expenseAdditionModel.getExpensePrice() / receiverEmailId.size();
 
         String finalUserEmailId = userEmailId;
         receiverEmailId.removeIf(id -> id.equals(finalUserEmailId));

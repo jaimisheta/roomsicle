@@ -464,4 +464,20 @@ public class ClassInitializer {
     public SystemGeneratedPropertiesModel getSystemGeneratedPropertiesModel() {
         return systemGeneratedPropertiesModel;
     }
+
+    public IExpenseAdditionDAO getIExpenseAdditionDAO() {
+        return expenseAdditionDAO;
+    }
+
+    public IExpenseAdditionModel getIExpenseAdditionModel() {
+        return expenseAdditionModel;
+    }
+
+    public IExpenseSettleUpDAO getIExpenseSettleUpDAO() {
+        return expenseSettleUpDAO;
+    }
+
+    public IExpenseSettleUpModel getIExpenseSettleUpModel() {
+        return expenseSettleUpModel;
+    }
 }
