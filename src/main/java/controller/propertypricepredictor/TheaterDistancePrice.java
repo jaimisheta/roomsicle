@@ -1,9 +1,11 @@
 package controller.propertypricepredictor;
 
+import controller.ClassInitializer;
+
 public class TheaterDistancePrice extends LocationBasedPrice {
 
     @Override
     IDistanceBasedPriceCalculator getLocation() {
-        return new DistanceBasedTheaterPrice();
+        return ClassInitializer.initializer().getDistanceBasedTheaterPrice();
     }
 }

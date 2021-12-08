@@ -1,5 +1,6 @@
 package controller.propertypricepredictor;
 
+import controller.ClassInitializer;
 import controller.ControllerProperties;
 import models.OwnerSurveyModel;
 import org.apache.logging.log4j.LogManager;
@@ -7,11 +8,11 @@ import org.apache.logging.log4j.Logger;
 
 public class DistanceBasedTotalPrice implements ICalculateIndividualFeaturePrice {
 
-    LocationBasedPriceFactory locationBasedPriceFactory = new LocationBasedPriceFactory();
     static final Logger logger = LogManager.getLogger(DistanceBasedTotalPrice.class);
 
     //calculate price of the property based on distance of the property from different sources
     public int calculatePrice(OwnerSurveyModel ownerSurveyModel) {
+        LocationBasedPriceFactory locationBasedPriceFactory = ClassInitializer.initializer().getLocationBasedPriceFactory();
         int dalDistance;
         int downtownDistance;
         int groceryDistance;
