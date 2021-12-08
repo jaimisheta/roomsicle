@@ -4,29 +4,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import commandline.CommandLineInputProperties;
+import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
+import controller.ClassInitializer;
 import controller.ControllerProperties;
-import database.DatabaseQueryProperties;
+import database.IUserDetailsDAO;
 import database.UserDetailsDAO;
-import models.UserDetailsModel;
+import models.fitroommatemodels.UserDetailsModel;
 
 public class FilterRoommatesDisplayController implements IFilterRoommatesDisplayController {
 
 	//Method to display results of filtered roommates
 	public void getFilteredFits(IFilterRoommates filteredPreferences) {
-	//public static void main(String args[]) {
-		//IFilterRoommates filteredPreferences = new FilterRoommates();
+
+		String loggedInUserId;
+		IFilterRoommatesInput preferences;
+		HashMap<String, Integer> usersMatchScoreMap;
+		IUserDetailsDAO userDetails;
+		IRoomsicleCLI roomsicleCLI;
+		ArrayList<UserDetailsModel> listOfUserDetails;
+
+		filteredPreferences = ClassInitializer.initializer().getFilterRoommates();
 		
-		filteredPreferences = new FilterRoommates();
-		
-		String loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
-		IFilterRoommatesInput preferences = new FilterRoommatesInput();
-		HashMap<String, Integer> usersMatchScoreMap = filteredPreferences.filterRoommates(preferences);
-		UserDetailsDAO userDetails = new UserDetailsDAO();
-		ArrayList<UserDetailsModel> listOfUserDetails = userDetails.getUserDetails();
+		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
+		preferences = ClassInitializer.initializer().getFilterRoommatesInput();
+		usersMatchScoreMap = filteredPreferences.filterRoommates(preferences);
+		userDetails = ClassInitializer.initializer().getUserDetailsDAO();
+		listOfUserDetails = userDetails.getUserDetails();
 		
 		//Object is created to print on the Command Line Interface(CLI)
-		RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
+		roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
 		roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.roommate.display.page.opening"));
 
 		for(UserDetailsModel usersDetails : listOfUserDetails) {

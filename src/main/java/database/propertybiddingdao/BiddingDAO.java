@@ -1,16 +1,19 @@
-package database;
+package database.propertybiddingdao;
 
-import models.BiddingDetailsModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.biddingmodels.BiddingDetailsModel;
+import models.biddingmodels.IBiddingDetailsModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class BiddingDAO {
+public class BiddingDAO implements IBiddingDAO{
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     Connection connection = databaseConnection.getConnectionObject();
     Statement statement;
-    public void enterBid(BiddingDetailsModel biddingDetailsModel){
+    public void enterBid(IBiddingDetailsModel biddingDetailsModel){
         String query;
         String userEmailId;
         String propertyId;

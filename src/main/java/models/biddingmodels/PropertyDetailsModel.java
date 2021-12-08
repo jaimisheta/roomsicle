@@ -1,6 +1,6 @@
-package models;
+package models.biddingmodels;
 
-public class PropertyDetailsModel {
+public class PropertyDetailsModel implements IPropertyDetailsModel{
 
     private String propertyId;
     private String ownerId;

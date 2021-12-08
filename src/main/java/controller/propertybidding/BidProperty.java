@@ -3,38 +3,47 @@ package controller.propertybidding;
 import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
+import controller.ClassInitializer;
 import controller.ControllerProperties;
-import database.BiddingDAO;
-import database.PropertyBidderDAO;
-import database.PropertyDetailsDAO;
-import models.BiddingDetailsModel;
-import models.PropertyDetailsModel;
+import database.propertybiddingdao.*;
+import models.biddingmodels.BiddingDetailsModel;
+import models.biddingmodels.IBiddingDetailsModel;
+import models.biddingmodels.PropertyDetailsModel;
 
 import java.util.ArrayList;
 
-public class BidProperty {
+public class BidProperty implements IBidProperty{
 
-    public static void main(String args[]){
-    //public void bidProperty(){
-        IRoomsicleCLI roomsicleCLI = new RoomsicleCLI();
+    boolean validation;
 
-        PropertyDetailsDAO propertiesDetails = new PropertyDetailsDAO();
-        ArrayList<PropertyDetailsModel> listOfPropertyDetails = propertiesDetails.getPropertyDetails();
+    public void bidProperty(){
 
-        AvailableProperties availableProperties = new AvailableProperties();
+        IPropertyBidderDAO propertyBidderDAO;
+        IRoomsicleCLI roomsicleCLI;
+        IPropertyDetailsDAO propertiesDetails;
+        ArrayList<PropertyDetailsModel> listOfPropertyDetails;
+        IAvailableProperties availableProperties;
+        ArrayList<BiddingDetailsModel> listOfPropertyBidders;
+        IBiddingDAO biddingDAO;
+        int propertyIdSelected;
+        IBiddingDetailsModel bidObject;
+        int propertyBidded;
+
+        propertiesDetails = ClassInitializer.initializer().getPropertyDetailsDAO();
+        listOfPropertyDetails = propertiesDetails.getPropertyDetails();
+        availableProperties = ClassInitializer.initializer().getAvailableProperties();
         availableProperties.displayProperties();
+        propertyBidderDAO = ClassInitializer.initializer().getPropertyBidderDAO();
+        listOfPropertyBidders = propertyBidderDAO.getPropertyBidDetails();
+        biddingDAO = ClassInitializer.initializer().getBiddingDAO();
+        roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
 
-        PropertyBidderDAO propertyBidderDAO = new PropertyBidderDAO();
-        ArrayList<BiddingDetailsModel> listOfPropertyBidders = propertyBidderDAO.getPropertyBidDetails();
 
-        BiddingDAO biddingDAO = new BiddingDAO();
+        roomsicleCLI.printMessage("enter.property.id.message");
+        propertyIdSelected = roomsicleCLI.getNumberResponse();
 
-        System.out.println("Enter property ID you want to bid:");
-        int propertyIdSelected = roomsicleCLI.getNumberResponse();
-
-        BiddingDetailsModel bidObject = new BiddingDetailsModel();
-        int propertyBidded = 0;
-        int currentBid = 0;
+        bidObject = ClassInitializer.initializer().getBiddingDetailsModel();
+        propertyBidded = 0;
         BiddingDetailsModel selectedPropertyForBid = new BiddingDetailsModel();
 
         for(PropertyDetailsModel propertyDetailsObject : listOfPropertyDetails) {
@@ -47,7 +56,6 @@ public class BidProperty {
                     if(biddingDetailsObject.getPropertyId().equals(propertyDetailsObject.getPropertyId())){
                         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bid.price")+biddingDetailsObject.getBid());
                         propertyBidded = 1;
-//                        currentBid = biddingDetailsObject.getBid();
                         selectedPropertyForBid.setBid(biddingDetailsObject.getBid());
                         selectedPropertyForBid.setPropertyId(String.valueOf(Integer.valueOf(propertyIdSelected)));
                         selectedPropertyForBid.setUserEmailId(ControllerProperties.getControllerPropertyValue("loggedInUser"));
@@ -58,8 +66,7 @@ public class BidProperty {
                 }
             }
         }
-        System.out.println("Enter your bid:");
-        //System.out.println("Current highest bid on this property:"+);
+        roomsicleCLI.printMessage("enter.bid.message");
         bidObject.setBid(roomsicleCLI.getNumberResponse());
         if(propertyBidded==0 || (propertyBidded==1 && bidObject.getBid()>selectedPropertyForBid.getBid())){
             for(PropertyDetailsModel propertyDetailsObject : listOfPropertyDetails) {
@@ -68,13 +75,19 @@ public class BidProperty {
                     bidObject.setUserEmailId(ControllerProperties.getControllerPropertyValue("loggedInUser"));
                     biddingDAO.enterBid(bidObject);
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bid.placed"));
+                    validation = true;
                     break;
                 }
             }
         }
         else{
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bid.error.message"));
+            validation = true;
         }
+    }
+
+    public boolean getValidation(){
+        return validation;
     }
 
 }

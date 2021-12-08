@@ -1,2 +1,7 @@
-package controller.propertybidding;public interface IAvailableProperties {
+package controller.propertybidding;
+
+public interface IAvailableProperties {
+
+    void displayProperties();
+
 }

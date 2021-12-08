@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import commandline.CommandLineInputProperties;
-import commandline.RoomsicleCLI;
+import commandline.IRoomsicleCLI;
+import controller.ClassInitializer;
 import controller.ControllerProperties;
 import controller.getloggedinuser.GetLoggedInUserController;
 import controller.getloggedinuser.IGetLoggedInUserController;
-import database.DatabaseQueryProperties;
-import database.UserDetailsDAO;
-import models.UserDetailsModel;
+import database.IUserDetailsDAO;
+import models.fitroommatemodels.UserDetailsModel;
 
 public class BestFitRoommatesDisplayController implements IBestFitRoommatesDisplayController {
 
@@ -20,16 +20,18 @@ public class BestFitRoommatesDisplayController implements IBestFitRoommatesDispl
 		String loggedInUserId;
 		IGetLoggedInUserController loggedInUser;
 		HashMap<String, Integer> usersMatchScoreMap;
-		UserDetailsDAO userDetails;
+		IUserDetailsDAO userDetails;
 		ArrayList<UserDetailsModel> listOfUserDetails;
+		IRoomsicleCLI roomsicleCLI;
+
 		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
-		loggedInUser = new GetLoggedInUserController();
+		loggedInUser = ClassInitializer.initializer().getLoggedInUserController();
 		usersMatchScoreMap = bestFitRoommate.findBestFit(loggedInUser);
-		userDetails = new UserDetailsDAO();
+		userDetails = ClassInitializer.initializer().getIUserDetailsDAO();
 		listOfUserDetails = userDetails.getUserDetails();
 		
 		//Object is created to print on the Command Line Interface(CLI)
-		RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
+		roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
 		roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.page.opening"));
 
 		for(UserDetailsModel usersDetails : listOfUserDetails) {

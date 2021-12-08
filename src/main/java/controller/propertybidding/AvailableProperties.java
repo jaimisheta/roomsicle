@@ -3,24 +3,32 @@ package controller.propertybidding;
 import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
-import database.PropertyDetailsDAO;
-import database.PropertyOwnersDAO;
-import models.PropertyDetailsModel;
-import models.PropertyOwnerModel;
+import controller.ClassInitializer;
+import database.propertybiddingdao.IPropertyDetailsDAO;
+import database.propertybiddingdao.IPropertyOwnersDAO;
+import database.propertybiddingdao.PropertyDetailsDAO;
+import database.propertybiddingdao.PropertyOwnersDAO;
+import models.biddingmodels.PropertyDetailsModel;
+import models.biddingmodels.PropertyOwnerModel;
 
 import java.util.ArrayList;
 
-public class AvailableProperties {
+public class AvailableProperties implements IAvailableProperties{
 
     //public static void main(String args[]) {
     public void displayProperties(){
-        IRoomsicleCLI roomsicleCLI = new RoomsicleCLI();
-        PropertyOwnersDAO propertiesOwners = new PropertyOwnersDAO();
-        ArrayList<PropertyOwnerModel> listOfPropertyOwners = propertiesOwners.getPropertyOwnerDetails();
-        System.out.println(propertiesOwners.getPropertyOwnerDetails().get(2).getEmailId());
+        IRoomsicleCLI roomsicleCLI;
+        IPropertyOwnersDAO propertiesOwners;
+        ArrayList<PropertyOwnerModel> listOfPropertyOwners;
+        IPropertyDetailsDAO propertiesDetails;
+        ArrayList<PropertyDetailsModel> listOfPropertyDetails;
 
-        PropertyDetailsDAO propertiesDetails = new PropertyDetailsDAO();
-        ArrayList<PropertyDetailsModel> listOfPropertyDetails = propertiesDetails.getPropertyDetails();
+        roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
+        propertiesOwners = ClassInitializer.initializer().getPropertyOwnersDAO();
+        listOfPropertyOwners = propertiesOwners.getPropertyOwnerDetails();
+        propertiesDetails = ClassInitializer.initializer().getPropertyDetailsDAO();
+        listOfPropertyDetails = propertiesDetails.getPropertyDetails();
+
 
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("properties.display.page.opening"));
         for(PropertyDetailsModel propertyDetailsObject : listOfPropertyDetails) {

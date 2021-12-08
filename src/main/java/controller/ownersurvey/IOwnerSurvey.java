@@ -2,7 +2,8 @@ package controller.ownersurvey;
 
 import models.OwnerSurveyModel;
 
-public interface IOwnerSurvey {
+public interface
+IOwnerSurvey {
 
      void getValue(OwnerSurveyModel ownerSurveyModel);
 

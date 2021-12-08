@@ -1,6 +1,6 @@
-package models;
+package models.biddingmodels;
 
-public class BiddingDetailsModel {
+public class BiddingDetailsModel implements IBiddingDetailsModel{
 
     private String userEmailId;
     private String propertyId;

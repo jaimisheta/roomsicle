@@ -1,6 +1,6 @@
-package models;
+package models.biddingmodels;
 
-public class PropertyOwnerModel {
+public class PropertyOwnerModel implements IPropertyOwnerDetails{
 
     private String firstName;
     private String lastName;

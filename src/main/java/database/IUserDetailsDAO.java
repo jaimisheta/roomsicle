@@ -1,6 +1,6 @@
 package database;
 
-import models.UserDetailsModel;
+import models.fitroommatemodels.UserDetailsModel;
 
 import java.util.ArrayList;
 

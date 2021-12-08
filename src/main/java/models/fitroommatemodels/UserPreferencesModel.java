@@ -1,6 +1,6 @@
-package models;
+package models.fitroommatemodels;
 
-public class UserPreferencesModel {
+public class UserPreferencesModel implements IUserPreferenceModel{
 	
 	private String userId;
 	private String roommateGender;

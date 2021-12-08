@@ -1,6 +1,8 @@
-package database;
+package database.propertybiddingdao;
 
-import models.PropertyOwnerModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.biddingmodels.PropertyOwnerModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class PropertyOwnersDAO {
+public class PropertyOwnersDAO implements IPropertyOwnersDAO{
 
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     Connection connection;

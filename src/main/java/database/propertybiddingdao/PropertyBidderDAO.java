@@ -1,6 +1,8 @@
-package database;
+package database.propertybiddingdao;
 
-import models.BiddingDetailsModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.biddingmodels.BiddingDetailsModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class PropertyBidderDAO {
+public class PropertyBidderDAO implements IPropertyBidderDAO{
 
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     Connection connection;
@@ -16,7 +18,9 @@ public class PropertyBidderDAO {
 
     public ArrayList<BiddingDetailsModel> getPropertyBidDetails() {
 
-        ArrayList<BiddingDetailsModel> listOfAllPropertyBiddings = new ArrayList<BiddingDetailsModel>();
+        ArrayList<BiddingDetailsModel> listOfAllPropertyBiddings;
+
+        listOfAllPropertyBiddings = new ArrayList<BiddingDetailsModel>();
         String query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("property.bidding.details.query");
 
         try(Connection conn = databaseConnection.getConnectionObject();

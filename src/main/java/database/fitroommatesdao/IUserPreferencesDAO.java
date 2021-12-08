@@ -1,2 +1,11 @@
-package database.fitroommatesdao;public interface IUserPreferencesDAO {
+package database.fitroommatesdao;
+
+import models.fitroommatemodels.UserPreferencesModel;
+
+import java.util.ArrayList;
+
+public interface IUserPreferencesDAO {
+
+    ArrayList<UserPreferencesModel> getUserPreferences();
+
 }

@@ -4,7 +4,7 @@ import commandline.CommandLineInputProperties;
 import controller.ControllerProperties;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
-import models.UserDetailsModel;
+import models.fitroommatemodels.UserDetailsModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
