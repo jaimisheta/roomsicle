@@ -1,6 +1,7 @@
 package commandline;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -9,12 +10,19 @@ public class CommandLineInputProperties {
     private static Properties properties;
 
     public static void loadCommandLineInputPropertiesFile() {
-        String path = System.getProperty("user.dir");
         properties = new Properties();
         try {
-            FileInputStream fileInputStream = new FileInputStream(path + "/classes/CommandLineInput.properties");
+            FileInputStream fileInputStream = new FileInputStream(CommandLineConstant.COMMAND_LINE_INPUT_PROPERTIES_FILE_PATH_UNDER_RESOURCES);
             properties.load(fileInputStream);
             fileInputStream.close();
+        } catch (FileNotFoundException e) {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(CommandLineConstant.COMMAND_LINE_INPUT_PROPERTIES_FILE_PATH);
+                properties.load(fileInputStream);
+                fileInputStream.close();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

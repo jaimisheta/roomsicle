@@ -6,7 +6,6 @@ import models.UserSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class UserBudgetTest {
 
@@ -21,26 +20,26 @@ public class UserBudgetTest {
     @Test
     public void validateValidUserBudgetInputTest() {
         userBudgetInput = new UserBudget(userSurveyModel, 500);
-        userBudgetInput.validateValue();
-        Assert.assertEquals(5, userSurveyModel.getUserBudget());
+        userBudgetInput.validateValue(userSurveyModel);
+        Assert.assertEquals(500, userSurveyModel.getUserBudget());
     }
 
     @Test
     public void validateNegativeUserBudgetInputTest() {
         userBudgetInput = new UserBudget(userSurveyModel, -1);
-        userBudgetInput.validateValue();
+        userBudgetInput.validateValue(userSurveyModel);
         Assert.assertEquals(0, userSurveyModel.getUserBudget());
     }
 
     @Test
     public void validateNegativeUserBudgetReturnValueTest() {
         userBudgetInput = new UserBudget(userSurveyModel, -1);
-        Assertions.assertFalse(userBudgetInput.validateValue());
+        Assert.assertFalse(userBudgetInput.validateValue(userSurveyModel));
     }
 
     @Test
     public void validateInvalidUserBudgetInputTest() {
         userBudgetInput = new UserBudget(userSurveyModel, 0);
-        Assertions.assertFalse(userBudgetInput.validateValue());
+        Assert.assertFalse(userBudgetInput.validateValue(userSurveyModel));
     }
 }

@@ -6,7 +6,6 @@ import models.OwnerSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class BedroomCountTest {
 
@@ -21,26 +20,26 @@ public class BedroomCountTest {
     @Test
     public void validateValidBedroomInputTest() {
         bedroomCountInput = new BedroomCount(ownerSurveyModel, 5);
-        bedroomCountInput.validateValue();
+        bedroomCountInput.validateValue(ownerSurveyModel);
         Assert.assertEquals(5, ownerSurveyModel.getNumberOfBedrooms());
     }
 
     @Test
     public void validateNegativeBedroomInputTest() {
         bedroomCountInput = new BedroomCount(ownerSurveyModel, -1);
-        bedroomCountInput.validateValue();
+        bedroomCountInput.validateValue(ownerSurveyModel);
         Assert.assertEquals(0, ownerSurveyModel.getNumberOfBedrooms());
     }
 
     @Test
     public void validateNegativeBedroomInputReturnValueTest() {
         bedroomCountInput = new BedroomCount(ownerSurveyModel, -1);
-        Assertions.assertEquals(false, bedroomCountInput.validateValue());
+        Assert.assertFalse(bedroomCountInput.validateValue(ownerSurveyModel));
     }
 
     @Test
     public void validateInValidBedroomInput() {
         bedroomCountInput = new BedroomCount(ownerSurveyModel, 10);
-        Assertions.assertEquals(false, bedroomCountInput.validateValue());
+        Assert.assertFalse(bedroomCountInput.validateValue(ownerSurveyModel));
     }
 }

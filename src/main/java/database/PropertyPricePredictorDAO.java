@@ -9,12 +9,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class PropertyPricePredictorDAO {
+public class PropertyPricePredictorDAO implements IPropertyPricePredictorDAO {
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     static final Logger logger = LogManager.getLogger(PropertyPricePredictorDAO.class);
     Connection connection;
     Statement statement;
 
+    @Override
     public void insertPropertyPrice(OwnerSurveyModel ownerSurveyModel, PropertyPriceCalculatorModel propertyPriceCalculatorModel) {
         String query;
         int propertyPrice;

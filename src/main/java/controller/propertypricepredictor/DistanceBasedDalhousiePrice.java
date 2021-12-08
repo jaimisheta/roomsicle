@@ -21,7 +21,7 @@ public class DistanceBasedDalhousiePrice implements IDistanceBasedPriceCalculato
             distanceDalhousiePrice = Integer.parseInt(ControllerProperties.getControllerPropertyValue("property.price.predictor.distance.priority.three.dalhousie.price"));
         } else if (priority == Integer.parseInt(ControllerProperties.getControllerPropertyValue("property.price.predictor.distance.priority.four"))) {
             distanceDalhousiePrice = Integer.parseInt(ControllerProperties.getControllerPropertyValue("property.price.predictor.distance.priority.four.dalhousie.price"));
-        } else{
+        } else {
             throw new IllegalArgumentException("invalid argument");
         }
         logger.info("Based on the Dalhousie distance from the property, property price is increased by: " + distanceDalhousiePrice);

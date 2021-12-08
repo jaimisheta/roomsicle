@@ -1,6 +1,5 @@
 package commandline;
 
-import java.io.Console;
 import java.util.Scanner;
 
 public class RoomsicleCLI implements IRoomsicleCLI {
@@ -25,6 +24,15 @@ public class RoomsicleCLI implements IRoomsicleCLI {
         int response;
         scanner = new Scanner(System.in);
         response = scanner.nextInt();
+        scanner.nextLine();
+        return response;
+    }
+
+    @Override
+    public long getLongNumberResponse() {
+        long response;
+        scanner = new Scanner(System.in);
+        response = scanner.nextLong();
         scanner.nextLine();
         return response;
     }

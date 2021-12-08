@@ -6,12 +6,12 @@ public class OwnerSurveyModel {
     private String address;
     private int numberOfBedrooms;
     private boolean isUtilitiesProvided;
-    private int numberOfVacancies;
     private int dalhousieDistance;
     private int groceryStoreDistance;
     private int downtownDistance;
     private int theaterDistance;
     private int propertyPrice;
+    private int numberOfVacancies;
 
     public OwnerSurveyModel() {
     }
@@ -63,14 +63,6 @@ public class OwnerSurveyModel {
         isUtilitiesProvided = utilitiesProvided;
     }
 
-    public int getNumberOfVacancies() {
-        return numberOfVacancies;
-    }
-
-    public void setNumberOfVacancies(int numberOfVacancies) {
-        this.numberOfVacancies = numberOfVacancies;
-    }
-
     public int getDalhousieDistance() {
         return dalhousieDistance;
     }
@@ -117,5 +109,9 @@ public class OwnerSurveyModel {
 
     public void setPropertyPrice(int propertyPrice) {
         this.propertyPrice = propertyPrice;
+    }
+
+    public void setNumberOfVacancies(int numberOfVacancies) {
+        this.numberOfVacancies = numberOfVacancies;
     }
 }

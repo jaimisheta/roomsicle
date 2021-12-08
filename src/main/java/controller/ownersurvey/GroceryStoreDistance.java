@@ -1,6 +1,7 @@
 package controller.ownersurvey;
 
 import commandline.CommandLineInputProperties;
+import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
 import controller.usersurvey.UserAlcoholHabits;
 import models.OwnerSurveyModel;
@@ -13,15 +14,13 @@ import static controller.ownersurvey.OwnerSurveyConstants.ONE;
 
 public class GroceryStoreDistance implements IOwnerSurvey {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     static final Logger logger = LogManager.getLogger(UserAlcoholHabits.class);
 
     OwnerSurveyModel ownerSurveyModel;
     boolean hasValidValue = false;
     int propertyDistanceFromGroceryStore;
 
-    public GroceryStoreDistance(OwnerSurveyModel ownerSurveyModel) {
-        this.ownerSurveyModel = ownerSurveyModel;
+    public GroceryStoreDistance() {
     }
 
     public GroceryStoreDistance(OwnerSurveyModel ownerSurveyModel, int propertyDistanceFromGroceryStore) {
@@ -31,16 +30,15 @@ public class GroceryStoreDistance implements IOwnerSurvey {
 
     //get grocery store distance input from owner
     @Override
-    public void getValue() {
-        DowntownDistance downtownDistance = new DowntownDistance(ownerSurveyModel);
+    public void getValue(OwnerSurveyModel ownerSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = new RoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.grocery.store.distance.message"));
             propertyDistanceFromGroceryStore = roomsicleCLI.getNumberResponse();
             logger.info("grocery store distance input from owner: " + propertyDistanceFromGroceryStore);
             while (hasValidValue == false) {
-                if (validateValue()) {
+                if (validateValue(ownerSurveyModel)) {
                     hasValidValue = true;
-                    downtownDistance.getValue();
                     break;
                 } else {
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.grocery.store.distance.message"));
@@ -48,8 +46,9 @@ public class GroceryStoreDistance implements IOwnerSurvey {
                 }
             }
         } catch (InputMismatchException e) {
+            logger.error("Input Mismatch exception occurred");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            getValue();
+            getValue(ownerSurveyModel);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,17 +56,20 @@ public class GroceryStoreDistance implements IOwnerSurvey {
 
     //validate grocery store distance input from owner
     @Override
-    public boolean validateValue() {
+    public boolean validateValue(OwnerSurveyModel ownerSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = new RoomsicleCLI();
         boolean distanceFromGroceryStore = false;
         try {
             logger.info("validate grocery store distance input from owner: " + propertyDistanceFromGroceryStore);
             if (propertyDistanceFromGroceryStore >= ONE) {
                 distanceFromGroceryStore = true;
-                setValue();
+                setValue(ownerSurveyModel);
             } else {
-                throw new IllegalArgumentException(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.illegal.argument.exception.invalid.distance.message"));
+                logger.error("validation failed, invalid value entered");
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.illegal.argument.exception.invalid.distance.message"));
             }
         } catch (Exception e) {
+            logger.error("Exception occurred while validating input");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.illegal.argument.exception.invalid.distance.message"));
         }
         return distanceFromGroceryStore;
@@ -75,7 +77,7 @@ public class GroceryStoreDistance implements IOwnerSurvey {
 
     //set grocery store distance
     @Override
-    public void setValue() {
+    public void setValue(OwnerSurveyModel ownerSurveyModel) {
         ownerSurveyModel.setGroceryStoreDistance(propertyDistanceFromGroceryStore);
         logger.info("grocery store distance is set to: " + propertyDistanceFromGroceryStore);
     }
