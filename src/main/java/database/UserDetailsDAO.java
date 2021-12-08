@@ -1,17 +1,19 @@
-package database;
+package database.fitroommatesdao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import models.UserDetailsModel;
 
-public class UserDetailsDAO {
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import database.IUserDetailsDAO;
+import models.fitroommatemodels.UserDetailsModel;
+
+public class UserDetailsDAO implements IUserDetailsDAO {
 
 	DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
-	Connection connection;
-	Statement statement;
 
 	public ArrayList<UserDetailsModel> getUserDetails() {
 
@@ -35,5 +37,6 @@ public class UserDetailsDAO {
 		} 
 		return listOfAllUserDetails;
 	}
+
 
 }

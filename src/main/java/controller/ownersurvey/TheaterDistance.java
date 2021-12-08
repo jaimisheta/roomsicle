@@ -1,6 +1,7 @@
 package controller.ownersurvey;
 
 import commandline.CommandLineInputProperties;
+import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
 import controller.propertypricepredictor.PropertyPriceCalculator;
 import database.OwnerSurveyDAO;
@@ -14,17 +15,13 @@ import static controller.ownersurvey.OwnerSurveyConstants.ONE;
 
 public class TheaterDistance implements IOwnerSurvey {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
-    OwnerSurveyDAO ownerSurveyDAO = new OwnerSurveyDAO();
-    PropertyPriceCalculator propertyPriceCalculator = new PropertyPriceCalculator();
     static final Logger logger = LogManager.getLogger(TheaterDistance.class);
 
     OwnerSurveyModel ownerSurveyModel;
     boolean hasValidValue = false;
     int propertyDistanceFromTheater;
 
-    public TheaterDistance(OwnerSurveyModel ownerSurveyModel) {
-        this.ownerSurveyModel = ownerSurveyModel;
+    public TheaterDistance() {
     }
 
     public TheaterDistance(OwnerSurveyModel ownerSurveyModel, int propertyDistanceFromTheater) {
@@ -34,19 +31,15 @@ public class TheaterDistance implements IOwnerSurvey {
 
     //get theater distance input from owner
     @Override
-    public void getValue() {
+    public void getValue(OwnerSurveyModel ownerSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = new RoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.theater.distance.message"));
             propertyDistanceFromTheater = roomsicleCLI.getNumberResponse();
             logger.info("theater distance input from owner: " + propertyDistanceFromTheater);
             while (hasValidValue == false) {
-                if (validateValue()) {
+                if (validateValue(ownerSurveyModel)) {
                     hasValidValue = true;
-                    logger.info("insert owner survey data into database");
-                    ownerSurveyDAO.insertOwnerSurveyDetails(ownerSurveyModel);
-                    logger.info("calculate price of the property");
-                    propertyPriceCalculator.propertyPrice(ownerSurveyModel);
-                    roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.profile.creation.message"));
                     break;
                 } else {
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.theater.distance.message"));
@@ -54,26 +47,28 @@ public class TheaterDistance implements IOwnerSurvey {
                 }
             }
         } catch (InputMismatchException e) {
+            logger.error("Input Mismatch exception occurred");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
-            getValue();
-        } catch (Exception e) {
-            e.printStackTrace();
+            getValue(ownerSurveyModel);
         }
     }
 
     //validate theater distance input from owner
     @Override
-    public boolean validateValue() {
+    public boolean validateValue(OwnerSurveyModel ownerSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = new RoomsicleCLI();
         boolean distanceFromTheater = false;
         try {
             logger.info("validating distance input from owner: " + propertyDistanceFromTheater);
             if (propertyDistanceFromTheater >= ONE) {
                 distanceFromTheater = true;
-                setValue();
+                setValue(ownerSurveyModel);
             } else {
-                throw new IllegalArgumentException(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.illegal.argument.exception.invalid.distance.message"));
+                logger.error("validation failed, invalid value entered");
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.illegal.argument.exception.invalid.distance.message"));
             }
         } catch (Exception e) {
+            logger.error("Exception occurred while validating input");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.illegal.argument.exception.invalid.distance.message"));
         }
         return distanceFromTheater;
@@ -81,7 +76,7 @@ public class TheaterDistance implements IOwnerSurvey {
 
     //set theater distance
     @Override
-    public void setValue() {
+    public void setValue(OwnerSurveyModel ownerSurveyModel) {
         ownerSurveyModel.setTheaterDistance(propertyDistanceFromTheater);
         logger.info("theater distance is set to: " + propertyDistanceFromTheater);
     }

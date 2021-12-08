@@ -1,11 +1,13 @@
 package controller.ownersurvey;
 
+import models.OwnerSurveyModel;
+
 public interface IOwnerSurvey {
 
-     void getValue();
+     void getValue(OwnerSurveyModel ownerSurveyModel);
 
-     boolean validateValue();
+     boolean validateValue(OwnerSurveyModel ownerSurveyModel);
 
-     void setValue();
+     void setValue(OwnerSurveyModel ownerSurveyModel);
 
 }

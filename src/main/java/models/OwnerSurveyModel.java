@@ -6,7 +6,6 @@ public class OwnerSurveyModel {
     private String address;
     private int numberOfBedrooms;
     private boolean isUtilitiesProvided;
-    private int numberOfVacancies;
     private int dalhousieDistance;
     private int groceryStoreDistance;
     private int downtownDistance;
@@ -60,14 +59,6 @@ public class OwnerSurveyModel {
 
     public void setUtilitiesProvided(boolean utilitiesProvided) {
         isUtilitiesProvided = utilitiesProvided;
-    }
-
-    public int getNumberOfVacancies() {
-        return numberOfVacancies;
-    }
-
-    public void setNumberOfVacancies(int numberOfVacancies) {
-        this.numberOfVacancies = numberOfVacancies;
     }
 
     public int getDalhousieDistance() {

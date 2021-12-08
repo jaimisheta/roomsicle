@@ -1,10 +1,12 @@
 package controller.usersurvey;
 
+import models.UserSurveyModel;
+
 public interface IUserSurvey {
 
-    void getValue();
+    void getValue(UserSurveyModel userSurveyModel);
 
-    boolean validateValue();
+    boolean validateValue(UserSurveyModel userSurveyModel);
 
-    void setValue();
+    void setValue(UserSurveyModel userSurveyModel);
 }

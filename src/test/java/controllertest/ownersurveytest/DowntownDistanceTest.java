@@ -20,26 +20,26 @@ public class DowntownDistanceTest {
     @Test
     public void validateValidDowntownDistanceInputTest() {
         downtownDistanceInput = new DowntownDistance(ownerSurveyModel, 5);
-        downtownDistanceInput.validateValue();
+        downtownDistanceInput.validateValue(ownerSurveyModel);
         Assert.assertEquals(5, ownerSurveyModel.getDowntownDistance());
     }
 
     @Test
     public void validateNegativeDowntownDistanceInputTest() {
         downtownDistanceInput = new DowntownDistance(ownerSurveyModel, -1);
-        downtownDistanceInput.validateValue();
+        downtownDistanceInput.validateValue(ownerSurveyModel);
         Assert.assertEquals(0, ownerSurveyModel.getDowntownDistance());
     }
 
     @Test
     public void validateNegativeDowntownDistanceReturnValueTest() {
         downtownDistanceInput = new DowntownDistance(ownerSurveyModel, -1);
-        Assert.assertFalse(downtownDistanceInput.validateValue());
+        Assert.assertFalse(downtownDistanceInput.validateValue(ownerSurveyModel));
     }
 
     @Test
     public void validateInvalidDowntownDistanceInputTest() {
         downtownDistanceInput = new DowntownDistance(ownerSurveyModel, 0);
-        Assert.assertFalse(downtownDistanceInput.validateValue());
+        Assert.assertFalse(downtownDistanceInput.validateValue(ownerSurveyModel));
     }
 }

@@ -20,20 +20,20 @@ public class UserSmokingHabitsTest {
     @Test
     public void validateSmokingHabitsYesInputTest() {
         userSmokingHabitsInput = new UserSmokingHabits(userSurveyModel, 1);
-        userSmokingHabitsInput.validateValue();
+        userSmokingHabitsInput.validateValue(userSurveyModel);
         Assert.assertEquals("Yes", userSurveyModel.getUserSmokingHabits());
     }
 
     @Test
     public void validateSmokingHabitsNoInputTest() {
         userSmokingHabitsInput = new UserSmokingHabits(userSurveyModel, 2);
-        userSmokingHabitsInput.validateValue();
+        userSmokingHabitsInput.validateValue(userSurveyModel);
         Assert.assertEquals("No", userSurveyModel.getUserSmokingHabits());
     }
 
     @Test
     public void validateSmokingHabitsInvalidInputTest() {
         userSmokingHabitsInput = new UserSmokingHabits(userSurveyModel, 3);
-        Assert.assertFalse(userSmokingHabitsInput.validateValue());
+        Assert.assertFalse(userSmokingHabitsInput.validateValue(userSurveyModel));
     }
 }

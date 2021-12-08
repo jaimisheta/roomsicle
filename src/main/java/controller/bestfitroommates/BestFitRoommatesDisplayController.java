@@ -8,6 +8,7 @@ import commandline.RoomsicleCLI;
 import controller.ControllerProperties;
 import controller.getloggedinuser.GetLoggedInUserController;
 import controller.getloggedinuser.IGetLoggedInUserController;
+import database.DatabaseQueryProperties;
 import database.UserDetailsDAO;
 import models.UserDetailsModel;
 
