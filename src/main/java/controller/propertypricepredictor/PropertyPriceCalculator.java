@@ -1,9 +1,10 @@
 package controller.propertypricepredictor;
 
 import commandline.CommandLineInputProperties;
-import commandline.RoomsicleCLI;
+import commandline.IRoomsicleCLI;
+import controller.ClassInitializer;
 import controller.usersurvey.UserAlcoholHabits;
-import database.PropertyPricePredictorDAO;
+import database.IPropertyPricePredictorDAO;
 import models.OwnerSurveyModel;
 import models.PropertyPriceCalculatorModel;
 import org.apache.logging.log4j.LogManager;
@@ -11,21 +12,21 @@ import org.apache.logging.log4j.Logger;
 
 public class PropertyPriceCalculator {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
-    PropertyPriceCalculatorModel propertyPriceCalculatorModel = new PropertyPriceCalculatorModel();
-    PropertyPricePredictorDAO propertyPricePredictorDAO = new PropertyPricePredictorDAO();
     static final Logger logger = LogManager.getLogger(UserAlcoholHabits.class);
 
     public void propertyPrice(OwnerSurveyModel ownerSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
+        PropertyPriceCalculatorModel propertyPriceCalculatorModel = ClassInitializer.initializer().getPropertyPriceCalculatorModel();
+        IPropertyPricePredictorDAO propertyPricePredictorDAO = ClassInitializer.initializer().getPropertyPricePredictorDAO();
         int propertyPrice;
         int basePrice;
         int distanceBasedPrice;
         int utilitiesPrice;
 
         try {
-            ICalculateIndividualFeaturePrice distanceIndividualPrice = new DistanceBasedTotalPrice();
-            ICalculateIndividualFeaturePrice propertyBasePrice = new PropertyBasePrice();
-            ICalculateIndividualFeaturePrice utilitiesBasedPrice = new UtilitiesBasedPrice();
+            ICalculateIndividualFeaturePrice distanceIndividualPrice = ClassInitializer.initializer().getDistanceBasedTotalPrice();
+            ICalculateIndividualFeaturePrice propertyBasePrice = ClassInitializer.initializer().getPropertyBasePrice();
+            ICalculateIndividualFeaturePrice utilitiesBasedPrice = ClassInitializer.initializer().getUtilitiesBasedPrice();
 
             distanceBasedPrice = distanceIndividualPrice.calculatePrice(ownerSurveyModel);
             logger.info("distanceBasedPrice: " + distanceBasedPrice);

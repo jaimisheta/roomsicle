@@ -14,6 +14,7 @@ import models.fitroommatemodels.UserDetailsModel;
 
 public class FilterRoommatesDisplayController implements IFilterRoommatesDisplayController {
 
+	boolean validation = false;
 	//Method to display results of filtered roommates
 	public void getFilteredFits(IFilterRoommates filteredPreferences) {
 
@@ -48,9 +49,11 @@ public class FilterRoommatesDisplayController implements IFilterRoommatesDisplay
 				roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.roommate.display.matched.preferences")+usersMatchScoreMap.get(usersDetails.getEmailId()));
 			}
 		}
-
+		validation = true;
 	}
 
-
+	public boolean getValidation(){
+		return validation;
+	}
 
 }

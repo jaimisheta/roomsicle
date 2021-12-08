@@ -1,12 +1,12 @@
 package controller.systemgeneratedproperties;
 
-import commandline.RoomsicleCLI;
+import commandline.IRoomsicleCLI;
+import controller.ClassInitializer;
 import controller.ControllerConstant;
 import controller.ControllerProperties;
+import database.ISystemGeneratedPropertiesDAO;
 import database.OwnerSurveyDAO;
-import database.SystemGeneratedPropertiesDAO;
 import models.SystemGeneratedPropertiesModel;
-import models.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,20 +15,10 @@ import java.util.HashMap;
 
 public class SystemGeneratedProperties implements ISystemGeneratedProperties {
 
-    SystemGeneratedPropertiesDAO systemGeneratedPropertiesDAO = new SystemGeneratedPropertiesDAO();
     static final Logger logger = LogManager.getLogger(OwnerSurveyDAO.class);
 
-    UserSurveyModel userSurveyModel;
     HashMap<String, Integer> userDetails = new HashMap<>();
     ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModels = new ArrayList<>();
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
-
-    public SystemGeneratedProperties() {
-    }
-
-    public SystemGeneratedProperties(UserSurveyModel userSurveyModel) {
-        this.userSurveyModel = userSurveyModel;
-    }
 
     public void initializeSystemGeneratedProperties() {
         getUserBudgetAndDistanceValues();
@@ -39,13 +29,15 @@ public class SystemGeneratedProperties implements ISystemGeneratedProperties {
     //get user budget and distance values
     @Override
     public HashMap<String, Integer> getUserBudgetAndDistanceValues() {
+        ISystemGeneratedPropertiesDAO systemGeneratedPropertiesDAO = ClassInitializer.initializer().getSystemGeneratedPropertiesDAO();
         logger.info("Getting user budget and distance from dalhousie preference");
-        userDetails = systemGeneratedPropertiesDAO.getUserBudgetAndDistancePreference(userSurveyModel);
+        userDetails = systemGeneratedPropertiesDAO.getUserBudgetAndDistancePreference();
         return userDetails;
     }
 
     @Override
     public ArrayList<SystemGeneratedPropertiesModel> getSystemGeneratedProperties() {
+        ISystemGeneratedPropertiesDAO systemGeneratedPropertiesDAO = ClassInitializer.initializer().getSystemGeneratedPropertiesDAO();
         logger.info("Getting system generated property details based on user preference");
         systemGeneratedPropertiesModels = systemGeneratedPropertiesDAO.getSystemGeneratedPropertyDetails(userDetails);
         return systemGeneratedPropertiesModels;
@@ -53,6 +45,7 @@ public class SystemGeneratedProperties implements ISystemGeneratedProperties {
 
     @Override
     public void printSystemGeneratedProperties(ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModels) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         int ownerCount = ControllerConstant.OWNER_COUNT;
         logger.info("Display properties matching user preferences");
         for (SystemGeneratedPropertiesModel propertiesModel : systemGeneratedPropertiesModels) {

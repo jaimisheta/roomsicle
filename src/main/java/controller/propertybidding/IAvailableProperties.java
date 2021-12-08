@@ -4,4 +4,6 @@ public interface IAvailableProperties {
 
     void displayProperties();
 
+    boolean getValidation();
+
 }

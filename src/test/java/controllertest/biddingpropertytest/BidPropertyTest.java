@@ -17,4 +17,10 @@ public class BidPropertyTest {
         assertEquals(asker.getValidation(),true);
     }
 
+    @Test
+    public void testBidProperty2(){
+        IBidProperty asker = mock(BidProperty.class);
+        when(asker.getValidation()).thenReturn(false);
+        assertEquals(asker.getValidation(),false);
+    }
 }

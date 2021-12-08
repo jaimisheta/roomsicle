@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 public class AvailableProperties implements IAvailableProperties{
 
+    boolean validation = false;
+
     //public static void main(String args[]) {
     public void displayProperties(){
         IRoomsicleCLI roomsicleCLI;
@@ -44,7 +46,14 @@ public class AvailableProperties implements IAvailableProperties{
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("property.details.display.propertyrent")+(propertyDetailsObject.getPropertyPrice()));
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("property.details.display.individualrent")+(propertyDetailsObject.getPropertyPrice()/4));
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("separator"));
+            validation = true;
         }
 
     }
+
+    public boolean getValidation(){
+        return validation;
+    }
+
+
 }

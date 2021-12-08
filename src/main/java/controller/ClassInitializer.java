@@ -21,6 +21,8 @@ import controller.userprofile.IUserHomePageController;
 import controller.welcomepage.IWelcomePageController;
 import controller.userprofile.UserHomePageController;
 import controller.welcomepage.WelcomePageController;
+import controller.ownersurvey.*;
+import controller.propertypricepredictor.*;
 import controller.userlogin.*;
 import controller.ownersurvey.*;
 import controller.propertypricepredictor.PropertyPriceCalculator;
@@ -28,12 +30,16 @@ import controller.userlogin.CheckSurveyTaken;
 import controller.userlogin.ICheckSurveyTaken;
 import controller.userlogin.IUserLoginController;
 import controller.userlogin.UserLoginController;
+import controller.userprofile.IUserHomePageController;
 import controller.userprofile.IUserProfile;
+import controller.userprofile.UserHomePageController;
 import controller.userprofile.UserProfile;
 import controller.userregistration.IUserRegistrationController;
 import controller.userregistration.UserRegistrationController;
 import controller.usersurvey.*;
 import controller.verifications.*;
+import controller.welcomepage.IWelcomePageController;
+import controller.welcomepage.WelcomePageController;
 import database.*;
 import database.fitroommatesdao.IUserPreferencesDAO;
 import database.UserDetailsDAO;
@@ -44,6 +50,7 @@ import database.ownerpropertydetailsdao.IOwnerPropertyDetailsDAO;
 import database.ownerpropertydetailsdao.OwnerPropertyDetailsDAO;
 import database.IUserDetailsDAO;
 import database.propertybiddingdao.*;
+import database.propertybiddingdao.PropertyDetailsDAO;
 import database.surveytakendao.ISurveyTakenDAO;
 import database.surveytakendao.SurveyTakenDAO;
 import database.userlogindao.IUserLoginDAO;
@@ -51,6 +58,8 @@ import database.userlogindao.UserLoginDAO;
 import database.userregistrationdao.IUserRegistrationDAO;
 import database.userregistrationdao.UserRegistrationDAO;
 import models.OwnerSurveyModel;
+import models.PropertyPriceCalculatorModel;
+import models.SystemGeneratedPropertiesModel;
 import models.UserSurveyModel;
 import models.biddingmodels.*;
 import models.fitroommatemodels.IUserDetailsModel;
@@ -134,36 +143,51 @@ public class ClassInitializer {
     IPropertyOwnerDetails propertyOwnerDetails;
     IBestFitRoommateController bestFitRoommateController;
     IBestFitRoommatesDisplayController bestFitRoommatesDisplayController;
+    PropertyPriceCalculatorModel propertyPriceCalculatorModel;
+    IPropertyPricePredictorDAO propertyPricePredictorDAO;
+    IDistanceBasedPriceCalculator distanceBasedDalhousiePrice;
+    IDistanceBasedPriceCalculator distanceBasedGroceryStorePrice;
+    IDistanceBasedPriceCalculator distanceBasedDowntownPrice;
+    IDistanceBasedPriceCalculator distanceBasedTheaterPrice;
+    LocationBasedPriceFactory locationBasedPriceFactory;
+    LocationBasedPrice dalhousieDistancePrice;
+    LocationBasedPrice groceryStoreDistancePrice;
+    LocationBasedPrice downtownDistancePrice;
+    LocationBasedPrice theaterDistancePrice;
+    ICalculateIndividualFeaturePrice distanceBasedTotalPrice;
+    ICalculateIndividualFeaturePrice propertyBasePrice;
+    ICalculateIndividualFeaturePrice utilitiesBasedPrice;
+    ISystemGeneratedPropertiesDAO systemGeneratedPropertiesDAO;
+    SystemGeneratedPropertiesModel systemGeneratedPropertiesModel;
 
-    private ClassInitializer()
-    {
+    private ClassInitializer() {
         roomsicleCLI = new RoomsicleCLI();
-        makeCLICommentListController =new MakeCLICommentListController();
-        userHomePageController =new UserHomePageController();
-        userRegistrationDAO =new UserRegistrationDAO();
-        emailFormatVerfier =new EmailFormatVerifierController();
-        userLoginDAO =new UserLoginDAO();
-        usersModel =new UsersModel();
-        emailVerfierController =new EmailVerfierController();
-        passwordVerifierController =new PasswordVerifierController();
-        phoneNumberVerifierController =new PhoneNumberVerifierController();
-        userRegistrationController =new UserRegistrationController();
-        userLoginController =new UserLoginController();
-        welcomePageController =new WelcomePageController();
-        checkSurveyTaken =new CheckSurveyTaken();
-        userDetailsDAO =new UserDetailsDAO();
-        userProfile =new UserProfile();
-        ownersDetailsDAO =new OwnersDetailsDAO();
-        ownerProfile =new OwnerProfile();
-        ownerDetailsModel =new OwnerDetailsModel();
-        ownerPropertyDetailsModel =new OwnerPropertyDetailsModel();
-        ownerPropertyDetailsDAO =new OwnerPropertyDetailsDAO();
-        checkCredentials=new CheckCredentials();
-        afterCheckingCredintials=new AfterCheckingCredintials();
-        giveCredintials=new GiveCredintials();
-        passwordValidity=new PasswordValidity();
-        surveyTakenDAO=new SurveyTakenDAO();
-        userIdValidation=new UserIdValidation();
+        makeCLICommentListController = new MakeCLICommentListController();
+        userHomePageController = new UserHomePageController();
+        userRegistrationDAO = new UserRegistrationDAO();
+        emailFormatVerfier = new EmailFormatVerifierController();
+        userLoginDAO = new UserLoginDAO();
+        usersModel = new UsersModel();
+        emailVerfierController = new EmailVerfierController();
+        passwordVerifierController = new PasswordVerifierController();
+        phoneNumberVerifierController = new PhoneNumberVerifierController();
+        userRegistrationController = new UserRegistrationController();
+        userLoginController = new UserLoginController();
+        welcomePageController = new WelcomePageController();
+        checkSurveyTaken = new CheckSurveyTaken();
+        userDetailsDAO = new UserDetailsDAO();
+        userProfile = new UserProfile();
+        ownersDetailsDAO = new OwnersDetailsDAO();
+        ownerProfile = new OwnerProfile();
+        ownerDetailsModel = new OwnerDetailsModel();
+        ownerPropertyDetailsModel = new OwnerPropertyDetailsModel();
+        ownerPropertyDetailsDAO = new OwnerPropertyDetailsDAO();
+        checkCredentials = new CheckCredentials();
+        afterCheckingCredintials = new AfterCheckingCredintials();
+        giveCredintials = new GiveCredintials();
+        passwordValidity = new PasswordValidity();
+        surveyTakenDAO = new SurveyTakenDAO();
+        userIdValidation = new UserIdValidation();
         userAlcoholHabits = new UserAlcoholHabits();
         userBudget = new UserBudget();
         userFoodHabits = new UserFoodHabits();
@@ -208,7 +232,23 @@ public class ClassInitializer {
         userPreferenceModel = new UserPreferencesModel();
         bestFitRoommateController = new BestFitRoommateController();
         bestFitRoommatesDisplayController = new BestFitRoommatesDisplayController();
-       }
+        propertyPriceCalculatorModel = new PropertyPriceCalculatorModel();
+        propertyPricePredictorDAO = new PropertyPricePredictorDAO();
+        distanceBasedDalhousiePrice = new DistanceBasedDalhousiePrice();
+        distanceBasedGroceryStorePrice = new DistanceBasedGroceryStorePrice();
+        distanceBasedDowntownPrice = new DistanceBasedDowntownPrice();
+        distanceBasedTheaterPrice = new DistanceBasedTheaterPrice();
+        locationBasedPriceFactory = new LocationBasedPriceFactory();
+        dalhousieDistancePrice = new DalhousieDistancePrice();
+        groceryStoreDistancePrice = new GroceryStoreDistancePrice();
+        downtownDistancePrice = new DowntownDistancePrice();
+        theaterDistancePrice = new TheaterDistancePrice();
+        distanceBasedTotalPrice = new DistanceBasedTotalPrice();
+        propertyBasePrice = new PropertyBasePrice();
+        utilitiesBasedPrice = new UtilitiesBasedPrice();
+        systemGeneratedPropertiesDAO = new SystemGeneratedPropertiesDAO();
+        systemGeneratedPropertiesModel = new SystemGeneratedPropertiesModel();
+    }
 
     public static ClassInitializer initializer() {
         if (initializer == null) {
@@ -217,95 +257,111 @@ public class ClassInitializer {
         return initializer;
     }
 
-    public IUserIdValidation getIUserIdValidation(){return userIdValidation; }
+    public IUserIdValidation getIUserIdValidation() {
+        return userIdValidation;
+    }
 
-    public ISurveyTakenDAO getISurveyTakenDAO(){return surveyTakenDAO; }
+    public ISurveyTakenDAO getISurveyTakenDAO() {
+        return surveyTakenDAO;
+    }
 
-    public IPasswordValidity getIPasswordValidity(){return passwordValidity; }
+    public IPasswordValidity getIPasswordValidity() {
+        return passwordValidity;
+    }
 
-    public IGiveCredintials getIGiveCredintials(){return giveCredintials; }
+    public IGiveCredintials getIGiveCredintials() {
+        return giveCredintials;
+    }
 
-    public IAfterCheckingCredintials getIAfterCheckingCredintials(){return afterCheckingCredintials; }
+    public IAfterCheckingCredintials getIAfterCheckingCredintials() {
+        return afterCheckingCredintials;
+    }
 
-    public ICheckCredentials getICheckCredentials(){return checkCredentials; }
+    public ICheckCredentials getICheckCredentials() {
+        return checkCredentials;
+    }
 
-    public IOwnerPropertyDetailsDAO getIOwnerPropertyDetailsDAO(){return ownerPropertyDetailsDAO; }
+    public IOwnerPropertyDetailsDAO getIOwnerPropertyDetailsDAO() {
+        return ownerPropertyDetailsDAO;
+    }
 
-    public IOwnerPropertyDetailsModel getIOwnerPropertyDetailsModel(){return ownerPropertyDetailsModel;}
+    public IOwnerPropertyDetailsModel getIOwnerPropertyDetailsModel() {
+        return ownerPropertyDetailsModel;
+    }
 
-    public IOwnerDetailsModel getIOwnerDetailsModel(){
+    public IOwnerDetailsModel getIOwnerDetailsModel() {
         return ownerDetailsModel;
     }
 
-    public IOwnersDetailsDAO getIOwnersDetailsDAO(){
+    public IOwnersDetailsDAO getIOwnersDetailsDAO() {
         return ownersDetailsDAO;
     }
 
-    public IUserDetailsDAO getIUserDetailsDAO(){
+    public IUserDetailsDAO getIUserDetailsDAO() {
         return userDetailsDAO;
     }
 
-    public IRoomsicleCLI getRoomsicleCLI(){
-       return roomsicleCLI;
+    public IRoomsicleCLI getRoomsicleCLI() {
+        return roomsicleCLI;
     }
 
-    public IMakeCLICommentListController getIMakeCLICommentListController(){
+    public IMakeCLICommentListController getIMakeCLICommentListController() {
         return makeCLICommentListController;
     }
 
-    public IUserHomePageController getIUserHomePageController(){
+    public IUserHomePageController getIUserHomePageController() {
         return userHomePageController;
     }
 
-    public IUserRegistrationDAO getIUserRegistrationDAO(){
+    public IUserRegistrationDAO getIUserRegistrationDAO() {
         return userRegistrationDAO;
     }
 
-    public IEmailFormatVerfier getIEmailFormatVerfier(){
+    public IEmailFormatVerfier getIEmailFormatVerfier() {
         return emailFormatVerfier;
     }
 
-    public IUserLoginDAO getIUserLoginDAO(){
+    public IUserLoginDAO getIUserLoginDAO() {
         return userLoginDAO;
     }
 
-    public IUsersModel getIUsersModel(){
+    public IUsersModel getIUsersModel() {
         return usersModel;
     }
 
-    public IEmailVerifierController getIEmailVerifierController(){
+    public IEmailVerifierController getIEmailVerifierController() {
         return emailVerfierController;
     }
 
-    public IPasswordVerifierController getIPasswordVerifierController(){
+    public IPasswordVerifierController getIPasswordVerifierController() {
         return passwordVerifierController;
     }
 
-    public IPhoneNumberVerifierController getIPhoneNumberVerifierController(){
+    public IPhoneNumberVerifierController getIPhoneNumberVerifierController() {
         return phoneNumberVerifierController;
     }
 
-    public IUserRegistrationController getIUserRegistrationController(){
+    public IUserRegistrationController getIUserRegistrationController() {
         return userRegistrationController;
     }
 
-    public IUserLoginController getUserLoginController(){
+    public IUserLoginController getUserLoginController() {
         return userLoginController;
     }
 
-    public IWelcomePageController getIWelcomePageController(){
+    public IWelcomePageController getIWelcomePageController() {
         return welcomePageController;
     }
 
-    public ICheckSurveyTaken getICheckSurveyTaken(){
+    public ICheckSurveyTaken getICheckSurveyTaken() {
         return checkSurveyTaken;
     }
 
-    public IUserProfile getUserProfile(){
-       return userProfile;
+    public IUserProfile getUserProfile() {
+        return userProfile;
     }
 
-    public IOwnerProfile getOwnerProfile(){
+    public IOwnerProfile getOwnerProfile() {
         return ownerProfile;
     }
 
@@ -481,4 +537,68 @@ public class ClassInitializer {
         return bestFitRoommatesDisplayController;
     }
 
+
+    public PropertyPriceCalculatorModel getPropertyPriceCalculatorModel() {
+        return propertyPriceCalculatorModel;
+    }
+
+    public IPropertyPricePredictorDAO getPropertyPricePredictorDAO() {
+        return propertyPricePredictorDAO;
+    }
+
+    public IDistanceBasedPriceCalculator getDistanceBasedDalhousiePrice() {
+        return distanceBasedDalhousiePrice;
+    }
+
+    public IDistanceBasedPriceCalculator getDistanceBasedGroceryStorePrice() {
+        return distanceBasedGroceryStorePrice;
+    }
+
+    public IDistanceBasedPriceCalculator getDistanceBasedDowntownPrice() {
+        return distanceBasedDowntownPrice;
+    }
+
+    public IDistanceBasedPriceCalculator getDistanceBasedTheaterPrice() {
+        return distanceBasedTheaterPrice;
+    }
+
+    public LocationBasedPriceFactory getLocationBasedPriceFactory() {
+        return locationBasedPriceFactory;
+    }
+
+    public LocationBasedPrice getDalhousieDistancePrice() {
+        return dalhousieDistancePrice;
+    }
+
+    public LocationBasedPrice getGroceryStoreDistancePrice() {
+        return groceryStoreDistancePrice;
+    }
+
+    public LocationBasedPrice getDowntownDistancePrice() {
+        return downtownDistancePrice;
+    }
+
+    public LocationBasedPrice getTheaterDistancePrice() {
+        return theaterDistancePrice;
+    }
+
+    public ICalculateIndividualFeaturePrice getDistanceBasedTotalPrice() {
+        return distanceBasedTotalPrice;
+    }
+
+    public ICalculateIndividualFeaturePrice getPropertyBasePrice() {
+        return propertyBasePrice;
+    }
+
+    public ICalculateIndividualFeaturePrice getUtilitiesBasedPrice() {
+        return utilitiesBasedPrice;
+    }
+
+    public ISystemGeneratedPropertiesDAO getSystemGeneratedPropertiesDAO() {
+        return systemGeneratedPropertiesDAO;
+    }
+
+    public SystemGeneratedPropertiesModel getSystemGeneratedPropertiesModel() {
+        return systemGeneratedPropertiesModel;
+    }
 }

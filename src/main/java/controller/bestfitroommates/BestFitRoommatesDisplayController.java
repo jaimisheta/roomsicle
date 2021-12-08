@@ -14,6 +14,8 @@ import models.fitroommatemodels.UserDetailsModel;
 
 public class BestFitRoommatesDisplayController implements IBestFitRoommatesDisplayController {
 
+	boolean validation = false;
+
 	//Method to display results of best fit roommates
 	public void getBestFits(IBestFitRoommateController bestFitRoommate) {
 
@@ -46,9 +48,11 @@ public class BestFitRoommatesDisplayController implements IBestFitRoommatesDispl
 				roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.matched.preferences")+usersMatchScoreMap.get(usersDetails.getEmailId()));
 			}
 		}
-
+		validation = true;
 	}
 
-
+	public boolean getValidation(){
+		return validation;
+	}
 
 }

@@ -31,25 +31,25 @@ public class OwnerProfileTest {
     @Test
     public void displayOwnerLastNameTest(){
         ownerDetailsModel.setLastName(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"),ownerDetailsModel.getLastName());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"),ownerDetailsModel.getLastName());
     }
 
     @Test
     public void displayOwnerContactNumberTest(){
         ownerDetailsModel.setContactNumber(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.contact.number"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.contact.number"),ownerDetailsModel.getContactNumber());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.contact.number"),ownerDetailsModel.getContactNumber());
     }
 
     @Test
     public void displayOwnerEmailIdTest(){
         ownerDetailsModel.setEmailId(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.email.id"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.email.id"),ownerDetailsModel.getEmailId());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.email.id"),ownerDetailsModel.getEmailId());
     }
 
     @Test
     public void displayOwnerPropertyAddressTest(){
         ownerPropertyDetailsModel.setAddress(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.property.address"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.property.address"),ownerPropertyDetailsModel.getAddress());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.property.address"),ownerPropertyDetailsModel.getAddress());
     }
 
 }
