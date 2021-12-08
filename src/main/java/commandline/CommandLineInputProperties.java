@@ -31,7 +31,6 @@ public class CommandLineInputProperties {
     public static String getCommandLineInputPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
-            loadCommandLineInputPropertiesFile();
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();

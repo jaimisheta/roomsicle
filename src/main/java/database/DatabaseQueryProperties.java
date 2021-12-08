@@ -31,7 +31,6 @@ public class DatabaseQueryProperties {
     public static String getDatabaseQueryPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
-            loadDatabaseQueryPropertiesFile();
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();

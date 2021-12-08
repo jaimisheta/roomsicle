@@ -1,6 +1,7 @@
 package controllertest.bestfitroommatetest;
 
 import commandline.CommandLineInputProperties;
+import controller.ClassInitializer;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
 import org.junit.BeforeClass;
@@ -15,7 +16,7 @@ import controller.getloggedinuser.IGetLoggedInUserController;
 
 public class BestFitRoommateControllerTest {
 
-/*	@BeforeClass
+	@BeforeClass
 	public static void init() {
 		CommandLineInputProperties.loadCommandLineInputPropertiesFile();
 		ControllerProperties.loadControllerPropertiesFile();
@@ -25,7 +26,11 @@ public class BestFitRoommateControllerTest {
 
 	@Test
 	public void testFindBestFit() {
-		HashMap<String, Integer> map = new HashMap<String, Integer>(){{
+		HashMap<String, Integer> map;
+		IBestFitRoommateController bestFitRoommateController;
+		IGetLoggedInUserController loggedInUser;
+
+		map = new HashMap<String, Integer>(){{
 			put(ControllerProperties.getControllerPropertyValue("bestFitData1.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData1.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData2.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData2.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData3.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData3.value")));
@@ -35,9 +40,9 @@ public class BestFitRoommateControllerTest {
 			put(ControllerProperties.getControllerPropertyValue("bestFitData8.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData8.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData9.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData9.value")));
 		}};
-		IBestFitRoommateController bestFitRoommateController = new BestFitRoommateController();
-		IGetLoggedInUserController loggedInUser = new GetLoggedInUserController();
-		assertEquals(bestFitRoommateController.findBestFit(loggedInUser), map);     
-	}*/
+		bestFitRoommateController = ClassInitializer.initializer().getBestFitRoommateController();
+		loggedInUser = ClassInitializer.initializer().getLoggedInUserController();
+		assertEquals(bestFitRoommateController.findBestFit(loggedInUser), map);
+	}
 
 }

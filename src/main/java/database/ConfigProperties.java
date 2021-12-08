@@ -33,7 +33,6 @@ public class ConfigProperties {
     public static String getConfigPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
-            loadConfigPropertiesFile();
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();
