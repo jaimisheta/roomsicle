@@ -1,4 +1,4 @@
-package controller.filterproperty;
+package controller.checkoutproperty;
 
 import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
@@ -7,7 +7,7 @@ import models.OwnerSurveyModel;
 
 import java.util.*;
 
-public class FilterPropertiesDisplayController {
+public class CheckoutPropertiesDisplayController {
 
     public static LinkedHashMap<Integer, Integer> sortHashMapByValues(
             HashMap<Integer, Integer> passedMap) {
@@ -39,13 +39,12 @@ public class FilterPropertiesDisplayController {
         return sortedMap;
     }
 
-    //Method to display results of filtered roommates
 //	public void getFilteredFits(IFilterProperties filteredPreferences) {
     public static void main(String args[]) {
 
-        IFilterProperties filteredPreferences = new FilterProperties();
+        ICheckoutProperties filteredPreferences = new CheckoutProperties();
 
-        IFilterPropertiesInput preferences = new FilterPropertiesInput();
+        ICheckoutPropertiesInput preferences = new CheckoutPropertiesInput();
         HashMap<Integer, Integer> propertiesMatchScoreMap = filteredPreferences.filterProperties(preferences);
         HashMap<Integer, Integer> sortedPropertiesList = sortHashMapByValues(propertiesMatchScoreMap);
 		ArrayList<Integer> keys = new ArrayList<Integer>(sortedPropertiesList.keySet());

@@ -11,8 +11,6 @@ import java.util.ArrayList;
 public class PropertyDetailsDAO {
 
 	DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
-	Connection connection;
-	Statement statement;
 
 	public ArrayList<OwnerSurveyModel> getPropertyDetails() {
 

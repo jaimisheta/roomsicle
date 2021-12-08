@@ -1,12 +1,12 @@
-package controller.filterproperty;
+package controller.checkoutproperty;
 
 import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
 import controller.ControllerProperties;
 
-import static controller.filterproperty.FilterPropertiesInputConstants.*;
+import static controller.checkoutproperty.CheckoutPropertiesInputConstants.*;
 
-public class FilterPropertiesInput implements IFilterPropertiesInput {
+public class CheckoutPropertiesInput implements ICheckoutPropertiesInput {
 
     int dalhousieDistancePreferenceSelect;
     String propertyPricePreference;
