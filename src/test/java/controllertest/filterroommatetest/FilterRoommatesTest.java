@@ -1,23 +1,23 @@
-package controllertest.filterroommatetest;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
-
-import commandline.CommandLineInputProperties;
-import database.ConfigProperties;
-import database.DatabaseQueryProperties;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import controller.ControllerProperties;
-import controller.filterroommates.FilterRoommates;
-import controller.filterroommates.FilterRoommatesInput;
-import controller.filterroommates.IFilterRoommates;
-import controller.filterroommates.IFilterRoommatesInput;
-
-public class FilterRoommatesTest {
-
+//package controllertest.filterroommatetest;
+//
+//import static org.junit.Assert.assertEquals;
+//
+//import java.util.HashMap;
+//
+//import commandline.CommandLineInputProperties;
+//import database.ConfigProperties;
+//import database.DatabaseQueryProperties;
+//import org.junit.BeforeClass;
+//import org.junit.Test;
+//
+//import controller.ControllerProperties;
+//import controller.filterroommates.FilterRoommates;
+//import controller.filterroommates.FilterRoommatesInput;
+//import controller.filterroommates.IFilterRoommates;
+//import controller.filterroommates.IFilterRoommatesInput;
+//
+//public class FilterRoommatesTest {
+//
 //	@BeforeClass
 //	public static void init() {
 //		CommandLineInputProperties.loadCommandLineInputPropertiesFile();
@@ -42,5 +42,5 @@ public class FilterRoommatesTest {
 //		IFilterRoommatesInput settedPreferences = new FilterRoommatesInput();
 //		assertEquals(filterRoommate.filterRoommates(settedPreferences), testMap);
 //	}
-
-}
+//
+//}

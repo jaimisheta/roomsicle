@@ -1,23 +1,18 @@
 package controller.usersurvey;
 
 import commandline.CommandLineInputProperties;
-import commandline.RoomsicleCLI;
+import commandline.IRoomsicleCLI;
+import controller.ClassInitializer;
 import models.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.InputMismatchException;
 
-import static controller.usersurvey.UserSurveyConstants.ONE;
-import static controller.usersurvey.UserSurveyConstants.TWO;
-import static controller.usersurvey.UserSurveyConstants.THREE;
-import static controller.usersurvey.UserSurveyConstants.VEG;
-import static controller.usersurvey.UserSurveyConstants.NON_VEG;
-import static controller.usersurvey.UserSurveyConstants.VEGAN;
+import static controller.usersurvey.UserSurveyConstants.*;
 
 public class UserFoodHabits implements IUserSurvey {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     static final Logger logger = LogManager.getLogger(UserFoodHabits.class);
 
     UserSurveyModel userSurveyModel;
@@ -25,8 +20,7 @@ public class UserFoodHabits implements IUserSurvey {
     boolean hasValidValue = false;
     String userFoodHabits;
 
-    public UserFoodHabits(UserSurveyModel userSurveyModel) {
-        this.userSurveyModel = userSurveyModel;
+    public UserFoodHabits() {
     }
 
     public UserFoodHabits(UserSurveyModel userSurveyModel, int userFoodHabitsInput) {
@@ -36,16 +30,15 @@ public class UserFoodHabits implements IUserSurvey {
 
     //get user food habits input
     @Override
-    public void getValue() {
-        UserSmokingHabits userSmokingHabits = new UserSmokingHabits(userSurveyModel);
+    public void getValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.food.habits.message"));
             userFoodHabitsInput = roomsicleCLI.getNumberResponse();
-            logger.info("User food habit input: "+userFoodHabitsInput);
+            logger.info("User food habit input: " + userFoodHabitsInput);
             while (hasValidValue == false) {
-                if (validateValue()) {
+                if (validateValue(userSurveyModel)) {
                     hasValidValue = true;
-                    userSmokingHabits.getValue();
                     break;
                 } else {
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.food.habits.message"));
@@ -53,35 +46,38 @@ public class UserFoodHabits implements IUserSurvey {
                 }
             }
         } catch (InputMismatchException e) {
+            logger.error("Input Mismatch exception occurred");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
-            getValue();
-        } catch (Exception e) {
-            e.printStackTrace();
+            getValue(userSurveyModel);
         }
     }
 
     //validate user food habits input
     @Override
-    public boolean validateValue() {
+    public boolean validateValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         boolean validateFoodHabitsResponse = false;
         try {
             logger.info("validating user food habits input");
             if (userFoodHabitsInput == ONE) {
                 validateFoodHabitsResponse = true;
                 userFoodHabits = VEG;
-                setValue();
             } else if (userFoodHabitsInput == TWO) {
                 validateFoodHabitsResponse = true;
                 userFoodHabits = NON_VEG;
-                setValue();
             } else if (userFoodHabitsInput == THREE) {
                 validateFoodHabitsResponse = true;
                 userFoodHabits = VEGAN;
-                setValue();
             } else {
-                throw new IllegalArgumentException(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.food.habits.message"));
+                logger.error("validation failed, invalid value entered");
+            }
+            if (validateFoodHabitsResponse == true) {
+                setValue(userSurveyModel);
+            } else {
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.food.habits.message"));
             }
         } catch (Exception e) {
+            logger.error("Exception occurred while validating input");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.food.habits.message"));
         }
         return validateFoodHabitsResponse;
@@ -89,9 +85,8 @@ public class UserFoodHabits implements IUserSurvey {
 
     //set user food habit
     @Override
-    public void setValue() {
+    public void setValue(UserSurveyModel userSurveyModel) {
         userSurveyModel.setUserFoodHabits(userFoodHabits);
-        logger.info("set user food habits input to: "+userFoodHabits);
-
+        logger.info("set user food habits input to: " + userFoodHabits);
     }
 }

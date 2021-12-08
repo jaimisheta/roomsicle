@@ -1,7 +1,7 @@
 import commandline.CommandLineInputProperties;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import controller.userhomepage.IWelcomePageController;
+import controller.welcomepage.IWelcomePageController;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +18,7 @@ public class RoommateFinder {
             DatabaseQueryProperties.loadDatabaseQueryPropertiesFile();
             ControllerProperties.loadControllerPropertiesFile();
             logger.info("Started Roomsicle Application");
-            IWelcomePageController iWelcomePageController= ClassInitializer.initializer().getIWelcomePageController();
+            IWelcomePageController iWelcomePageController = ClassInitializer.initializer().getIWelcomePageController();
             iWelcomePageController.showWelcomePage();
         } catch (Exception e) {
             e.printStackTrace();

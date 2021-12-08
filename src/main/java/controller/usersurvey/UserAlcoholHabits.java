@@ -1,21 +1,18 @@
 package controller.usersurvey;
 
 import commandline.CommandLineInputProperties;
-import commandline.RoomsicleCLI;
+import commandline.IRoomsicleCLI;
+import controller.ClassInitializer;
 import models.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.InputMismatchException;
 
-import static controller.usersurvey.UserSurveyConstants.ONE;
-import static controller.usersurvey.UserSurveyConstants.TWO;
-import static controller.usersurvey.UserSurveyConstants.YES;
-import static controller.usersurvey.UserSurveyConstants.NO;
+import static controller.usersurvey.UserSurveyConstants.*;
 
 public class UserAlcoholHabits implements IUserSurvey {
 
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     static final Logger logger = LogManager.getLogger(UserAlcoholHabits.class);
 
     UserSurveyModel userSurveyModel;
@@ -23,8 +20,7 @@ public class UserAlcoholHabits implements IUserSurvey {
     boolean hasValidValue = false;
     String userAlcoholHabits;
 
-    public UserAlcoholHabits(UserSurveyModel userSurveyModel) {
-        this.userSurveyModel = userSurveyModel;
+    public UserAlcoholHabits() {
     }
 
     public UserAlcoholHabits(UserSurveyModel userSurveyModel, int userAlcoholHabitsInput) {
@@ -34,16 +30,15 @@ public class UserAlcoholHabits implements IUserSurvey {
 
     //get alcohol habits input from user
     @Override
-    public void getValue() {
-        UserBudget userBudget = new UserBudget(userSurveyModel);
+    public void getValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         try {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.alcohol.habits.message"));
             userAlcoholHabitsInput = roomsicleCLI.getNumberResponse();
             logger.info("userAlcoholHabitsInput:" + userAlcoholHabitsInput);
             while (hasValidValue == false) {
-                if (validateValue()) {
+                if (validateValue(userSurveyModel)) {
                     hasValidValue = true;
-                    userBudget.getValue();
                     break;
                 } else {
                     roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.user.alcohol.habits.message"));
@@ -51,31 +46,35 @@ public class UserAlcoholHabits implements IUserSurvey {
                 }
             }
         } catch (InputMismatchException e) {
+            logger.error("Input Mismatch exception occurred");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.invalid.input.message"));
-            getValue();
-        } catch (Exception e) {
-            e.printStackTrace();
+            getValue(userSurveyModel);
         }
     }
 
     //validate alcohol habits input from user
     @Override
-    public boolean validateValue() {
+    public boolean validateValue(UserSurveyModel userSurveyModel) {
+        IRoomsicleCLI roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         boolean validateAlcoholHabitsResponse = false;
         try {
             logger.info("Validating alcohol habits user input: " + userAlcoholHabitsInput);
             if (userAlcoholHabitsInput == ONE) {
                 validateAlcoholHabitsResponse = true;
                 userAlcoholHabits = YES;
-                setValue();
             } else if (userAlcoholHabitsInput == TWO) {
                 validateAlcoholHabitsResponse = true;
                 userAlcoholHabits = NO;
-                setValue();
             } else {
-                throw new IllegalArgumentException(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.alcohol.habits.message"));
+                logger.error("validation failed, invalid value entered");
+            }
+            if (validateAlcoholHabitsResponse == true) {
+                setValue(userSurveyModel);
+            } else {
+                roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.alcohol.habits.message"));
             }
         } catch (Exception e) {
+            logger.error("Exception occurred while validating input");
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.illegal.argument.exception.alcohol.habits.message"));
         }
         return validateAlcoholHabitsResponse;
@@ -83,10 +82,8 @@ public class UserAlcoholHabits implements IUserSurvey {
 
     //set alcohol habit of user
     @Override
-    public void setValue() {
+    public void setValue(UserSurveyModel userSurveyModel) {
         userSurveyModel.setUserAlcoholHabits(userAlcoholHabits);
         logger.info("user alcohol habit is set");
     }
-
-
 }

@@ -1,7 +1,7 @@
 package controller.userregistration;
 
 public interface IUserRegistrationController {
-    void UserRegistrationController();
-     void UserRegistrationCheck();
+    void userRegistrationController();
+     void userRegistrationCheck();
      void getToTheSurvey();
 }

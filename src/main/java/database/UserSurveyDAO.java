@@ -8,13 +8,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserSurveyDAO {
+public class UserSurveyDAO implements IUserSurveyDAO {
 
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     static final Logger logger = LogManager.getLogger(UserSurveyDAO.class);
     Connection connection = databaseConnection.getConnectionObject();
     Statement statement;
 
+    @Override
     public void insertUserPersonalDetails(UserSurveyModel userSurveyModel) {
         String query;
         String userId;
@@ -63,6 +64,7 @@ public class UserSurveyDAO {
         }
     }
 
+    @Override
     public void insertRoommatePreferenceDetails(UserSurveyModel userSurveyModel) {
         String query;
         String userId;
@@ -95,6 +97,28 @@ public class UserSurveyDAO {
             statement.executeUpdate(query);
             logger.info("query executed");
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateSurveyTakenStatus(UserSurveyModel userSurveyModel) {
+        String query;
+        String userId;
+
+        userId = userSurveyModel.getUserId();
+        try {
+            statement = connection.createStatement();
+
+            query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.update.user.survey.taken.field.query")
+                    .replace("userTableName", DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.survey.user.details.table.name"))
+                    .replace("userEmailID", userId);
+
+            logger.info("query: " + query);
+            statement.executeUpdate(query);
+            logger.info("query executed");
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

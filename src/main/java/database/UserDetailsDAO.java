@@ -5,9 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import models.UserDetailsModel;
 
-public class UserDetailsDAO implements IUserDetailsDAO{
+public class UserDetailsDAO implements IUserDetailsDAO {
 
 	DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
 

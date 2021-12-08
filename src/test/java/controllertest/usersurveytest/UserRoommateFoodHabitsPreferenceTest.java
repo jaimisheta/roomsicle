@@ -20,28 +20,28 @@ public class UserRoommateFoodHabitsPreferenceTest {
     @Test
     public void validateRoommateVegFoodHabitsInputTest() {
         userRoommateFoodHabitsPreferenceInput = new UserRoommateFoodHabitsPreference(userSurveyModel, 1);
-        userRoommateFoodHabitsPreferenceInput.validateValue();
+        userRoommateFoodHabitsPreferenceInput.validateValue(userSurveyModel);
         Assert.assertEquals("Veg", userSurveyModel.getRoommateFoodHabits());
     }
 
     @Test
     public void validateRoommateNonVegFoodHabitsInputTest() {
         userRoommateFoodHabitsPreferenceInput = new UserRoommateFoodHabitsPreference(userSurveyModel, 2);
-        userRoommateFoodHabitsPreferenceInput.validateValue();
+        userRoommateFoodHabitsPreferenceInput.validateValue(userSurveyModel);
         Assert.assertEquals("Non-Veg", userSurveyModel.getRoommateFoodHabits());
     }
 
     @Test
     public void validateRoommateVeganFoodHabitsInputTest() {
         userRoommateFoodHabitsPreferenceInput = new UserRoommateFoodHabitsPreference(userSurveyModel, 3);
-        userRoommateFoodHabitsPreferenceInput.validateValue();
+        userRoommateFoodHabitsPreferenceInput.validateValue(userSurveyModel);
         Assert.assertEquals("Vegan", userSurveyModel.getRoommateFoodHabits());
     }
 
     @Test
     public void validateInvalidRoommateFoodHabitsInputTest() {
         userRoommateFoodHabitsPreferenceInput = new UserRoommateFoodHabitsPreference(userSurveyModel, 4);
-        Assert.assertFalse(userRoommateFoodHabitsPreferenceInput.validateValue());
+        Assert.assertFalse(userRoommateFoodHabitsPreferenceInput.validateValue(userSurveyModel));
     }
 
 }

@@ -1,9 +1,12 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExpenseAdditionModel implements IExpenseAdditionModel {
     private int expensePrice;
     private String userEmailId;
-    private String[] receiverEmailId;
+    private List<String> receiverEmailId = new ArrayList<>();
     private String description;
     private int groupId;
 
@@ -27,13 +30,13 @@ this.userEmailId = userEmailId;
     }
 
     @Override
-    public String[] getReceiverEmailId() {
+    public List<String> getReceiverEmailId() {
         return receiverEmailId;
     }
 
     @Override
-    public void setReceiverEmailId(String[] receiverEmailId) {
-this.receiverEmailId=receiverEmailId;
+    public void setReceiverEmailId(String receiverEmailId) {
+        this.receiverEmailId.add(receiverEmailId);
     }
 
     @Override

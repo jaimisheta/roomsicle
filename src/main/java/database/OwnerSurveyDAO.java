@@ -9,13 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class OwnerSurveyDAO {
+public class OwnerSurveyDAO implements IOwnerSurveyDAO{
 
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     static final Logger logger = LogManager.getLogger(OwnerSurveyDAO.class);
     Connection connection;
     Statement statement;
 
+    @Override
     public void insertOwnerSurveyDetails(OwnerSurveyModel ownerSurveyModel) {
         String query;
         String getIdQuery;
@@ -23,7 +24,6 @@ public class OwnerSurveyDAO {
         String address;
         int numberOfBedrooms;
         boolean isUtilitiesProvided;
-        int numberOfVacancies;
         int dalDistance;
         int groceryStoreDistance;
         int theaterDistance;
@@ -38,8 +38,6 @@ public class OwnerSurveyDAO {
         logger.info("numberOfBedrooms: " + numberOfBedrooms);
         isUtilitiesProvided = ownerSurveyModel.isUtilitiesProvided();
         logger.info("isUtilitiesProvided: " + isUtilitiesProvided);
-        numberOfVacancies = ownerSurveyModel.getNumberOfVacancies();
-        logger.info("numberOfVacancies: " + numberOfVacancies);
         dalDistance = ownerSurveyModel.getDalhousieDistance();
         logger.info("dalDistance: " + dalDistance);
         groceryStoreDistance = ownerSurveyModel.getGroceryStoreDistance();
@@ -57,7 +55,6 @@ public class OwnerSurveyDAO {
                     .replace("ownerID", ownerID).replace("propertyAddress", address)
                     .replace("numberOfBedrooms", String.valueOf(numberOfBedrooms))
                     .replace("isUtilitiesProvided", String.valueOf(isUtilitiesProvided))
-                    .replace("numberOfVacancies", String.valueOf(numberOfVacancies))
                     .replace("dalDistance", String.valueOf(dalDistance))
                     .replace("groceryStoreDistance", String.valueOf(groceryStoreDistance))
                     .replace("downtownDistance", String.valueOf(downtownDistance))

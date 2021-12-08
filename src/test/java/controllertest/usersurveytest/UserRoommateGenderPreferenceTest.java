@@ -20,28 +20,28 @@ public class UserRoommateGenderPreferenceTest {
     @Test
     public void validateMaleUserGenderInputTest() {
         userRoommateGenderPreferenceInput = new UserRoommateGenderPreference(userSurveyModel, 1);
-        userRoommateGenderPreferenceInput.validateValue();
+        userRoommateGenderPreferenceInput.validateValue(userSurveyModel);
         Assert.assertEquals("Male", userSurveyModel.getRoommateGender());
     }
 
     @Test
     public void validateFemaleUserGenderInputTest() {
         userRoommateGenderPreferenceInput = new UserRoommateGenderPreference(userSurveyModel, 2);
-        userRoommateGenderPreferenceInput.validateValue();
+        userRoommateGenderPreferenceInput.validateValue(userSurveyModel);
         Assert.assertEquals("Female", userSurveyModel.getRoommateGender());
     }
 
     @Test
     public void validateOtherUserGenderInputTest() {
         userRoommateGenderPreferenceInput = new UserRoommateGenderPreference(userSurveyModel, 3);
-        userRoommateGenderPreferenceInput.validateValue();
+        userRoommateGenderPreferenceInput.validateValue(userSurveyModel);
         Assert.assertEquals("Does not matter", userSurveyModel.getRoommateGender());
     }
 
     @Test
     public void validateInvalidUserGenderInputTest() {
         userRoommateGenderPreferenceInput = new UserRoommateGenderPreference(userSurveyModel, 4);
-        Assert.assertEquals(false, userRoommateGenderPreferenceInput.validateValue());
+        Assert.assertEquals(false, userRoommateGenderPreferenceInput.validateValue(userSurveyModel));
     }
 
 }

@@ -2,8 +2,8 @@ package controller.verifications;
 import Exception.EmailException;
 
 public interface IEmailFormatVerfier{
-        void EmailFormatVerifier(String email) throws EmailException;
-        boolean ValidEmailFormatVerifier(String email) ;
+        void emailFormatVerifier(String email) throws EmailException;
+        boolean validEmailFormatVerifier(String email) ;
     }
 
 

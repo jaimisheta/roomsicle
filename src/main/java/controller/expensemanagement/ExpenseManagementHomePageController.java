@@ -6,10 +6,14 @@ import commandline.RoomsicleCLI;
 import java.sql.SQLException;
 
 public class ExpenseManagementHomePageController {
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
+    static  RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
 
-    int userSelection;
-    public void showHomePage() throws SQLException {
+    public static void main(String[] args) throws SQLException {
+        showHomePage();
+    }
+
+    static int userSelection;
+    public static void showHomePage() throws SQLException {
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("expense.decorator.message"));
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("expense.management.welcome.message"));
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("expense.decorator.message"));

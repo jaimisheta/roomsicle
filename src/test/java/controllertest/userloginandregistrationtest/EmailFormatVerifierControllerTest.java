@@ -2,8 +2,9 @@ package controllertest.userloginandregistrationtest;
 
 import Exception.EmailException;
 import commandline.CommandLineInputProperties;
+import controller.ClassInitializer;
 import controller.ControllerProperties;
-import controller.verifications.EmailFormatVerifierController;
+import controller.verifications.IEmailFormatVerfier;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
 import org.junit.Assert;
@@ -11,8 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class EmailFormatVerifierControllerTest  {
-    EmailFormatVerifierController emailFormatVerifier=new EmailFormatVerifierController();
-
+    IEmailFormatVerfier emailFormatVerfier= ClassInitializer.initializer().getIEmailFormatVerfier();
     @BeforeClass
     public static void init() {
         CommandLineInputProperties.loadCommandLineInputPropertiesFile();
@@ -25,7 +25,7 @@ public class EmailFormatVerifierControllerTest  {
     public void validEmailFormatVerifierPositiveTest(){
         Boolean actual;
         Boolean expected;
-        actual=emailFormatVerifier.ValidEmailFormatVerifier(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.message"));
+        actual=emailFormatVerfier.validEmailFormatVerifier(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.message"));
         expected=true;
         Assert.assertEquals(actual, expected);
     }
@@ -33,13 +33,13 @@ public class EmailFormatVerifierControllerTest  {
     public void validEmailFormatVerifierNegativeTest(){
         Boolean actual;
         Boolean expected;
-        actual=emailFormatVerifier.ValidEmailFormatVerifier(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"));
+        actual=emailFormatVerfier.validEmailFormatVerifier(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"));
         expected=false;
         Assert.assertEquals(actual, expected);
     }
 
     @Test(expected= EmailException.class)
     public void validEmailFormatVerifierExceptionTest() throws EmailException {
-        emailFormatVerifier.EmailFormatVerifier(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"));
+        emailFormatVerfier.emailFormatVerifier(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.actual.message"));
     }
 }
