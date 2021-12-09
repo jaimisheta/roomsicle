@@ -4,8 +4,6 @@ import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
 import controller.ClassInitializer;
 
-import java.sql.SQLException;
-
 public class ExpenseManagementHomePageController {
     static  RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
 
@@ -20,9 +18,11 @@ public class ExpenseManagementHomePageController {
         userSelection = roomsicleCLI.getNumberResponse();
         if (userSelection==1){
             ExpenseAdditionController expenseAdditionController =new ExpenseAdditionController();
+            expenseAdditionController.userExpenseAddition();
         }
         else if (userSelection==2){
             ExpenseSettleUpController expenseSettleUpController=new ExpenseSettleUpController();
+            expenseSettleUpController.userExpenseSettleUp();
         }
         else{
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));

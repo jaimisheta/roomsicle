@@ -2,26 +2,17 @@ package controllertest.bestfitroommatetest;
 
 import commandline.CommandLineInputProperties;
 import controller.ClassInitializer;
-import database.ConfigProperties;
-import database.DatabaseQueryProperties;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
-
-import java.util.HashMap;
-
 import controller.ControllerProperties;
 import controller.bestfitroommates.IBestFitRoommateController;
 import controller.getloggedinuser.IGetLoggedInUserController;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
+import database.ConfigProperties;
+import database.DatabaseQueryProperties;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.util.HashMap;
+
+import static org.junit.Assert.assertEquals;
 
 public class BestFitRoommateControllerTest {
 
