@@ -10,16 +10,6 @@ public class ExpenseAdditionController {
     int expense;
     String description;
 
-    public ExpenseAdditionController() {
-        try{
-            userExpenseAddition();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            userExpenseAddition();
-        }
-    }
-
     public void userExpenseAddition() {
         IMakeCLICommentListController iMakeCLICommentListController= ClassInitializer.initializer().getIMakeCLICommentListController();
         IExpenseAdditionDAO iExpenseAdditionDAO=ClassInitializer.initializer().getIExpenseAdditionDAO();
@@ -29,6 +19,11 @@ public class ExpenseAdditionController {
         setDescription();
         iExpenseAdditionDAO.addExpense(iExpenseAdditionModel);
     }
+
+    public int ValidataeExpenseAddition(int expense){
+        return expense;
+    }
+
 
     public void setExpense() {
         IMakeCLICommentListController iMakeCLICommentListController= ClassInitializer.initializer().getIMakeCLICommentListController();
@@ -44,6 +39,10 @@ public class ExpenseAdditionController {
         }
     }
 
+    public String ValidateExpense(String expense){
+        return expense;
+    }
+
     public void setDescription() {
         IMakeCLICommentListController iMakeCLICommentListController= ClassInitializer.initializer().getIMakeCLICommentListController();
         IExpenseAdditionModel iExpenseAdditionModel=ClassInitializer.initializer().getIExpenseAdditionModel();
@@ -56,5 +55,9 @@ public class ExpenseAdditionController {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String viewDescription(String description){
+        return description;
     }
 }

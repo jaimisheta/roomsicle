@@ -13,7 +13,7 @@ public class ExpenseManagementHomePageController {
     }
 
     static int userSelection;
-    public static void showHomePage() throws SQLException {
+    public static void showHomePage()  {
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("expense.decorator.message"));
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("expense.management.welcome.message"));
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("expense.decorator.message"));
@@ -23,9 +23,11 @@ public class ExpenseManagementHomePageController {
         userSelection = roomsicleCLI.getNumberResponse();
         if (userSelection==1){
             ExpenseAdditionController expenseAdditionController =new ExpenseAdditionController();
+            expenseAdditionController.userExpenseAddition();
         }
         else if (userSelection==2){
             ExpenseSettleUpController expenseSettleUpController=new ExpenseSettleUpController();
+            expenseSettleUpController.userExpenseSettleUp();
         }
         else{
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));

@@ -6,15 +6,6 @@ import database.expensesettleupdao.IExpenseSettleUpDAO;
 import models.expensesettleup.IExpenseSettleUpModel;
 
 public class ExpenseSettleUpController {
-    public ExpenseSettleUpController() {
-        try{
-            userExpenseSettleUp();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            userExpenseSettleUp();
-        }
-    }
 
     public void userExpenseSettleUp() {
         IMakeCLICommentListController iMakeCLICommentListController= ClassInitializer.initializer().getIMakeCLICommentListController();
