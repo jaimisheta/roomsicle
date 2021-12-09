@@ -2,13 +2,34 @@ package controller;
 
 import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
+import controller.bestfitroommates.BestFitRoommateController;
+import controller.bestfitroommates.BestFitRoommatesDisplayController;
+import controller.bestfitroommates.IBestFitRoommateController;
+import controller.bestfitroommates.IBestFitRoommatesDisplayController;
 import controller.clicommentlist.IMakeCLICommentListController;
 import controller.clicommentlist.MakeCLICommentListController;
+import controller.filterroommates.*;
+import controller.getloggedinuser.GetLoggedInUserController;
+import controller.getloggedinuser.IGetLoggedInUserController;
 import controller.ownerprofile.IOwnerProfile;
 import controller.ownerprofile.OwnerProfile;
+import controller.propertybidding.AvailableProperties;
+import controller.propertybidding.BidProperty;
+import controller.propertybidding.IAvailableProperties;
+import controller.propertybidding.IBidProperty;
+import controller.userprofile.IUserHomePageController;
+import controller.welcomepage.IWelcomePageController;
+import controller.userprofile.UserHomePageController;
+import controller.welcomepage.WelcomePageController;
 import controller.ownersurvey.*;
 import controller.propertypricepredictor.*;
 import controller.userlogin.*;
+import controller.ownersurvey.*;
+import controller.propertypricepredictor.PropertyPriceCalculator;
+import controller.userlogin.CheckSurveyTaken;
+import controller.userlogin.ICheckSurveyTaken;
+import controller.userlogin.IUserLoginController;
+import controller.userlogin.UserLoginController;
 import controller.userprofile.IUserHomePageController;
 import controller.userprofile.IUserProfile;
 import controller.userprofile.UserHomePageController;
@@ -20,6 +41,11 @@ import controller.verifications.*;
 import controller.welcomepage.IWelcomePageController;
 import controller.welcomepage.WelcomePageController;
 import database.*;
+import database.expensesettleupdao.ExpenseSettleUpDAO;
+import database.expensesettleupdao.IExpenseSettleUpDAO;
+import database.fitroommatesdao.IUserPreferencesDAO;
+import database.UserDetailsDAO;
+import database.fitroommatesdao.UserPreferencesDAO;
 import database.ownerdetailsdao.IOwnersDetailsDAO;
 import database.ownerdetailsdao.OwnersDetailsDAO;
 import database.ownerpropertydetailsdao.IOwnerPropertyDetailsDAO;
@@ -28,6 +54,9 @@ import database.ownersurveydao.IOwnerSurveyDAO;
 import database.ownersurveydao.OwnerSurveyDAO;
 import database.propertypricepredictordao.IPropertyPricePredictorDAO;
 import database.propertypricepredictordao.PropertyPricePredictorDAO;
+import database.IUserDetailsDAO;
+import database.propertybiddingdao.*;
+import database.propertybiddingdao.PropertyDetailsDAO;
 import database.surveytakendao.ISurveyTakenDAO;
 import database.surveytakendao.SurveyTakenDAO;
 import database.systemgeneratedpropertiesdao.ISystemGeneratedPropertiesDAO;
@@ -38,10 +67,18 @@ import database.userregistrationdao.IUserRegistrationDAO;
 import database.userregistrationdao.UserRegistrationDAO;
 import database.usersurveydao.IUserSurveyDAO;
 import database.usersurveydao.UserSurveyDAO;
+import models.ExpenseAdditionModel;
+import models.IExpenseAdditionModel;
 import models.ownersurveymodel.OwnerSurveyModel;
 import models.propertypricecalculatormodel.PropertyPriceCalculatorModel;
 import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
 import models.usersurveymodel.UserSurveyModel;
+import models.expensesettleup.ExpenseSettleUpModel;
+import models.expensesettleup.IExpenseSettleUpModel;
+import models.biddingmodels.*;
+import models.fitroommatemodels.IUserDetailsModel;
+import models.fitroommatemodels.IUserPreferenceModel;
+import models.fitroommatemodels.UserPreferencesModel;
 import models.ownerdetailsmodel.IOwnerDetailsModel;
 import models.ownerdetailsmodel.OwnerDetailsModel;
 import models.ownerpropertydetailsmodel.IOwnerPropertyDetailsModel;
@@ -102,6 +139,24 @@ public class ClassInitializer {
     IOwnerSurveyDAO ownerSurveyDAO;
     OwnerSurveyMain ownerSurveyMain;
     PropertyPriceCalculator propertyPriceCalculator;
+    IUserPreferencesDAO userPreferencesDAO;
+    IGetLoggedInUserController getLoggedInUserController;
+    IFilterRoommates filterRoommates;
+    IFilterRoommatesInput filterRoommatesInput;
+    IFilterRoommatesDisplayController filterRoommatesDisplayController;
+    IAvailableProperties availableProperties;
+    IBidProperty bidProperty;
+    IBiddingDAO biddingDAO;
+    IBiddingDetailsModel biddingDetailsModel;
+    IPropertyDetailsModel propertyDetailsModel;
+    IPropertyBidderDAO propertyBidderDAO;
+    IPropertyDetailsDAO propertyDetailsDAO;
+    IPropertyOwnersDAO propertyOwnersDAO;
+    IUserDetailsModel userDetailsModel;
+    IUserPreferenceModel userPreferenceModel;
+    IPropertyOwnerDetails propertyOwnerDetails;
+    IBestFitRoommateController bestFitRoommateController;
+    IBestFitRoommatesDisplayController bestFitRoommatesDisplayController;
     PropertyPriceCalculatorModel propertyPriceCalculatorModel;
     IPropertyPricePredictorDAO propertyPricePredictorDAO;
     IDistanceBasedPriceCalculator distanceBasedDalhousiePrice;
@@ -118,6 +173,10 @@ public class ClassInitializer {
     ICalculateIndividualFeaturePrice utilitiesBasedPrice;
     ISystemGeneratedPropertiesDAO systemGeneratedPropertiesDAO;
     SystemGeneratedPropertiesModel systemGeneratedPropertiesModel;
+    IExpenseAdditionDAO expenseAdditionDAO;
+    IExpenseAdditionModel expenseAdditionModel;
+    IExpenseSettleUpDAO expenseSettleUpDAO;
+    IExpenseSettleUpModel expenseSettleUpModel;
 
     private ClassInitializer() {
         roomsicleCLI = new RoomsicleCLI();
@@ -171,6 +230,26 @@ public class ClassInitializer {
         ownerSurveyDAO = new OwnerSurveyDAO();
         ownerSurveyMain = new OwnerSurveyMain();
         propertyPriceCalculator = new PropertyPriceCalculator();
+        userPreferencesDAO = new UserPreferencesDAO();
+        userDetailsDAO = new UserDetailsDAO();
+        getLoggedInUserController = new GetLoggedInUserController();
+        filterRoommates = new FilterRoommates();
+        filterRoommatesInput = new FilterRoommatesInput();
+        filterRoommatesDisplayController = new FilterRoommatesDisplayController();
+        availableProperties = new AvailableProperties();
+        bidProperty = new BidProperty();
+        biddingDAO = new BiddingDAO();
+        biddingDetailsModel = new BiddingDetailsModel();
+        propertyBidderDAO = new PropertyBidderDAO();
+        propertyDetailsModel = new PropertyDetailsModel();
+        propertyOwnersDAO = new PropertyOwnersDAO();
+        propertyDetailsDAO = new PropertyDetailsDAO();
+        userDetailsDAO = new UserDetailsDAO();
+        userPreferencesDAO = new UserPreferencesDAO();
+        propertyOwnerDetails = new PropertyOwnerModel();
+        userPreferenceModel = new UserPreferencesModel();
+        bestFitRoommateController = new BestFitRoommateController();
+        bestFitRoommatesDisplayController = new BestFitRoommatesDisplayController();
         propertyPriceCalculatorModel = new PropertyPriceCalculatorModel();
         propertyPricePredictorDAO = new PropertyPricePredictorDAO();
         distanceBasedDalhousiePrice = new DistanceBasedDalhousiePrice();
@@ -187,6 +266,10 @@ public class ClassInitializer {
         utilitiesBasedPrice = new UtilitiesBasedPrice();
         systemGeneratedPropertiesDAO = new SystemGeneratedPropertiesDAO();
         systemGeneratedPropertiesModel = new SystemGeneratedPropertiesModel();
+        expenseAdditionDAO = new ExpenseAdditionDAO();
+        expenseAdditionModel = new ExpenseAdditionModel();
+        expenseSettleUpDAO = new ExpenseSettleUpDAO();
+        expenseSettleUpModel = new ExpenseSettleUpModel();
     }
 
     public static ClassInitializer initializer() {
@@ -400,6 +483,83 @@ public class ClassInitializer {
         return propertyPriceCalculator;
     }
 
+    public IUserPreferencesDAO getUserPreferenceDAO() {
+        return userPreferencesDAO;
+    }
+
+    public IUserDetailsDAO getUserDetailsDAO(){
+        return userDetailsDAO;
+    }
+
+    public IGetLoggedInUserController getLoggedInUserController(){
+        return getLoggedInUserController;
+    }
+
+    public IFilterRoommates getFilterRoommates(){
+        return filterRoommates;
+    }
+
+    public IFilterRoommatesInput getFilterRoommatesInput(){
+        return filterRoommatesInput;
+    }
+
+    public IFilterRoommatesDisplayController getFilterRoommatesDisplayController(){
+        return filterRoommatesDisplayController;
+    }
+
+    public IAvailableProperties getAvailableProperties(){
+        return availableProperties;
+    }
+
+    public IBidProperty getBidProperty(){
+        return bidProperty;
+    }
+
+    public IBiddingDAO getBiddingDAO(){
+        return biddingDAO;
+    }
+
+    public IPropertyBidderDAO getPropertyBidderDAO(){
+        return propertyBidderDAO;
+    }
+
+    public IPropertyOwnersDAO getPropertyOwnersDAO(){
+        return propertyOwnersDAO;
+    }
+
+    public IPropertyDetailsDAO getPropertyDetailsDAO(){
+        return propertyDetailsDAO;
+    }
+
+    public IBiddingDetailsModel getBiddingDetailsModel(){
+        return biddingDetailsModel;
+    }
+
+    public IPropertyOwnerDetails getPropertyOwnerDetails(){
+        return propertyOwnerDetails;
+    }
+
+    public IPropertyDetailsModel propertyDetailsModel(){
+        return propertyDetailsModel;
+    }
+
+    public IUserDetailsModel getUserDetailsModel(){
+        return userDetailsModel;
+    }
+
+    public IUserPreferenceModel getUserPreferenceModel(){
+        return userPreferenceModel;
+    }
+
+    public IBestFitRoommateController getBestFitRoommateController(){
+        return bestFitRoommateController;
+    }
+
+    public IBestFitRoommatesDisplayController getBestFitRoommatesDisplayController(){
+        return bestFitRoommatesDisplayController;
+    }
+
+
     public PropertyPriceCalculatorModel getPropertyPriceCalculatorModel() {
         return propertyPriceCalculatorModel;
     }
@@ -462,5 +622,21 @@ public class ClassInitializer {
 
     public SystemGeneratedPropertiesModel getSystemGeneratedPropertiesModel() {
         return systemGeneratedPropertiesModel;
+    }
+
+    public IExpenseAdditionDAO getIExpenseAdditionDAO() {
+        return expenseAdditionDAO;
+    }
+
+    public IExpenseAdditionModel getIExpenseAdditionModel() {
+        return expenseAdditionModel;
+    }
+
+    public IExpenseSettleUpDAO getIExpenseSettleUpDAO() {
+        return expenseSettleUpDAO;
+    }
+
+    public IExpenseSettleUpModel getIExpenseSettleUpModel() {
+        return expenseSettleUpModel;
     }
 }

@@ -1,6 +1,6 @@
 package controller.getloggedinuser;
 
-import models.UserPreferencesModel;
+import models.fitroommatemodels.UserPreferencesModel;
 
 public interface IGetLoggedInUserController {
 	

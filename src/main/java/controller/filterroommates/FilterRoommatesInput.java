@@ -5,7 +5,9 @@ import static controller.filterroommates.FilterRoommatesInputConstants.TWO;
 import static controller.filterroommates.FilterRoommatesInputConstants.THREE;
 
 import commandline.CommandLineInputProperties;
+import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
+import controller.ClassInitializer;
 import controller.ControllerProperties;
 
 import java.util.HashMap;
@@ -18,25 +20,11 @@ public class FilterRoommatesInput implements IFilterRoommatesInput{
     String foodPreference;
     String smokePreference;
     String alcoholPreference;
-    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
-    HashMap<Integer,String> foodPreferenceMap = new HashMap<Integer,String>(){{
-        foodPreferenceMap.put(ONE, ControllerProperties.getControllerPropertyValue("food.one"));
-        foodPreferenceMap.put(TWO, ControllerProperties.getControllerPropertyValue("food.two"));
-        foodPreferenceMap.put(THREE, ControllerProperties.getControllerPropertyValue("food.three"));
-    }};
-    HashMap<Integer,String> smokingPreferenceMap = new HashMap<Integer,String>(){{
-        smokingPreferenceMap.put(ONE, ControllerProperties.getControllerPropertyValue("smoke.one"));
-        smokingPreferenceMap.put(TWO, ControllerProperties.getControllerPropertyValue("smoke.two"));
-        smokingPreferenceMap.put(THREE, ControllerProperties.getControllerPropertyValue("smoke.three"));
-    }};
-    HashMap<Integer,String> alcoholPreferenceMap = new HashMap<Integer,String>(){{
-        alcoholPreferenceMap.put(ONE, ControllerProperties.getControllerPropertyValue("alcohol.one"));
-        alcoholPreferenceMap.put(TWO, ControllerProperties.getControllerPropertyValue("alcohol.two"));
-        alcoholPreferenceMap.put(THREE, ControllerProperties.getControllerPropertyValue("alcohol.three"));
-    }};
+    IRoomsicleCLI roomsicleCLI;
 
     public String[] setPreferences() {
         try {
+            roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
         	roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.roommate.preference.details.message"));
         	roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.roommate.food.habits.message"));
             foodPreferenceSelect = roomsicleCLI.getNumberResponse();

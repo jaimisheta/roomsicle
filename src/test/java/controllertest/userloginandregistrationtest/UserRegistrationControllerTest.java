@@ -24,13 +24,13 @@ public class UserRegistrationControllerTest{
     @Test
     public void setFirstNameTest() {
         usersModel.setFirstName(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.first.name"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.first.name"),usersModel.getFirstName());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.first.name"),usersModel.getFirstName());
     }
 
     @Test
     public void setLastNameTest() {
         usersModel.setLastName(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"),usersModel.getLastName());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.test.last.name"),usersModel.getLastName());
     }
 
     @Test
@@ -42,12 +42,12 @@ public class UserRegistrationControllerTest{
     @Test
     public void setEmailTest() {
         usersModel.setEmailId(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.id"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.id"),usersModel.getEmailId());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.id"),usersModel.getEmailId());
     }
 
     @Test
     public void setPasswordTest() {
         usersModel.setPassword(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.password"));
-        Assert.assertSame(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.password"),usersModel.getPassword());
+        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.password"),usersModel.getPassword());
     }
 }
