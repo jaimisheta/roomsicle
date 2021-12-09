@@ -3,13 +3,12 @@ package controllertest.getloggedinusertest;
 import static org.junit.Assert.assertEquals;
 
 import commandline.CommandLineInputProperties;
+import controller.ClassInitializer;
 import controller.ControllerProperties;
 import database.ConfigProperties;
 import database.DatabaseQueryProperties;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import controller.getloggedinuser.GetLoggedInUserController;
 import controller.getloggedinuser.IGetLoggedInUserController;
 
 public class GetLoggedInUserControllerTest {
@@ -23,8 +22,8 @@ public class GetLoggedInUserControllerTest {
 	}
 
 	@Test
-	public void testGetLoggedInUser() {	
-		IGetLoggedInUserController loggedInUser = new GetLoggedInUserController();
+	public void testGetLoggedInUser() {
+		IGetLoggedInUserController loggedInUser = ClassInitializer.initializer().getLoggedInUserController();
 		assertEquals(loggedInUser.getLoggedInUser().getUserId(),ControllerProperties.getControllerPropertyValue("loggedInUser"));
 
 	}
