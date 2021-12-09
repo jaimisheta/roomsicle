@@ -29,7 +29,7 @@ public class PropertyDetailsDAO implements IPropertyDetailsDAO{
                 PropertyDetailsModel propertyDetails = new PropertyDetailsModel();
                 propertyDetails.setPropertyId(rs.getString(1));
                 propertyDetails.setOwnerId(rs.getString(2));
-                propertyDetails.setPropertyPrice(rs.getInt(11));
+                propertyDetails.setPropertyPrice(rs.getInt(10));
                 listOfAllPropertyDetails.add(propertyDetails);
             }
         } catch (SQLException exception) {

@@ -1,5 +1,6 @@
 package database.usersurveydao;
 
+import controller.ControllerProperties;
 import database.DatabaseConnection;
 import database.DatabaseQueryProperties;
 import models.usersurveymodel.UserSurveyModel;
@@ -104,11 +105,11 @@ public class UserSurveyDAO implements IUserSurveyDAO {
     }
 
     @Override
-    public void updateSurveyTakenStatus(UserSurveyModel userSurveyModel) {
+    public void updateSurveyTakenStatus() {
         String query;
         String userId;
 
-        userId = userSurveyModel.getUserId();
+        userId = ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
         try {
             statement = connection.createStatement();
 

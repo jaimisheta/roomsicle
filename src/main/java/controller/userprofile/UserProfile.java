@@ -47,5 +47,7 @@ public class UserProfile implements IUserProfile{
                 roommateDetails.roommateDetails(usersGroupModel.getSecondName(),usersGroupModel.getThirdName(),usersGroupModel.getFirstName());
             }
         }
+        ClassInitializer.initializer().getNavigator().navigator();
+
     }
 }

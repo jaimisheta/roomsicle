@@ -46,7 +46,5 @@ public class UserLoginController implements IUserLoginController {
 		checkCreds=checkCredentials.checkCredentials();
 		password=giveCredintials.getPassword();
 		passwordValidity.getPasswordvalilidity(checkCreds,email,password);
-		UserGroupFormation userGroupFormation=new UserGroupFormation();
-		userGroupFormation.GroupFormation();
 	}
 }

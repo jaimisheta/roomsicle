@@ -2,18 +2,15 @@ package controller.expensemanagement;
 
 import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
+import controller.ClassInitializer;
 
 import java.sql.SQLException;
 
 public class ExpenseManagementHomePageController {
     static  RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
 
-    public static void main(String[] args) throws SQLException {
-        showHomePage();
-    }
-
     static int userSelection;
-    public static void showHomePage()  {
+    public void showHomePage() {
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("expense.decorator.message"));
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("expense.management.welcome.message"));
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("expense.decorator.message"));
@@ -32,5 +29,6 @@ public class ExpenseManagementHomePageController {
         else{
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.invalid.input.message"));
         }
+        ClassInitializer.initializer().getNavigator().navigator();
     }
 }

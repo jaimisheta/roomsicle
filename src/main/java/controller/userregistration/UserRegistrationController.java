@@ -3,6 +3,7 @@ package controller.userregistration;
 import Exception.InvalidInputException;
 import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
+import controller.ControllerProperties;
 import controller.clicommentlist.IMakeCLICommentListController;
 import controller.ClassInitializer;
 import controller.verifications.IEmailFormatVerfier;
@@ -13,9 +14,10 @@ import database.DatabaseQueryProperties;
 import database.userregistrationdao.IUserRegistrationDAO;
 import models.usermodel.IUsersModel;
 
+import static controller.userregistration.UserRegistrationConstants.*;
+import static controller.usersurvey.UserSurveyConstants.ONE;
+import static controller.usersurvey.UserSurveyConstants.TWO;
 import static controller.welcomepage.WelcomePageController.userId;
-import static controller.userregistration.UserRegistrationConstants.OWNER;
-import static controller.userregistration.UserRegistrationConstants.USER;
 
 
 public class UserRegistrationController implements IUserRegistrationController {
@@ -134,6 +136,7 @@ public class UserRegistrationController implements IUserRegistrationController {
             }
             iEmailVerifierController.userEmailAlreadyRegistered(email,userData);
             iEmailFormatVerfier.emailFormatVerifier(email);
+            ControllerProperties.setControllerPropertyValue("user.logged.in.email.id",email);
             emailId=email;
             iUsersModel.setEmailId(email);
         }
@@ -163,16 +166,16 @@ public class UserRegistrationController implements IUserRegistrationController {
     }
 
     public void getToTheSurvey(){
-//        try {
-//            if (userId==1){
-//                iUserSurveyController.takeSurvey(emailId);
-//            }
-//            else if(userId==2){
-//                ownerSurveyController.takeSurvey(emailId);
-//            }
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            if (userId==ONE){
+                ClassInitializer.initializer().getUserSurveyMain().takeUserSurvey();
+            }
+            else if(userId==TWO){
+                ClassInitializer.initializer().getOwnerSurveyMain().takeOwnerSurvey();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

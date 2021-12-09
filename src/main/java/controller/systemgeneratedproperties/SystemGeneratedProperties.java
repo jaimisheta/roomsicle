@@ -9,6 +9,7 @@ import database.ownersurveydao.OwnerSurveyDAO;
 import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import Exception.InvalidBidException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,10 +21,12 @@ public class SystemGeneratedProperties implements ISystemGeneratedProperties {
     HashMap<String, Integer> userDetails = new HashMap<>();
     ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModels = new ArrayList<>();
 
-    public void initializeSystemGeneratedProperties() {
+    @Override
+    public void initializeSystemGeneratedProperties()  {
         getUserBudgetAndDistanceValues();
         getSystemGeneratedProperties();
         printSystemGeneratedProperties(systemGeneratedPropertiesModels);
+        ClassInitializer.initializer().getNavigator().navigator();
     }
 
     //get user budget and distance values
