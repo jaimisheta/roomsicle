@@ -7,7 +7,7 @@ import database.usergroupformationdao.IUserGroupFormationDAO;
 import models.usergroupformationmodel.IUserGroupFormationModel;
 
 public class UserGroupFormation implements IUserGroupFormation{
-    public  void GroupFormation(){
+    public void GroupFormation(){
         String firstChoice;
         String secondChoice;
         String thirdChoice;
@@ -30,5 +30,6 @@ public class UserGroupFormation implements IUserGroupFormation{
 
         userGroupFormationDAO.UserGroupFormationDAO(userGroupFormationModel);
         makeCLICommentListController.makeCLICommentListController("group.created.successfully.message");
+        ClassInitializer.initializer().getNavigator().navigator();
     }
 }

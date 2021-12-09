@@ -8,7 +8,7 @@ import static controller.userregistration.UserRegistrationConstants.ONESTRING;
 import static controller.userregistration.UserRegistrationConstants.ZEROSTRING;
 
 public class CheckSurveyTaken implements ICheckSurveyTaken {
-    public void checkSurveyTaken(String email){
+    public void checkSurveyTaken(String email)  {
         String getUserData;
         String survey;
         IUserHomePageController userHomePageController=ClassInitializer.initializer().getIUserHomePageController();
@@ -20,7 +20,7 @@ public class CheckSurveyTaken implements ICheckSurveyTaken {
             userHomePageController.showUserHomePageController();
         }
         else if (survey.equals(ZEROSTRING)){
-            //Yet to initialize;
+            ClassInitializer.initializer().getIUserRegistrationController().getToTheSurvey();
         }
     }
 }

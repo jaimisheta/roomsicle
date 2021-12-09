@@ -8,6 +8,6 @@ public interface IUserSurveyDAO {
 
     void insertRoommatePreferenceDetails(UserSurveyModel userSurveyModel);
 
-    void updateSurveyTakenStatus(UserSurveyModel userSurveyModel);
+    void updateSurveyTakenStatus();
 
 }

@@ -2,12 +2,13 @@ package controller.checkoutproperty;
 
 import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
+import controller.ClassInitializer;
 import database.PropertyDetailsDAO;
 import models.ownersurveymodel.OwnerSurveyModel;
 
 import java.util.*;
 
-public class CheckoutPropertiesDisplayController {
+public class CheckoutPropertiesDisplayController implements ICheckoutPropertiesDisplayController {
 
     public static LinkedHashMap<Integer, Integer> sortHashMapByValues(
             HashMap<Integer, Integer> passedMap) {
@@ -39,21 +40,16 @@ public class CheckoutPropertiesDisplayController {
         return sortedMap;
     }
 
-    //	public void getFilteredFits(IFilterProperties filteredPreferences) {
-    public static void main(String args[]) {
-
-        ICheckoutProperties filteredPreferences = new CheckoutProperties();
+    	public void getCheckedOutProperties(ICheckoutProperties filterProperties) {
 
         ICheckoutPropertiesInput preferences = new CheckoutPropertiesInput();
-        HashMap<Integer, Integer> propertiesMatchScoreMap = filteredPreferences.filterProperties(preferences);
+        HashMap<Integer, Integer> propertiesMatchScoreMap = filterProperties.filterProperties(preferences);
         HashMap<Integer, Integer> sortedPropertiesList = sortHashMapByValues(propertiesMatchScoreMap);
         ArrayList<Integer> keys = new ArrayList<Integer>(sortedPropertiesList.keySet());
 
-        System.out.println("list==" + sortedPropertiesList);
         PropertyDetailsDAO propertyDetails = new PropertyDetailsDAO();
         ArrayList<OwnerSurveyModel> listOfPropertyDetails = propertyDetails.getPropertyDetails();
 
-        //Object is created to print on the Command Line Interface(CLI)
         RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.property.display.page.opening"));
 
@@ -63,8 +59,9 @@ public class CheckoutPropertiesDisplayController {
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.property.display.property.dalhousie.distance") + listOfPropertyDetails.stream().filter(item -> item.getPropertyID() == id).findFirst().orElse(null).getDalhousieDistance());
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.property.display.property.address") + listOfPropertyDetails.stream().filter(item -> item.getPropertyID() == id).findFirst().orElse(null).getAddress());
             roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.property.display.matched.preferences") + propertiesMatchScoreMap.get(listOfPropertyDetails.stream().filter(item -> item.getPropertyID() == id).findFirst().orElse(null).getPropertyID()));
-
+            roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("separator"));
         }
+            ClassInitializer.initializer().getNavigator().navigator();
     }
 
 

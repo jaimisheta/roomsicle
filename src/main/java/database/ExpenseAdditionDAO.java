@@ -24,7 +24,7 @@ public class ExpenseAdditionDAO implements IExpenseAdditionDAO{
         String description;
         int groupId;
 
-        userEmailId = ControllerProperties.getControllerPropertyValue("loggedInUser");
+        userEmailId = ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
         expenseAdditionModel.setUserEmailId(userEmailId);
         String getGroupInfoQuery = DatabaseQueryProperties.getDatabaseQueryPropertyValue("group.members.details.query")
                 .replace("UserEmailId", userEmailId);

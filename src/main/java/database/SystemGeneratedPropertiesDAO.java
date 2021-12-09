@@ -2,8 +2,6 @@ package database;
 
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import database.DatabaseConnection;
-import database.DatabaseQueryProperties;
 import database.ownersurveydao.OwnerSurveyDAO;
 import database.systemgeneratedpropertiesdao.ISystemGeneratedPropertiesDAO;
 import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
@@ -35,10 +33,8 @@ public class SystemGeneratedPropertiesDAO implements ISystemGeneratedPropertiesD
 
         userEmailId = ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
         logger.info("userId: " + userEmailId);
-
         try {
             statement = connection.createStatement();
-
             query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("system.generated.properties.get.user.budget.Dalhousie.Distance.query")
                     .replace("userPersonalDetailsTableName", DatabaseQueryProperties.getDatabaseQueryPropertyValue("system.generated.properties.user.personal.details.table.name"))
                     .replace("userEmailId", userEmailId);
@@ -62,7 +58,6 @@ public class SystemGeneratedPropertiesDAO implements ISystemGeneratedPropertiesD
     @Override
     public ArrayList<SystemGeneratedPropertiesModel> getSystemGeneratedPropertyDetails(HashMap<String, Integer> userDetails) {
         ArrayList<SystemGeneratedPropertiesModel> systemGeneratedPropertiesModelArrayList = new ArrayList<>();
-        SystemGeneratedPropertiesModel systemGeneratedPropertiesModel = ClassInitializer.initializer().getSystemGeneratedPropertiesModel();
         String query;
         int userBudget;
         int userDalDistanceMin;
@@ -83,6 +78,7 @@ public class SystemGeneratedPropertiesDAO implements ISystemGeneratedPropertiesD
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
+                SystemGeneratedPropertiesModel systemGeneratedPropertiesModel = ClassInitializer.initializer().getNewSystemGeneratedPropertiesModel();
                 systemGeneratedPropertiesModel.setFirstName(resultSet.getString(DatabaseQueryProperties.getDatabaseQueryPropertyValue("system.generated.properties.first.name.column.name")));
                 systemGeneratedPropertiesModel.setLastName(resultSet.getString(DatabaseQueryProperties.getDatabaseQueryPropertyValue("system.generated.properties.last.name.column.name")));
                 systemGeneratedPropertiesModel.setAddress(resultSet.getString(DatabaseQueryProperties.getDatabaseQueryPropertyValue("system.generated.properties.address.column.name")));

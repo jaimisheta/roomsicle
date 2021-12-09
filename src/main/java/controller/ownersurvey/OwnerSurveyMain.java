@@ -42,6 +42,8 @@ public class OwnerSurveyMain {
         theaterDistance.getValue(ownerSurveyModel);
         //insert owner survey details
         ownerSurveyDAO.insertOwnerSurveyDetails(ownerSurveyModel);
+        //update survey taken status for owner
+        ownerSurveyDAO.updateOwnerSurveyTakenStatus();
         //calculate price of the property based on owner inputs
         propertyPriceCalculator.propertyPrice(ownerSurveyModel);
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.profile.creation.message"));
