@@ -36,6 +36,8 @@ import controller.userregistration.UserRegistrationController;
 import controller.usersurvey.*;
 import controller.verifications.*;
 import database.*;
+import database.expensesettleupdao.ExpenseSettleUpDAO;
+import database.expensesettleupdao.IExpenseSettleUpDAO;
 import database.fitroommatesdao.IUserPreferencesDAO;
 import database.fitroommatesdao.UserDetailsDAO;
 import database.fitroommatesdao.UserPreferencesDAO;
@@ -52,6 +54,9 @@ import database.userlogindao.IUserLoginDAO;
 import database.userlogindao.UserLoginDAO;
 import database.userregistrationdao.IUserRegistrationDAO;
 import database.userregistrationdao.UserRegistrationDAO;
+import models.*;
+import models.expensesettleup.ExpenseSettleUpModel;
+import models.expensesettleup.IExpenseSettleUpModel;
 import models.OwnerSurveyModel;
 import models.PropertyPriceCalculatorModel;
 import models.SystemGeneratedPropertiesModel;
@@ -154,6 +159,10 @@ public class ClassInitializer {
     ICalculateIndividualFeaturePrice utilitiesBasedPrice;
     ISystemGeneratedPropertiesDAO systemGeneratedPropertiesDAO;
     SystemGeneratedPropertiesModel systemGeneratedPropertiesModel;
+    IExpenseAdditionDAO expenseAdditionDAO;
+    IExpenseAdditionModel expenseAdditionModel;
+    IExpenseSettleUpDAO expenseSettleUpDAO;
+    IExpenseSettleUpModel expenseSettleUpModel;
 
     private ClassInitializer() {
         roomsicleCLI = new RoomsicleCLI();
@@ -243,6 +252,10 @@ public class ClassInitializer {
         utilitiesBasedPrice = new UtilitiesBasedPrice();
         systemGeneratedPropertiesDAO = new SystemGeneratedPropertiesDAO();
         systemGeneratedPropertiesModel = new SystemGeneratedPropertiesModel();
+        expenseAdditionDAO = new ExpenseAdditionDAO();
+        expenseAdditionModel = new ExpenseAdditionModel();
+        expenseSettleUpDAO = new ExpenseSettleUpDAO();
+        expenseSettleUpModel = new ExpenseSettleUpModel();
     }
 
     public static ClassInitializer initializer() {
@@ -594,5 +607,21 @@ public class ClassInitializer {
 
     public SystemGeneratedPropertiesModel getSystemGeneratedPropertiesModel() {
         return systemGeneratedPropertiesModel;
+    }
+
+    public IExpenseAdditionDAO getIExpenseAdditionDAO() {
+        return expenseAdditionDAO;
+    }
+
+    public IExpenseAdditionModel getIExpenseAdditionModel() {
+        return expenseAdditionModel;
+    }
+
+    public IExpenseSettleUpDAO getIExpenseSettleUpDAO() {
+        return expenseSettleUpDAO;
+    }
+
+    public IExpenseSettleUpModel getIExpenseSettleUpModel() {
+        return expenseSettleUpModel;
     }
 }

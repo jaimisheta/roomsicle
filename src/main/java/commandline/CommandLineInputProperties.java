@@ -1,9 +1,5 @@
 package commandline;
 
-import controller.ControllerProperties;
-import database.ConfigProperties;
-import database.DatabaseQueryProperties;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,7 +31,6 @@ public class CommandLineInputProperties {
     public static String getCommandLineInputPropertyValue(String propertyKey) {
         String propertyValue = null;
         try {
-            CommandLineInputProperties.loadCommandLineInputPropertiesFile();
             propertyValue = properties.getProperty(propertyKey);
         } catch (Exception e) {
             e.printStackTrace();
