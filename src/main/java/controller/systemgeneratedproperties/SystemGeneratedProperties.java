@@ -4,9 +4,9 @@ import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerConstant;
 import controller.ControllerProperties;
-import database.ISystemGeneratedPropertiesDAO;
-import database.OwnerSurveyDAO;
-import models.SystemGeneratedPropertiesModel;
+import database.systemgeneratedpropertiesdao.ISystemGeneratedPropertiesDAO;
+import database.ownersurveydao.OwnerSurveyDAO;
+import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

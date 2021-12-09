@@ -1,6 +1,6 @@
 package controller.propertypricepredictor;
 
-import models.OwnerSurveyModel;
+import models.ownersurveymodel.OwnerSurveyModel;
 
 public interface ICalculateIndividualFeaturePrice {
 

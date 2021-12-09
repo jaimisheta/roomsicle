@@ -4,9 +4,9 @@ import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.usersurvey.UserAlcoholHabits;
-import database.IPropertyPricePredictorDAO;
-import models.OwnerSurveyModel;
-import models.PropertyPriceCalculatorModel;
+import database.propertypricepredictordao.IPropertyPricePredictorDAO;
+import models.ownersurveymodel.OwnerSurveyModel;
+import models.propertypricecalculatormodel.PropertyPriceCalculatorModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

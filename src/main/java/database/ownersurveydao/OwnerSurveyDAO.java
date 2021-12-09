@@ -1,6 +1,8 @@
-package database;
+package database.ownersurveydao;
 
-import models.OwnerSurveyModel;
+import database.DatabaseConnection;
+import database.DatabaseQueryProperties;
+import models.ownersurveymodel.OwnerSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class OwnerSurveyDAO implements IOwnerSurveyDAO{
+public class OwnerSurveyDAO implements IOwnerSurveyDAO {
 
     DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnectionObject();
     static final Logger logger = LogManager.getLogger(OwnerSurveyDAO.class);

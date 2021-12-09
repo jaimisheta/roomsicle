@@ -1,6 +1,6 @@
 package controller.ownersurvey;
 
-import models.OwnerSurveyModel;
+import models.ownersurveymodel.OwnerSurveyModel;
 
 public interface
 IOwnerSurvey {

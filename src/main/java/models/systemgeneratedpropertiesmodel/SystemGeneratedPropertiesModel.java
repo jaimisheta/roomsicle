@@ -1,4 +1,4 @@
-package models;
+package models.systemgeneratedpropertiesmodel;
 
 public class SystemGeneratedPropertiesModel {
 

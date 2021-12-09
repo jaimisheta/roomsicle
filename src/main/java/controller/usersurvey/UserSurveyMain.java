@@ -4,8 +4,8 @@ import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import database.IUserSurveyDAO;
-import models.UserSurveyModel;
+import database.usersurveydao.IUserSurveyDAO;
+import models.usersurveymodel.UserSurveyModel;
 
 public class UserSurveyMain {
 

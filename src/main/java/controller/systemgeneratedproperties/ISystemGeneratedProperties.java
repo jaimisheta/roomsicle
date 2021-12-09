@@ -1,6 +1,6 @@
 package controller.systemgeneratedproperties;
 
-import models.SystemGeneratedPropertiesModel;
+import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

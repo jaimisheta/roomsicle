@@ -1,4 +1,4 @@
-package models;
+package models.usersurveymodel;
 
 public class UserSurveyModel {
     private String userId;

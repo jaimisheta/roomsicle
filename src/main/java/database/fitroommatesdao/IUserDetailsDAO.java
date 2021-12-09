@@ -1,4 +1,4 @@
-package database;
+package database.fitroommatesdao;
 
 import models.fitroommatemodels.UserDetailsModel;
 

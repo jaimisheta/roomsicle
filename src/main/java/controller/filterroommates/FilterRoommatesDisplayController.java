@@ -5,11 +5,9 @@ import java.util.HashMap;
 
 import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
-import commandline.RoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import database.IUserDetailsDAO;
-import database.UserDetailsDAO;
+import database.fitroommatesdao.IUserDetailsDAO;
 import models.fitroommatemodels.UserDetailsModel;
 
 public class FilterRoommatesDisplayController implements IFilterRoommatesDisplayController {
@@ -27,7 +25,7 @@ public class FilterRoommatesDisplayController implements IFilterRoommatesDisplay
 
 		filteredPreferences = ClassInitializer.initializer().getFilterRoommates();
 		
-		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
+		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");;
 		preferences = ClassInitializer.initializer().getFilterRoommatesInput();
 		usersMatchScoreMap = filteredPreferences.filterRoommates(preferences);
 		userDetails = ClassInitializer.initializer().getUserDetailsDAO();

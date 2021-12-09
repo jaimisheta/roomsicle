@@ -4,7 +4,7 @@ import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import database.IUserDetailsDAO;
+import database.fitroommatesdao.IUserDetailsDAO;
 import models.fitroommatemodels.UserDetailsModel;
 
 import java.util.ArrayList;

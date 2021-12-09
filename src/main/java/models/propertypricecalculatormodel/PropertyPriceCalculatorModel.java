@@ -1,4 +1,4 @@
-package models;
+package models.propertypricecalculatormodel;
 
 public class PropertyPriceCalculatorModel {
 
