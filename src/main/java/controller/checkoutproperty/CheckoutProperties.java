@@ -1,7 +1,7 @@
 package controller.checkoutproperty;
 
 import database.PropertyDetailsDAO;
-import models.OwnerSurveyModel;
+import models.ownersurveymodel.OwnerSurveyModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

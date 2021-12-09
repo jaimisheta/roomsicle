@@ -1,6 +1,6 @@
 package database;
 
-import models.OwnerSurveyModel;
+import models.ownersurveymodel.OwnerSurveyModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
