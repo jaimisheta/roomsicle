@@ -38,6 +38,7 @@ public class BestFitRoommateControllerTest {
 			put(ControllerProperties.getControllerPropertyValue("bestFitData8.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData8.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData9.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData9.value")));
 		}};
+		System.out.println(map);
 		bestFitRoommateController = ClassInitializer.initializer().getBestFitRoommateController();
 		loggedInUser = ClassInitializer.initializer().getLoggedInUserController();
 		assertEquals(bestFitRoommateController.findBestFit(loggedInUser), map);
