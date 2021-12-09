@@ -5,10 +5,15 @@ import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
 import controller.propertypricepredictor.PropertyPriceCalculator;
+import controller.usersurvey.UserRoommateGenderPreference;
 import database.ownersurveydao.IOwnerSurveyDAO;
 import models.ownersurveymodel.OwnerSurveyModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class OwnerSurveyMain {
+
+    static final Logger logger = LogManager.getLogger(UserRoommateGenderPreference.class);
 
     public void takeOwnerSurvey() {
         IOwnerSurvey bedroomCount = ClassInitializer.initializer().getBedroomCount();
@@ -47,5 +52,10 @@ public class OwnerSurveyMain {
         //calculate price of the property based on owner inputs
         propertyPriceCalculator.propertyPrice(ownerSurveyModel);
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("owner.survey.profile.creation.message"));
+        try {
+            ClassInitializer.initializer().getUserLoginController().userLoginController();
+        } catch (Exception e) {
+            logger.error("invalid credentials");
+        }
     }
 }

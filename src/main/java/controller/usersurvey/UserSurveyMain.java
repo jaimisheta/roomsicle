@@ -6,8 +6,12 @@ import controller.ClassInitializer;
 import controller.ControllerProperties;
 import database.usersurveydao.IUserSurveyDAO;
 import models.usersurveymodel.UserSurveyModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UserSurveyMain {
+
+    static final Logger logger = LogManager.getLogger(UserRoommateGenderPreference.class);
 
     //take user survey
     public void takeUserSurvey() {
@@ -59,5 +63,10 @@ public class UserSurveyMain {
         //update that survey is completed
         userSurveyDAO.updateSurveyTakenStatus();
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.profile.creation.message"));
+        try {
+            ClassInitializer.initializer().getUserLoginController().userLoginController();
+        } catch (Exception e) {
+            logger.error("invalid credentials");
+        }
     }
 }
