@@ -3,9 +3,7 @@ package controller.ownersurvey;
 import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import commandline.RoomsicleCLI;
-import controller.propertypricepredictor.PropertyPriceCalculator;
-import database.OwnerSurveyDAO;
-import models.OwnerSurveyModel;
+import models.ownersurveymodel.OwnerSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -2,7 +2,7 @@ package controllertest.ownersurveytest;
 
 import commandline.CommandLineInputProperties;
 import controller.ownersurvey.Utilities;
-import models.OwnerSurveyModel;
+import models.ownersurveymodel.OwnerSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -1,6 +1,6 @@
-package database;
+package database.usersurveydao;
 
-import models.UserSurveyModel;
+import models.usersurveymodel.UserSurveyModel;
 
 public interface IUserSurveyDAO {
 

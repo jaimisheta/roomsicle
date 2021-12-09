@@ -1,7 +1,7 @@
-package database;
+package database.propertypricepredictordao;
 
-import models.OwnerSurveyModel;
-import models.PropertyPriceCalculatorModel;
+import models.ownersurveymodel.OwnerSurveyModel;
+import models.propertypricecalculatormodel.PropertyPriceCalculatorModel;
 
 public interface IPropertyPricePredictorDAO {
 

@@ -4,7 +4,7 @@ import controller.ControllerProperties;
 import controller.systemgeneratedproperties.SystemGeneratedProperties;
 import database.ConfigProperties;
 import mocks.SystemGeneratedPropertiesDAOMocks;
-import models.SystemGeneratedPropertiesModel;
+import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;

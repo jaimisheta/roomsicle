@@ -1,6 +1,6 @@
 package controller.usersurvey;
 
-import models.UserSurveyModel;
+import models.usersurveymodel.UserSurveyModel;
 
 public interface IUserSurvey {
 

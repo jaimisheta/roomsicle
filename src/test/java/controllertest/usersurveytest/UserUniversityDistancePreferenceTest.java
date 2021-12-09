@@ -2,7 +2,7 @@ package controllertest.usersurveytest;
 
 import commandline.CommandLineInputProperties;
 import controller.usersurvey.UserUniversityDistancePreference;
-import models.UserSurveyModel;
+import models.usersurveymodel.UserSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

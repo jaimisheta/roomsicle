@@ -2,7 +2,7 @@ package controllertest.propertypricepredictortest;
 
 import controller.ControllerProperties;
 import controller.propertypricepredictor.UtilitiesBasedPrice;
-import models.OwnerSurveyModel;
+import models.ownersurveymodel.OwnerSurveyModel;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;

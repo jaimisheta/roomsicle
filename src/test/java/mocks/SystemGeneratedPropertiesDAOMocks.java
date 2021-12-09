@@ -1,6 +1,6 @@
 package mocks;
 
-import models.SystemGeneratedPropertiesModel;
+import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
 
 import java.util.ArrayList;
 
