@@ -24,7 +24,7 @@ public class FilterRoommates implements IFilterRoommates{
 		preferencesList = preferences.setPreferences();
 
 		//Stored Logged-In user-id into the string
-		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
+		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");;
 		
 		//Made Object of DAO class to get list of all users' preferences
 		userPreferences = ClassInitializer.initializer().getUserPreferenceDAO();

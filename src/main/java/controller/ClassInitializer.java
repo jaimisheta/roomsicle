@@ -24,33 +24,28 @@ import controller.welcomepage.WelcomePageController;
 import controller.ownersurvey.*;
 import controller.propertypricepredictor.*;
 import controller.userlogin.*;
-import controller.ownersurvey.*;
 import controller.propertypricepredictor.PropertyPriceCalculator;
 import controller.userlogin.CheckSurveyTaken;
 import controller.userlogin.ICheckSurveyTaken;
 import controller.userlogin.IUserLoginController;
 import controller.userlogin.UserLoginController;
-import controller.userprofile.IUserHomePageController;
 import controller.userprofile.IUserProfile;
-import controller.userprofile.UserHomePageController;
 import controller.userprofile.UserProfile;
 import controller.userregistration.IUserRegistrationController;
 import controller.userregistration.UserRegistrationController;
 import controller.usersurvey.*;
 import controller.verifications.*;
-import controller.welcomepage.IWelcomePageController;
-import controller.welcomepage.WelcomePageController;
 import database.*;
 import database.expensesettleupdao.ExpenseSettleUpDAO;
 import database.expensesettleupdao.IExpenseSettleUpDAO;
 import database.fitroommatesdao.IUserPreferencesDAO;
-import database.UserDetailsDAO;
+import database.fitroommatesdao.UserDetailsDAO;
 import database.fitroommatesdao.UserPreferencesDAO;
 import database.ownerdetailsdao.IOwnersDetailsDAO;
 import database.ownerdetailsdao.OwnersDetailsDAO;
 import database.ownerpropertydetailsdao.IOwnerPropertyDetailsDAO;
 import database.ownerpropertydetailsdao.OwnerPropertyDetailsDAO;
-import database.IUserDetailsDAO;
+import database.fitroommatesdao.IUserDetailsDAO;
 import database.propertybiddingdao.*;
 import database.propertybiddingdao.PropertyDetailsDAO;
 import database.surveytakendao.ISurveyTakenDAO;
@@ -549,7 +544,6 @@ public class ClassInitializer {
     public IBestFitRoommatesDisplayController getBestFitRoommatesDisplayController(){
         return bestFitRoommatesDisplayController;
     }
-
 
     public PropertyPriceCalculatorModel getPropertyPriceCalculatorModel() {
         return propertyPriceCalculatorModel;
