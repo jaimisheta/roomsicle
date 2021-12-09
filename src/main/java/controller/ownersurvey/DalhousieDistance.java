@@ -14,6 +14,7 @@ import static controller.ownersurvey.OwnerSurveyConstants.ONE;
 
 public class DalhousieDistance implements IOwnerSurvey {
 
+    RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
     static final Logger logger = LogManager.getLogger(UserAlcoholHabits.class);
 
     OwnerSurveyModel ownerSurveyModel;

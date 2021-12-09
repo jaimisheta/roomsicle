@@ -9,8 +9,7 @@ import controller.bestfitroommates.IBestFitRoommatesDisplayController;
 import controller.clicommentlist.IMakeCLICommentListController;
 import controller.clicommentlist.MakeCLICommentListController;
 import controller.filterroommates.*;
-import controller.getloggedinuser.GetLoggedInUserController;
-import controller.getloggedinuser.IGetLoggedInUserController;
+import controller.getloggedinuser.*;
 import controller.ownerprofile.IOwnerProfile;
 import controller.ownerprofile.OwnerProfile;
 import controller.propertybidding.AvailableProperties;
@@ -36,11 +35,21 @@ import controller.userregistration.UserRegistrationController;
 import controller.usersurvey.*;
 import controller.verifications.*;
 import database.*;
+import database.SystemGeneratedPropertiesDAO;
+import database.UserLoginDAO;
 import database.expensesettleupdao.ExpenseSettleUpDAO;
 import database.expensesettleupdao.IExpenseSettleUpDAO;
 import database.fitroommatesdao.IUserPreferencesDAO;
 import database.fitroommatesdao.UserDetailsDAO;
 import database.fitroommatesdao.UserPreferencesDAO;
+import controller.usergroupformationcontroller.IUserGroupFormation;
+import controller.userprofile.*;
+import controller.verifications.EmailVerfierController;
+import controller.verifications.PasswordVerifierController;
+import database.getgroupId.GetGroupId;
+import database.getgroupId.IGetGroupId;
+import database.getusersgroupdao.GetUsersGroupDAO;
+import database.getusersgroupdao.IGetUserGroupDAO;
 import database.ownerdetailsdao.IOwnersDetailsDAO;
 import database.ownerdetailsdao.OwnersDetailsDAO;
 import database.ownerpropertydetailsdao.IOwnerPropertyDetailsDAO;
@@ -56,18 +65,20 @@ import database.propertybiddingdao.PropertyDetailsDAO;
 import database.surveytakendao.ISurveyTakenDAO;
 import database.surveytakendao.SurveyTakenDAO;
 import database.systemgeneratedpropertiesdao.ISystemGeneratedPropertiesDAO;
-import database.systemgeneratedpropertiesdao.SystemGeneratedPropertiesDAO;
+import database.usergroupformationdao.IUserGroupFormationDAO;
+import database.usergroupformationdao.UserGroupFormationDAO;
 import database.userlogindao.IUserLoginDAO;
-import database.userlogindao.UserLoginDAO;
 import database.userregistrationdao.IUserRegistrationDAO;
 import database.userregistrationdao.UserRegistrationDAO;
 import database.usersurveydao.IUserSurveyDAO;
 import database.usersurveydao.UserSurveyDAO;
 import models.ExpenseAdditionModel;
 import models.IExpenseAdditionModel;
+import models.UsersGroupModel;
 import models.ownersurveymodel.OwnerSurveyModel;
 import models.propertypricecalculatormodel.PropertyPriceCalculatorModel;
 import models.systemgeneratedpropertiesmodel.SystemGeneratedPropertiesModel;
+import models.usergroupformationmodel.UserGroupFormationModel;
 import models.usersurveymodel.UserSurveyModel;
 import models.expensesettleup.ExpenseSettleUpModel;
 import models.expensesettleup.IExpenseSettleUpModel;
@@ -75,6 +86,8 @@ import models.biddingmodels.*;
 import models.fitroommatemodels.IUserDetailsModel;
 import models.fitroommatemodels.IUserPreferenceModel;
 import models.fitroommatemodels.UserPreferencesModel;
+import models.IUsersGroupModel;
+import models.usergroupformationmodel.IUserGroupFormationModel;
 import models.ownerdetailsmodel.IOwnerDetailsModel;
 import models.ownerdetailsmodel.OwnerDetailsModel;
 import models.ownerpropertydetailsmodel.IOwnerPropertyDetailsModel;
@@ -82,8 +95,12 @@ import models.ownerpropertydetailsmodel.OwnerPropertyDetailsModel;
 import models.usermodel.IUsersModel;
 import models.usermodel.UsersModel;
 
+
+
+
 public class ClassInitializer {
     private static ClassInitializer initializer = null;
+
     IRoomsicleCLI roomsicleCLI;
     IMakeCLICommentListController makeCLICommentListController;
     IUserHomePageController userHomePageController;
@@ -173,8 +190,24 @@ public class ClassInitializer {
     IExpenseAdditionModel expenseAdditionModel;
     IExpenseSettleUpDAO expenseSettleUpDAO;
     IExpenseSettleUpModel expenseSettleUpModel;
+    IUserGroupFormationDAO userGroupFormationDAO;
+    IUserGroupFormationModel userGroupFormationModel;
+    IGetGroupId getGroupDetails;
+    IUsersGroupModel usersGroupModel;
+    IGetUserGroupDAO userGroupDAO;
+    IRoommateDetails roommateDetails;
+    IUserGroupFormation userGroupFormation;
+
+
+
+
+
 
     private ClassInitializer() {
+        getGroupDetails=new GetGroupId();
+        userGroupFormationDAO=new UserGroupFormationDAO();
+        roommateDetails=new RoommateDetails();
+        userGroupDAO=new GetUsersGroupDAO();
         roomsicleCLI = new RoomsicleCLI();
         makeCLICommentListController = new MakeCLICommentListController();
         userHomePageController = new UserHomePageController();
@@ -266,6 +299,8 @@ public class ClassInitializer {
         expenseAdditionModel = new ExpenseAdditionModel();
         expenseSettleUpDAO = new ExpenseSettleUpDAO();
         expenseSettleUpModel = new ExpenseSettleUpModel();
+        usersGroupModel=new UsersGroupModel();
+        userGroupFormationModel=new UserGroupFormationModel();
     }
 
     public static ClassInitializer initializer() {
@@ -275,112 +310,12 @@ public class ClassInitializer {
         return initializer;
     }
 
-    public IUserIdValidation getIUserIdValidation() {
-        return userIdValidation;
+    public IUsersGroupModel getUsersGroupModel() {
+        return usersGroupModel;
     }
 
-    public ISurveyTakenDAO getISurveyTakenDAO() {
-        return surveyTakenDAO;
-    }
-
-    public IPasswordValidity getIPasswordValidity() {
-        return passwordValidity;
-    }
-
-    public IGiveCredintials getIGiveCredintials() {
-        return giveCredintials;
-    }
-
-    public IAfterCheckingCredintials getIAfterCheckingCredintials() {
-        return afterCheckingCredintials;
-    }
-
-    public ICheckCredentials getICheckCredentials() {
-        return checkCredentials;
-    }
-
-    public IOwnerPropertyDetailsDAO getIOwnerPropertyDetailsDAO() {
-        return ownerPropertyDetailsDAO;
-    }
-
-    public IOwnerPropertyDetailsModel getIOwnerPropertyDetailsModel() {
-        return ownerPropertyDetailsModel;
-    }
-
-    public IOwnerDetailsModel getIOwnerDetailsModel() {
-        return ownerDetailsModel;
-    }
-
-    public IOwnersDetailsDAO getIOwnersDetailsDAO() {
-        return ownersDetailsDAO;
-    }
-
-    public IUserDetailsDAO getIUserDetailsDAO() {
-        return userDetailsDAO;
-    }
-
-    public IRoomsicleCLI getRoomsicleCLI() {
-        return roomsicleCLI;
-    }
-
-    public IMakeCLICommentListController getIMakeCLICommentListController() {
-        return makeCLICommentListController;
-    }
-
-    public IUserHomePageController getIUserHomePageController() {
-        return userHomePageController;
-    }
-
-    public IUserRegistrationDAO getIUserRegistrationDAO() {
-        return userRegistrationDAO;
-    }
-
-    public IEmailFormatVerfier getIEmailFormatVerfier() {
-        return emailFormatVerfier;
-    }
-
-    public IUserLoginDAO getIUserLoginDAO() {
-        return userLoginDAO;
-    }
-
-    public IUsersModel getIUsersModel() {
-        return usersModel;
-    }
-
-    public IEmailVerifierController getIEmailVerifierController() {
-        return emailVerfierController;
-    }
-
-    public IPasswordVerifierController getIPasswordVerifierController() {
-        return passwordVerifierController;
-    }
-
-    public IPhoneNumberVerifierController getIPhoneNumberVerifierController() {
-        return phoneNumberVerifierController;
-    }
-
-    public IUserRegistrationController getIUserRegistrationController() {
-        return userRegistrationController;
-    }
-
-    public IUserLoginController getUserLoginController() {
-        return userLoginController;
-    }
-
-    public IWelcomePageController getIWelcomePageController() {
-        return welcomePageController;
-    }
-
-    public ICheckSurveyTaken getICheckSurveyTaken() {
-        return checkSurveyTaken;
-    }
-
-    public IUserProfile getUserProfile() {
-        return userProfile;
-    }
-
-    public IOwnerProfile getOwnerProfile() {
-        return ownerProfile;
+    public IGetUserGroupDAO getGetUserGroupDAO() {
+        return userGroupDAO;
     }
 
     public IUserSurvey getUserAlcoholHabits() {
@@ -555,6 +490,7 @@ public class ClassInitializer {
         return bestFitRoommatesDisplayController;
     }
 
+
     public PropertyPriceCalculatorModel getPropertyPriceCalculatorModel() {
         return propertyPriceCalculatorModel;
     }
@@ -634,4 +570,108 @@ public class ClassInitializer {
     public IExpenseSettleUpModel getIExpenseSettleUpModel() {
         return expenseSettleUpModel;
     }
+    public IUserGroupFormation getUserGroupFormation(){return userGroupFormation;}
+
+    public IRoommateDetails getRoommateDetails(){return roommateDetails;}
+
+    public IGetUserGroupDAO getUsersGroupDAO(){return userGroupDAO; }
+
+    public IGetGroupId getGetGroupDetails(){return getGroupDetails; }
+
+    public IUserGroupFormationModel getUserGroupFormationModel(){return userGroupFormationModel; }
+
+    public IUserGroupFormationDAO getUserGroupFormationDAO(){return userGroupFormationDAO; }
+
+    public IUserIdValidation getIUserIdValidation(){return userIdValidation; }
+
+    public ISurveyTakenDAO getISurveyTakenDAO(){return surveyTakenDAO; }
+
+    public IPasswordValidity getIPasswordValidity(){return passwordValidity; }
+
+    public IGiveCredintials getIGiveCredintials(){return giveCredintials; }
+
+    public IAfterCheckingCredintials getIAfterCheckingCredintials(){return afterCheckingCredintials; }
+
+    public ICheckCredentials getICheckCredentials(){return checkCredentials; }
+
+    public IOwnerPropertyDetailsDAO getIOwnerPropertyDetailsDAO(){return ownerPropertyDetailsDAO; }
+
+    public IOwnerPropertyDetailsModel getIOwnerPropertyDetailsModel(){return ownerPropertyDetailsModel;}
+
+    public IOwnerDetailsModel getIOwnerDetailsModel(){
+        return ownerDetailsModel;
+    }
+
+    public IOwnersDetailsDAO getIOwnersDetailsDAO(){
+        return ownersDetailsDAO;
+    }
+
+    public IUserDetailsDAO getIUserDetailsDAO(){
+        return userDetailsDAO;
+    }
+
+    public IRoomsicleCLI getRoomsicleCLI(){
+       return roomsicleCLI;
+    }
+
+    public IMakeCLICommentListController getIMakeCLICommentListController(){
+        return makeCLICommentListController;
+    }
+
+    public IUserHomePageController getIUserHomePageController(){
+        return userHomePageController;
+    }
+
+    public IUserRegistrationDAO getIUserRegistrationDAO(){
+        return userRegistrationDAO;
+    }
+
+    public IEmailFormatVerfier getIEmailFormatVerfier(){
+        return emailFormatVerfier;
+    }
+
+    public IUserLoginDAO getIUserLoginDAO(){
+        return userLoginDAO;
+    }
+
+    public IUsersModel getIUsersModel(){
+        return usersModel;
+    }
+
+    public IEmailVerifierController getIEmailVerifierController(){
+        return emailVerfierController;
+    }
+
+    public IPasswordVerifierController getIPasswordVerifierController(){
+        return passwordVerifierController;
+    }
+
+    public IPhoneNumberVerifierController getIPhoneNumberVerifierController(){
+        return phoneNumberVerifierController;
+    }
+
+    public IUserRegistrationController getIUserRegistrationController(){
+        return userRegistrationController;
+    }
+
+    public IUserLoginController getUserLoginController(){
+        return userLoginController;
+    }
+
+    public IWelcomePageController getIWelcomePageController(){
+        return welcomePageController;
+    }
+
+    public ICheckSurveyTaken getICheckSurveyTaken(){
+        return checkSurveyTaken;
+    }
+
+    public IUserProfile getUserProfile(){
+       return userProfile;
+    }
+
+    public IOwnerProfile getOwnerProfile(){
+        return ownerProfile;
+    }
+
 }

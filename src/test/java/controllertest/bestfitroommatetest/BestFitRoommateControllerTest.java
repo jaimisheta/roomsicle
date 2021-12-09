@@ -8,9 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import java.util.HashMap;
-import controller.bestfitroommates.BestFitRoommateController;
 import controller.ControllerProperties;
-import controller.getloggedinuser.GetLoggedInUserController;
 import controller.bestfitroommates.IBestFitRoommateController;
 import controller.getloggedinuser.IGetLoggedInUserController;
 

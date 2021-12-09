@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
+import commandline.RoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
 import database.fitroommatesdao.IUserDetailsDAO;
@@ -30,7 +31,7 @@ public class FilterRoommatesDisplayController implements IFilterRoommatesDisplay
 		usersMatchScoreMap = filteredPreferences.filterRoommates(preferences);
 		userDetails = ClassInitializer.initializer().getUserDetailsDAO();
 		listOfUserDetails = userDetails.getUserDetails();
-		
+
 		//Object is created to print on the Command Line Interface(CLI)
 		roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
 		roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("filter.roommate.display.page.opening"));
