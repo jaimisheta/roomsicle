@@ -16,6 +16,7 @@ public class UserGroupFormation implements IUserGroupFormation{
         IUserGroupFormationModel userGroupFormationModel=ClassInitializer.initializer().getUserGroupFormationModel();
         IUserGroupFormationDAO userGroupFormationDAO=ClassInitializer.initializer().getUserGroupFormationDAO();
 
+        makeCLICommentListController.makeCLICommentListController("choose.your.roommate.message");
         makeCLICommentListController.makeCLICommentListController("user.first.choice.message");
         firstChoice=roomsicleCLI.getStringResponse();
         userGroupFormationModel.setFirstEmailId(firstChoice);
