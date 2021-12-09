@@ -25,12 +25,6 @@ public class EmailVerfierControllerTest  {
     }
 
     @Test(expected=EmailException.class)
-    public void vaidateUserEmailAlreadyRegisteredTest() throws EmailException {
-        userData=DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.login.email.password.query");
-        iEmailVerifierController.userEmailAlreadyRegistered(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.message"),userData);
-    }
-
-    @Test(expected=EmailException.class)
     public void emailDoesnotExistsTest() throws EmailException {
         userData=DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.login.email.password.query");
         iEmailVerifierController.emailDoesNotExists(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.negative.test.email.message"),userData);
@@ -45,12 +39,4 @@ public class EmailVerfierControllerTest  {
         Assert.assertEquals(actual, expected);
     }
 
-    @Test()
-    public void testEmailExistsPositive(){
-        EmailVerfierController emailVerfierController=new EmailVerfierController();
-        userData=DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.login.email.password.query");
-        String actual=emailVerfierController.validateEmailExists(CommandLineInputProperties.getCommandLineInputPropertyValue("login.example.test.email.message"),userData);
-        String expected= CommandLineInputProperties.getCommandLineInputPropertyValue("registration.identify.correct.email.id.message");
-        Assert.assertEquals(actual, expected);
-    }
 }
