@@ -4,8 +4,6 @@ import commandline.CommandLineInputProperties;
 import commandline.RoomsicleCLI;
 import controller.ClassInitializer;
 
-import java.sql.SQLException;
-
 public class ExpenseManagementHomePageController {
     static  RoomsicleCLI roomsicleCLI = new RoomsicleCLI();
 

@@ -14,5 +14,4 @@ public class ExpenseSettleUpController {
         iMakeCLICommentListController.makeCLICommentListController("expense.decorator.message","expense.management.expense.settle.up.main.message","expense.decorator.message");
         iExpenseSettleUpDAO.displayExpense(iExpenseSettleUpModel);
     }
-
 }
