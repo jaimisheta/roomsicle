@@ -32,9 +32,9 @@ public class GetLoggedInUserController implements IGetLoggedInUserController{
 				loggedInUser.setRoommateGender(userPreferenceObject.getRoommateGender());
 			}
 		}
-		
+
 		return (UserPreferencesModel) loggedInUser;
-		
+
 	}
 
 }

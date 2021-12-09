@@ -4,6 +4,7 @@ import Exception.EmailException;
 import Exception.PasswordNotMatchException;
 import controller.clicommentlist.IMakeCLICommentListController;
 import controller.ClassInitializer;
+import controller.usergroupformationcontroller.UserGroupFormation;
 import controller.verifications.IEmailFormatVerfier;
 import controller.verifications.IEmailVerifierController;
 
@@ -45,5 +46,7 @@ public class UserLoginController implements IUserLoginController {
 		checkCreds=checkCredentials.checkCredentials();
 		password=giveCredintials.getPassword();
 		passwordValidity.getPasswordvalilidity(checkCreds,email,password);
+		UserGroupFormation userGroupFormation=new UserGroupFormation();
+		userGroupFormation.GroupFormation();
 	}
 }

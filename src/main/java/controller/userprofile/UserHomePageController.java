@@ -29,9 +29,7 @@ public class UserHomePageController implements IUserHomePageController {
                     "user.home.page.system.suggested.properties.option.message", "user.home.page.system.checkout.properties.option.message",
                     "user.home.page.expense.management.option.message", "user.home.page.logout.option.message"
             );
-
         }
-
         else if(userId==TWO) {
             makeCLICommentListController.makeCLICommentListController("welcomepage.add.message"
                     , "user.home.page.main.message", "welcomepage.add.message"
@@ -40,7 +38,6 @@ public class UserHomePageController implements IUserHomePageController {
             );
 
         }
-
         userInput=roomsicleCLI.getNumberResponse();
 
         switch (userInput) {

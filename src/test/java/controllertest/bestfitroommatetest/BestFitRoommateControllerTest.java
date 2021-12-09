@@ -8,9 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import java.util.HashMap;
-import controller.bestfitroommates.BestFitRoommateController;
 import controller.ControllerProperties;
-import controller.getloggedinuser.GetLoggedInUserController;
 import controller.bestfitroommates.IBestFitRoommateController;
 import controller.getloggedinuser.IGetLoggedInUserController;
 
@@ -40,6 +38,7 @@ public class BestFitRoommateControllerTest {
 			put(ControllerProperties.getControllerPropertyValue("bestFitData8.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData8.value")));
 			put(ControllerProperties.getControllerPropertyValue("bestFitData9.key"),Integer.parseInt(ControllerProperties.getControllerPropertyValue("bestFitData9.value")));
 		}};
+		System.out.println(map);
 		bestFitRoommateController = ClassInitializer.initializer().getBestFitRoommateController();
 		loggedInUser = ClassInitializer.initializer().getLoggedInUserController();
 		assertEquals(bestFitRoommateController.findBestFit(loggedInUser), map);
