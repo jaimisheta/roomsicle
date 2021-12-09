@@ -53,15 +53,6 @@ public class UserLoginControllerTest {
                 ,userIdValidation.userIdValidation(THREE));
     }
 
-    @Test
-    public void passwordValidityTest(){
-        String checkCreds;
-        String actual;
-        checkCreds=DatabaseQueryProperties.getDatabaseQueryPropertyValue("user.login.email.password.query");
-        actual=passwordValidity.validatePassword(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.id"),checkCreds);
-        Assert.assertEquals(CommandLineInputProperties.getCommandLineInputPropertyValue("user.test.email.password"),actual);
-    }
-
     @Test(expected = NullPointerException.class)
     public void NullEmailExceptionTest() throws PasswordNotMatchException{
         String checkCreds;

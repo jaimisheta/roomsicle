@@ -9,7 +9,6 @@ import controller.clicommentlist.IMakeCLICommentListController;
 import controller.ClassInitializer;
 import controller.filterroommates.IFilterRoommates;
 import controller.filterroommates.IFilterRoommatesDisplayController;
-import controller.filterroommates.IFilterRoommatesInput;
 import controller.ownerprofile.IOwnerProfile;
 import controller.propertybidding.IBidProperty;
 import controller.welcomepage.IWelcomePageController;
