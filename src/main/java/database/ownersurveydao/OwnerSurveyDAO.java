@@ -1,8 +1,10 @@
 package database.ownersurveydao;
 
+import controller.ControllerProperties;
 import database.DatabaseConnection;
 import database.DatabaseQueryProperties;
 import models.ownersurveymodel.OwnerSurveyModel;
+import models.usersurveymodel.UserSurveyModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -76,4 +78,27 @@ public class OwnerSurveyDAO implements IOwnerSurveyDAO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateOwnerSurveyTakenStatus() {
+        String query;
+        String userId;
+
+        userId = ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
+        try {
+            statement = connection.createStatement();
+
+            query = DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.survey.update.owner.survey.taken.field.query")
+                    .replace("ownerTableName", DatabaseQueryProperties.getDatabaseQueryPropertyValue("owner.survey.owner.details.table.name"))
+                    .replace("userEmailID", userId);
+
+            logger.info("query: " + query);
+            statement.executeUpdate(query);
+            logger.info("query executed");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

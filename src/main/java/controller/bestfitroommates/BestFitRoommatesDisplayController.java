@@ -8,6 +8,7 @@ import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
 import controller.getloggedinuser.IGetLoggedInUserController;
+import controller.usergroupformationcontroller.IUserGroupFormation;
 import database.fitroommatesdao.IUserDetailsDAO;
 import models.fitroommatemodels.UserDetailsModel;
 
@@ -24,12 +25,14 @@ public class BestFitRoommatesDisplayController implements IBestFitRoommatesDispl
 		IUserDetailsDAO userDetails;
 		ArrayList<UserDetailsModel> listOfUserDetails;
 		IRoomsicleCLI roomsicleCLI;
+		IUserGroupFormation userGroupFormation;
 
-		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");;
+		loggedInUserId = ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
 		loggedInUser = ClassInitializer.initializer().getLoggedInUserController();
 		usersMatchScoreMap = bestFitRoommate.findBestFit(loggedInUser);
 		userDetails = ClassInitializer.initializer().getIUserDetailsDAO();
 		listOfUserDetails = userDetails.getUserDetails();
+		userGroupFormation = ClassInitializer.initializer().getUserGroupFormation();
 		
 		//Object is created to print on the Command Line Interface(CLI)
 		roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
@@ -45,8 +48,10 @@ public class BestFitRoommatesDisplayController implements IBestFitRoommatesDispl
 				roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.contactnumber")+usersDetails.getContactNumber());
 				roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.user.emailid")+usersDetails.getEmailId());
 				roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("bestfit.roommate.display.matched.preferences")+usersMatchScoreMap.get(usersDetails.getEmailId()));
+				roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("separator"));
 			}
 		}
+		userGroupFormation.GroupFormation();
 		validation = true;
 	}
 

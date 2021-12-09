@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 public interface ISystemGeneratedProperties {
 
+    void initializeSystemGeneratedProperties();
+
     HashMap<String, Integer> getUserBudgetAndDistanceValues();
 
     ArrayList<SystemGeneratedPropertiesModel> getSystemGeneratedProperties();

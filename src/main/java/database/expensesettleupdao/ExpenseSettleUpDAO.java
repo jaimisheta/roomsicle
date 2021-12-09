@@ -20,7 +20,7 @@ public class ExpenseSettleUpDAO implements IExpenseSettleUpDAO {
         String userEmailId;
         List<String> receiverEmailId;
 
-        userEmailId = ControllerProperties.getControllerPropertyValue("loggedInUser");
+        userEmailId = ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
         expenseSettleUpModel.setUserEmailId(userEmailId);
         String getGroupInfoQuery = DatabaseQueryProperties.getDatabaseQueryPropertyValue("group.members.details.query")
                 .replace("UserEmailId", userEmailId);

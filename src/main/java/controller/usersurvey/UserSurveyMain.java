@@ -57,7 +57,7 @@ public class UserSurveyMain {
         //insert roommate preference details
         userSurveyDAO.insertRoommatePreferenceDetails(userSurveyModel);
         //update that survey is completed
-        userSurveyDAO.updateSurveyTakenStatus(userSurveyModel);
+        userSurveyDAO.updateSurveyTakenStatus();
         roomsicleCLI.printMessage(CommandLineInputProperties.getCommandLineInputPropertyValue("user.survey.profile.creation.message"));
     }
 }
