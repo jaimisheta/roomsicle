@@ -20,9 +20,8 @@ public class BestFitRoommateController implements IBestFitRoommateController{
 		UserPreferencesModel loggedInUser;
 		HashMap<String, Integer> matchScoresMap;
 
-
 		loggedInUserId = ControllerProperties.getControllerPropertyValue("user.logged.in.email.id");
-
+		//loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
 		//Made Object of DAO class to get list of all users' preferences
 		userPreferences = ClassInitializer.initializer().getUserPreferenceDAO();
 
