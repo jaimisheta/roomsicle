@@ -7,9 +7,8 @@ import commandline.CommandLineInputProperties;
 import commandline.IRoomsicleCLI;
 import controller.ClassInitializer;
 import controller.ControllerProperties;
-import controller.getloggedinuser.GetLoggedInUserController;
 import controller.getloggedinuser.IGetLoggedInUserController;
-import database.IUserDetailsDAO;
+import database.fitroommatesdao.IUserDetailsDAO;
 import models.fitroommatemodels.UserDetailsModel;
 
 public class BestFitRoommatesDisplayController implements IBestFitRoommatesDisplayController {
@@ -26,7 +25,7 @@ public class BestFitRoommatesDisplayController implements IBestFitRoommatesDispl
 		ArrayList<UserDetailsModel> listOfUserDetails;
 		IRoomsicleCLI roomsicleCLI;
 
-		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");
+		loggedInUserId = ControllerProperties.getControllerPropertyValue("loggedInUser");;
 		loggedInUser = ClassInitializer.initializer().getLoggedInUserController();
 		usersMatchScoreMap = bestFitRoommate.findBestFit(loggedInUser);
 		userDetails = ClassInitializer.initializer().getIUserDetailsDAO();

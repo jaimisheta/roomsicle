@@ -1,4 +1,4 @@
-package database;
+package database.fitroommatesdao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import database.DatabaseConnection;
 import database.DatabaseQueryProperties;
-import database.IUserDetailsDAO;
 import models.fitroommatemodels.UserDetailsModel;
 
 public class UserDetailsDAO implements IUserDetailsDAO {
