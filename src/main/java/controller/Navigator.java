@@ -10,6 +10,7 @@ public class Navigator {
 
         IRoomsicleCLI roomsicleCLI;
         int userInput;
+
         roomsicleCLI = ClassInitializer.initializer().getRoomsicleCLI();
 
         try {
